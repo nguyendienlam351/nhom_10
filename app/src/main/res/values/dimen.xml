@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textSize">18dp</dimen>
+    <dimen name="titleSize">20dp</dimen>
+    <dimen name="textBarSize">22dp</dimen>
+    
+    <dimen name="spacing1">2dp</dimen>
+    <dimen name="spacing2">4dp</dimen>
+    <dimen name="spacing3">6dp</dimen>
+    <dimen name="spacing4">8dp</dimen>
+    
+    <dimen name="iconSize">32dp</dimen>
+    <dimen name="smallIconSize">22dp</dimen>
+
+    <dimen name="largeImage">150dp</dimen>
+    <dimen name="smallImage">60dp</dimen>
+</resources>

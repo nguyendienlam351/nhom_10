@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">nhom_10</string>
+    <array name="testarray">
+        <item>test 1</item>
+        <item>test 2</item>
+        <item>test 3</item>
+        <item>test 4</item>
+        <item>test 5</item>
+    </array>
 </resources>

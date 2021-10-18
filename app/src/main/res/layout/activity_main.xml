@@ -2,15 +2,77 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    style="@style/layout"
     tools:context=".MainActivity">
 
     <TextView
-        android:gravity="center"
+        style="@style/title"
+        android:layout_width="match_parent"
+        android:text="nhóm 10" />
+
+    <TextView
+        style="@style/text"
+        android:layout_width="match_parent"
+        android:text="nhóm 10" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="nhóm 10" />
+
+        <ImageButton
+            style="@style/iconButton"
+            android:background="@drawable/left_arrow" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add"
+        style="@style/editButton"
+        android:layout_width="wrap_content"
+        android:text="nhóm 10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        style="@style/spinnerLayout">
+
+        <Spinner
+            android:entries="@array/testarray"
+            style="@style/spinner"/>
+    </LinearLayout>
+    
+    <ImageButton
+        android:background="@drawable/image"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
+    <ImageButton
+        android:background="@drawable/image"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        style="@style/text"
         android:text="nhóm 10"/>
+    <ImageButton
+        android:background="@drawable/edit"
+        android:layout_width="22dp"
+        android:layout_height="22dp" />
+    <ImageButton
+        android:background="@drawable/delete"
+        android:layout_width="22dp"
+        android:layout_height="22dp" />
+</LinearLayout>
+
 
 </LinearLayout>
