@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">nhom_10</string>
+    <string name="nhapTenBan">Nhập tên bàn</string>
+    <string name="nhapTenLoaiMon">Nhập tên loại món</string>
+    <string name="add">Thêm</string>
+    <string name="soBan">Bàn số 01</string>
+    <string name="ThayDoi">Thay đổi</string>
+    <string name="cancel">Huỷ</string>
     <array name="testarray">
         <item>test 1</item>
         <item>test 2</item>

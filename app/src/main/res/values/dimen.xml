@@ -10,7 +10,7 @@
     <dimen name="spacing4">8dp</dimen>
     
     <dimen name="iconSize">32dp</dimen>
-    <dimen name="smallIconSize">22dp</dimen>
+    <dimen name="smallIconSize">26dp</dimen>
 
     <dimen name="largeImage">150dp</dimen>
     <dimen name="smallImage">60dp</dimen>
