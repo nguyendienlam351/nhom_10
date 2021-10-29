@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DangNhap"
+    android:layout_weight="9"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/dangnhap"
+            android:textSize="40dp"
+            android:textColor="@color/purple_500"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/iconcofe" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="2">
+        <EditText
+            android:id="@+id/edTaikhoan"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:paddingLeft="20dp"
+            android:layout_marginRight="50dp"
+            android:hint="@string/taikhoan"
+            android:background="@drawable/boder"/>
+
+        <EditText
+            android:id="@+id/edMatkhau"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:hint="@string/matkhau"
+            android:background="@drawable/boder"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cdHienmk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hienmatkhau"
+                android:textStyle="bold"/>
+            <Button
+                android:id="@+id/btnQuenmk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quenmatkhau"
+                android:textColor="@color/black"
+                android:layout_marginLeft="40dp"
+
+                style="?android:attr/borderlessButtonStyle"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_weight="3">
+
+        <Button
+            android:id="@+id/btnDangNhap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btdangnhap"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

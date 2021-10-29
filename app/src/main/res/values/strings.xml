@@ -7,4 +7,32 @@
         <item>test 4</item>
         <item>test 5</item>
     </array>
+    <string name="taikhoan">Tài khoản</string>
+    <string name="dangnhap">ĐĂNG NHẬP</string>
+    <string name="matkhau">Mật khẩu</string>
+    <string name="hienmatkhau">Hiện mật khẩu</string>
+    <string name="quenmatkhau">Quên mật khẩu</string>
+    <string name="btdangnhap">Đăng nhập</string>
+    <string name="loinhan">Chúng tôi sẽ gửi link đổi mật khẩu vào Email của bạn.</string>
+    <string name="nhapmail">Nhập email</string>
+    <string name="email">Email</string>
+    <string name="huy">Hủy</string>
+    <string name="gui">Gửi</string>
+    <string name="datmon">Đặt món</string>
+    <string name="lich">Lịch làm việc</string>
+    <string name="dangxuat">Đăng xuất</string>
+
+    <string name="xemhoadon">Xem hóa đơn</string>
+    <string name="xuatkho">Xuất kho</string>
+    <string name="thanhtoan">Thanh toán</string>
+    <string name="thuchi">Thu chi</string>
+
+    <string name="quanly">Quản Lý</string>
+    <string name="quanlybanhang">Quản lý bán hàng</string>
+    <string name="nhapxuatkho">Nhập xuất kho</string>
+    <string name="baocao">Báo cáo</string>
+
+
+    <string name="open_navigation_drawer">open_navigation_drawer</string>
+    <string name="close_navigation_drawer">close_navigation_drawer</string>
 </resources>

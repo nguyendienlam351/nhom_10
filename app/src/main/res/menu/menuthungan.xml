@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/thanhtoan"
+            android:title="@string/thanhtoan"
+            android:icon="@drawable/ic_order"/>
+        <item android:id="@+id/thuchi"
+            android:title="@string/thuchi"
+            android:icon="@drawable/calculator"/>
+        <item android:id="@+id/calendar"
+            android:title="@string/lich"
+            android:icon="@drawable/ic_calendar"/>
+    </group>
+    <item android:title="account">
+        <menu>
+            <item android:id="@+id/logout"
+                android:title="@string/dangxuat"
+                android:icon="@drawable/logout"/>
+        </menu>
+    </item>
+</menu>

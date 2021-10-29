@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/quanly"
+            android:title="@string/quanly"
+            android:icon="@drawable/ic_order"/>
+        <item android:id="@+id/quanlybanhang"
+            android:title="@string/quanlybanhang"
+            android:icon="@drawable/ic_order"/>
+        <item android:id="@+id/nhapxuatkho"
+            android:title="@string/nhapxuatkho"
+            android:icon="@drawable/dropbox"/>
+        <item android:id="@+id/thuchi"
+            android:title="@string/thuchi"
+            android:icon="@drawable/calculator"/>
+        <item android:id="@+id/baocao"
+            android:title="@string/baocao"
+            android:icon="@drawable/file"/>
+    </group>
+    <item android:title="account">
+        <menu>
+            <item android:id="@+id/logout"
+                android:title="@string/dangxuat"
+                android:icon="@drawable/logout"/>
+        </menu>
+    </item>
+</menu>

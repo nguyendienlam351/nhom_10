@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/xemhoadon"
+            android:title="@string/xemhoadon"
+            android:icon="@drawable/ic_hoadon"/>
+        <item android:id="@+id/xuatkho"
+            android:title="@string/xuatkho"
+            android:icon="@drawable/file"/>
+        <item android:id="@+id/calendar"
+            android:title="@string/lich"
+            android:icon="@drawable/ic_calendar"/>
+    </group>
+    <item android:title="account">
+        <menu>
+            <item android:id="@+id/logout"
+                android:title="@string/dangxuat"
+                android:icon="@drawable/logout"/>
+        </menu>
+    </item>
+
+</menu>
