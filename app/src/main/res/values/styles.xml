@@ -82,16 +82,15 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@drawable/boder</item>
+        <item name="android:layout_marginTop">@dimen/spacing2</item>
+        <item name="android:layout_marginBottom">@dimen/spacing2</item>
     </style>
 
     //spinner
     <style name="spinner">
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">@dimen/iconSize</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">@dimen/textSize</item>
-        <item name="android:padding">@dimen/spacing2</item>
-        <item name="android:layout_marginTop">@dimen/spacing2</item>
-        <item name="android:layout_marginBottom">@dimen/spacing2</item>
     </style>
 
     //layout
