@@ -64,7 +64,7 @@ public class DangNhap extends AppCompatActivity {
                 email = edTaikhoan.getText().toString().trim();
                 pass = edMatkhau.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Nhập Email của bạn !", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Nhập email của bạn !", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (TextUtils.isEmpty(pass)) {

@@ -48,7 +48,7 @@ public class ThuNgan extends AppCompatActivity implements NavigationView.OnNavig
     private NavigationView navigationView;
     Toolbar toolbar;
 
-    private TextView ten,email;
+    private TextView ten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,6 @@ public class ThuNgan extends AppCompatActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_thu_ngan);
         navigationView = findViewById(R.id.navigation_view);
         ten = navigationView.getHeaderView(0).findViewById(R.id.tennhanvien);
-        email = navigationView.getHeaderView(0).findViewById(R.id.emailnhanvien);
         getInfoUser();
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
@@ -74,8 +73,21 @@ public class ThuNgan extends AppCompatActivity implements NavigationView.OnNavig
     }
     private void getInfoUser(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String emaill = user.getEmail();
-        email.setText(emaill);
+        String maNV = user.getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("NhanVien/"+maNV);
+        myRef.child("hoTen").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String value = snapshot.getValue(String.class);
+                ten.setText(String.valueOf(value));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

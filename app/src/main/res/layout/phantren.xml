@@ -18,11 +18,5 @@
         android:textSize="16dp"
         android:textColor="@color/white"
         android:layout_marginTop="8dp"/>
-    <TextView
-        android:id="@+id/emailnhanvien"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:textColor="@color/white"/>
 
 </LinearLayout>
