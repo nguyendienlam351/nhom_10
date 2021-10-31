@@ -30,6 +30,7 @@ public class DangNhap extends AppCompatActivity {
     Button btnQuenmk,btnDangNhap;
     EditText edMatkhau,edTaikhoan;
     FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
