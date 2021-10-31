@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout"
+    tools:context=".DanhSachMon">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            style="@style/spinnerLayout"
+            android:layout_width="match_parent"
+            android:layout_weight="2">
+
+            <Spinner
+                android:id="@+id/spnLoaiMon"
+                style="@style/spinner"/>
+        </LinearLayout>
+
+        <SearchView
+            android:id="@+id/edtTimKiem"
+            style="@style/editText"
+            android:layout_height="@dimen/iconSize"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/spacing1"
+            android:layout_weight="1"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@color/white"
+            android:submitBackground="@color/white"
+            android:queryHint="@string/search"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lvDanhSachMon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+</LinearLayout>

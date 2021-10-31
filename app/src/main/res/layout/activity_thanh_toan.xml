@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout"
+    tools:context=".ThanhToan">
+    <SearchView
+        android:id="@+id/edtTimKiem"
+        style="@style/editText"
+        android:layout_height="@dimen/iconSize"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/spacing1"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@color/white"
+        android:submitBackground="@color/white"
+        android:queryHint="@string/search"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_weight="1"
+        android:id="@+id/lvDanhSachBan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

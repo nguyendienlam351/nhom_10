@@ -7,4 +7,18 @@
         <item>test 4</item>
         <item>test 5</item>
     </array>
+
+    <string name="tenMon">Tên món</string>
+    <string name="loaiMon">Loai món</string>
+    <string name="gia">Giá:</string>
+    <string name="moTa">Mô tả</string>
+    <string name="hoTen">Họ tên: </string>
+    <string name="email">Email: </string>
+    <string name="tong">Tổng: </string>
+    <string name="thanhToan">Thanh Toán</string>
+    <string name="nhapMaGiamGia">Nhập mã giảm giá</string>
+    <string name="search">search</string>
+    <string name="tenBan">Tên bàn</string>
+    <string name="dat">Đặt</string>
+    <string name="soLuong">Số Lượng: </string>
 </resources>
