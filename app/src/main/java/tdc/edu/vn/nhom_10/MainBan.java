@@ -105,7 +105,7 @@ public class MainBan extends AppCompatActivity {
         });
     }
     private void setEvent() {
-        myRecyclerViewAdapter = new MyRecyclerViewAdapterBan(this,R.layout.layout_ban,data);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapterBan(this,R.layout.layout_item_ban,data);
         myRecyclerViewAdapter.setDelegation(new MyRecyclerViewAdapterBan.MyItemClickListener() {
             @Override
             public void getDeleteBan(Ban ban) {

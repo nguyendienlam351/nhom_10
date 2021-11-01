@@ -55,4 +55,10 @@
     <string name="dat">Đặt</string>
     <string name="soLuong">Số Lượng: </string>
     <string name="themMon">Thêm Món</string>
+
+    <string name="quanLyBan">Quản Lý Bàn</string>
+    <string name="quanLyMon">Quản Lý Món</string>
+    <string name="quanLyLoaiMon">Quản Lý Loại Món</string>
+    <string name="quanLyNhanVien">Quản Lý Nhân Viên</string>
+    <string name="quanLyLichLamViec">Quản Lý Lịch Làm Việc</string>
 </resources>

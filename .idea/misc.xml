@@ -9,28 +9,19 @@
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_dat_mon.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_phuc_vu.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_quan_ly.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/ban.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/baocao.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/datmon.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/email_dialog.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_ban.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_ban.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/lichlamviec.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/phantren.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/quanly.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/quanlybanhang.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/thanhtoan.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2388888888888889" />
-        <entry key="..\:/nhom_10/app/src/main/res/drawable/boder.xml" value="0.2203125" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_QuanLiBan.xml" value="0.1" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_ban.xml" value="0.1" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_dialog_delete.xml" value="0.1" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_dialog_update.xml" value="0.19701086956521738" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_hoadon.xml" value="0.1" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_loaimon.xml" value="0.1" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_ql_ban.xml" value="0.1" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_ql_loaimon.xml" value="0.25" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_quanliban.xml" value="0.1" />
       </map>
     </option>
   </component>

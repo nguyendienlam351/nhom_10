@@ -162,7 +162,12 @@ public class ChiTietMon extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 LoaiMon loaiMon = snapshot.getValue(LoaiMon.class);
-                tvLoaiMon.setText(loaiMon.getTenLoaiMon());
+                if(loaiMon!= null) {
+                    tvLoaiMon.setText(loaiMon.getTenLoaiMon());
+                }
+                else {
+                    tvLoaiMon.setText("Lỗi loại món");
+                }
             }
 
             @Override
