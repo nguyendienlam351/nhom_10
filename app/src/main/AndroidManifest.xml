@@ -24,11 +24,13 @@
             android:name=".PhucVu"
             android:exported="false"/>
         <activity
-            android:name=".DangNhap"
+            android:name=".ThanhToan"
+            android:exported="false" />
+        <activity
             android:name=".ChiTietThanhToan"
             android:exported="false" />
         <activity
-            android:name=".ThanhToan"
+            android:name=".DangNhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
