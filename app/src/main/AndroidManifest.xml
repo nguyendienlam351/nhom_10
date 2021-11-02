@@ -13,10 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
-            android:name=".ChiTietThanhToan"
+            android:name=".DanhSachDonHang"
             android:exported="false" />
         <activity
             android:name=".ThanhToan"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietThanhToan"
+            android:exported="false" />
+        <activity
+            android:name=".XemDonHang"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +41,8 @@
             android:exported="false" />
         <activity
             android:name=".DonHangCuaBan"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".DatMon" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

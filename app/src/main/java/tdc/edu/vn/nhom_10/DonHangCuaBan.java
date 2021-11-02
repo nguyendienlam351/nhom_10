@@ -47,7 +47,8 @@ public class DonHangCuaBan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_don_hang_cua_ban);
-
+        getSupportActionBar().setTitle("Đơn hàng của bàn");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setControl();
         setEvent();
     }
