@@ -2,91 +2,134 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ChiTietMon">
 
-    <ImageView
-        android:id="@+id/imgMon"
-        android:layout_width="@dimen/largeImage"
-        android:layout_height="@dimen/largeImage"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/image"
-        android:scaleType="fitXY" />
-
-    <TextView
-        android:id="@+id/tvTenMon"
-        style="@style/title"
-        android:layout_width="match_parent"
-        android:text="@string/tenMon" />
-
-    <TextView
-        android:id="@+id/tvLoaiMon"
-        style="@style/text"
-        android:layout_width="match_parent"
-        android:text="@string/loaiMon" />
-
-    <TextView
-        android:id="@+id/tvGia"
-        style="@style/text"
-        android:layout_width="match_parent"
-        android:text="@string/gia" />
-
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
+            android:background="@color/blue"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing4"
+            android:weightSum="15">
 
-            <ImageButton
-                android:id="@+id/btnGiam"
-                android:layout_width="@dimen/iconSize"
-                android:layout_height="@dimen/iconSize"
-                android:layout_marginRight="@dimen/spacing1"
-                android:background="@drawable/left_arrow" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing4"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="@dimen/smallIconSize"
+                    android:layout_height="@dimen/smallIconSize"
+                    android:background="@drawable/back" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvSoLuong"
-                style="@style/text"
-                android:layout_width="wrap_content"
-                android:background="@drawable/boder"
-                android:paddingLeft="@dimen/spacing3"
-                android:paddingTop="@dimen/spacing1"
-                android:paddingRight="@dimen/spacing3"
-                android:paddingBottom="@dimen/spacing1"
-                android:text="1" />
-
-            <ImageButton
-                android:id="@+id/btnTang"
-                android:layout_width="@dimen/iconSize"
-                android:layout_height="@dimen/iconSize"
-                android:layout_marginLeft="@dimen/spacing1"
-                android:background="@drawable/right_arrow" />
+                style="@style/textBar"
+                android:layout_width="0dp"
+                android:layout_weight="13"
+                android:text="Chi tiết món" />
         </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        style="@style/layout">
+
+        <ImageView
+            android:id="@+id/imgMon"
+            android:layout_width="@dimen/largeImage"
+            android:layout_height="@dimen/largeImage"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            android:src="@drawable/image" />
+
+        <TextView
+            android:id="@+id/tvTenMon"
+            style="@style/title"
+            android:layout_width="match_parent"
+            android:text="@string/tenMon" />
+
+        <TextView
+            android:id="@+id/tvLoaiMon"
+            style="@style/text"
+            android:layout_width="match_parent"
+            android:text="@string/loaiMon" />
+
+        <TextView
+            android:id="@+id/tvGia"
+            style="@style/text"
+            android:layout_width="match_parent"
+            android:text="@string/gia" />
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnThemMon"
-                style="@style/addButton"
-                android:layout_width="wrap_content"
-                android:text="@string/tenBan" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnGiam"
+                    android:layout_width="@dimen/iconSize"
+                    android:layout_height="@dimen/iconSize"
+                    android:layout_marginRight="@dimen/spacing1"
+                    android:background="@drawable/left_arrow" />
+
+                <TextView
+                    android:id="@+id/tvSoLuong"
+                    style="@style/text"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/boder"
+                    android:paddingLeft="@dimen/spacing3"
+                    android:paddingTop="@dimen/spacing1"
+                    android:paddingRight="@dimen/spacing3"
+                    android:paddingBottom="@dimen/spacing1"
+                    android:text="1" />
+
+                <ImageButton
+                    android:id="@+id/btnTang"
+                    android:layout_width="@dimen/iconSize"
+                    android:layout_height="@dimen/iconSize"
+                    android:layout_marginLeft="@dimen/spacing1"
+                    android:background="@drawable/right_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnThemMon"
+                    style="@style/addButton"
+                    android:layout_width="wrap_content"
+                    android:text="@string/tenBan" />
+            </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvMonTa"
+            style="@style/text"
+            android:layout_width="match_parent"
+            android:text="@string/moTa" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/tvMonTa"
-        style="@style/text"
-        android:layout_width="match_parent"
-        android:text="@string/moTa" />
 </LinearLayout>

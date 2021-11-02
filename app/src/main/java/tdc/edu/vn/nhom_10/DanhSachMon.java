@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import tdc.edu.vn.nhom_10.adater.MonAdapter;
+import tdc.edu.vn.nhom_10.adapter.MonAdapter;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
@@ -41,6 +42,7 @@ public class DanhSachMon extends AppCompatActivity {
     ArrayAdapter<LoaiMon> loaiMonAdapter;
     int viTriLoai = 0;
     DonHang donHang;
+    ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +149,12 @@ public class DanhSachMon extends AppCompatActivity {
             }
         });
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void filter(String tenMon){
@@ -268,5 +276,6 @@ public class DanhSachMon extends AppCompatActivity {
         lvDanhSachMon = findViewById(R.id.lvDanhSachMon);
         spnLoaiMon = findViewById(R.id.spnLoaiMon);
         edtTimKiem = findViewById(R.id.edtTimKiem);
+        btnBack = findViewById(R.id.btnBack);
     }
 }

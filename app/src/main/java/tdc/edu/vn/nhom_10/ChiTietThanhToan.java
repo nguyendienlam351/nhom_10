@@ -1,7 +1,6 @@
 package tdc.edu.vn.nhom_10;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,9 +27,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import tdc.edu.vn.nhom_10.adater.ChiTietDonHangAdater;
-import tdc.edu.vn.nhom_10.adater.ChiTietThanhToanAdapter;
-import tdc.edu.vn.nhom_10.adater.MonAdapter;
+import tdc.edu.vn.nhom_10.adapter.ChiTietThanhToanAdapter;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
 import tdc.edu.vn.nhom_10.model.HoaDon;
@@ -46,6 +42,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
     DatabaseReference database;
     DonHang donHang;
     ArrayList<ChiTietDonHang> chiTietDonHangArrayList;
+    ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +112,13 @@ public class ChiTietThanhToan extends AppCompatActivity {
                 else {
                     Toast.makeText(ChiTietThanhToan.this, "Hãy chọn thêm món", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -199,5 +203,6 @@ public class ChiTietThanhToan extends AppCompatActivity {
         tvHoTen = findViewById(R.id.tvHoTen);
         tvEmail = findViewById(R.id.tvEmail);
         btnThanhToan = findViewById(R.id.btnThanhToan);
+        btnBack = findViewById(R.id.btnBack);
     }
 }

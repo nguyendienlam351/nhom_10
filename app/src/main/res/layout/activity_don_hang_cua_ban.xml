@@ -2,52 +2,101 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/layout"
-    android:weightSum="14"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DonHangCuaBan">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing4"
+            android:weightSum="15">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing4"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="@dimen/smallIconSize"
+                    android:layout_height="@dimen/smallIconSize"
+                    android:background="@drawable/back" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/textBar"
+                android:layout_weight="13"
+                android:layout_width="0dp"
+                android:text="Đơn hàng của bàn" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <LinearLayout
-        android:weightSum="10"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        tools:ignore="Suspicious0dp">
-    <TextView
-        android:id="@+id/tvTenBan"
-        android:layout_weight="10"
-        android:gravity="center"
-        android:layout_width="0dp"
-        style="@style/title"
-        android:text="@string/tenBan"/>
-        <ImageButton
-            android:id="@+id/btnThemMon"
-            style="@style/iconButton"
-            android:background="@drawable/add"/>
-    </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lvDanhSachMon"
-        android:layout_weight="12"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"/>
-    <LinearLayout
-        android:layout_weight="1"
-        android:weightSum="10"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tvTong"
-            android:layout_weight="8"
-            android:layout_width="0dp"
-            style="@style/title"
-            android:text="@string/tong"/>
-        <Button
-            android:id="@+id/btnDat"
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            style="@style/addButton"
-            android:text="@string/dat"/>
+        style="@style/layout"
+        android:weightSum="14">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            tools:ignore="Suspicious0dp">
+
+            <TextView
+                android:id="@+id/tvTenBan"
+                style="@style/title"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:gravity="center"
+                android:text="@string/tenBan" />
+
+            <ImageButton
+                android:id="@+id/btnThemMon"
+                style="@style/iconButton"
+                android:background="@drawable/add" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lvDanhSachMon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/tvTong"
+                style="@style/title"
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:text="@string/tong" />
+
+            <Button
+                android:id="@+id/btnDat"
+                style="@style/addButton"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:text="@string/dat" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

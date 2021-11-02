@@ -48,6 +48,7 @@ public class ChiTietMon extends AppCompatActivity {
     DatabaseReference database;
     StorageReference storage;
     DonHang donHang;
+    ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +104,13 @@ public class ChiTietMon extends AppCompatActivity {
                     chiTietDonHang.setSoLuong(chiTietDonHang.getSoLuong() - 1);
                     tvSoLuong.setText(String.valueOf(chiTietDonHang.getSoLuong()));
                 }
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -213,5 +221,6 @@ public class ChiTietMon extends AppCompatActivity {
         btnThemMon = findViewById(R.id.btnThemMon);
         btnTang = findViewById(R.id.btnTang);
         btnGiam = findViewById(R.id.btnGiam);
+        btnBack = findViewById(R.id.btnBack);
     }
 }

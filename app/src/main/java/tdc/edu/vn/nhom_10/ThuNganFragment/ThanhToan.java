@@ -2,7 +2,6 @@ package tdc.edu.vn.nhom_10.ThuNganFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,8 +23,7 @@ import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.ChiTietThanhToan;
 import tdc.edu.vn.nhom_10.R;
-import tdc.edu.vn.nhom_10.adater.DonHangAdater;
-import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
+import tdc.edu.vn.nhom_10.adapter.DonHangAdater;
 import tdc.edu.vn.nhom_10.model.DonHang;
 
 public class ThanhToan extends Fragment {

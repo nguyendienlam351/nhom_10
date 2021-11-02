@@ -2,7 +2,6 @@ package tdc.edu.vn.nhom_10.PhucVuFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +23,7 @@ import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.DonHangCuaBan;
 import tdc.edu.vn.nhom_10.R;
-import tdc.edu.vn.nhom_10.adater.DonHangAdater;
+import tdc.edu.vn.nhom_10.adapter.DonHangAdater;
 import tdc.edu.vn.nhom_10.model.DonHang;
 
 public class DatMon extends Fragment {
@@ -45,6 +43,32 @@ public class DatMon extends Fragment {
     }
 
     private void setEvent() {
+//        DatabaseReference database1 = FirebaseDatabase.getInstance().getReference("Mon");
+//        for(int i = 1; i < 5; i++){
+//            String maMon =  database1.push().getKey();
+//            ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
+//            chiTietDonHang.setMaMon(maMon);
+//            chiTietDonHang.setTenMon("Tên món " + i);
+//            chiTietDonHang.setAnh("images (1).jpg");
+//            chiTietDonHang.setGia(i * 10000);
+//            chiTietDonHang.setLoaiMon("-MmxGqIIVxahb98fjs0e");
+//            chiTietDonHang.setMoTa("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+//
+//            database1.child(maMon).setValue(chiTietDonHang);
+//        }
+//
+//        for(int i = 5; i < 10; i++){
+//            String maMon =  database1.push().getKey();
+//            ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
+//            chiTietDonHang.setMaMon(maMon);
+//            chiTietDonHang.setTenMon("Tên món " + i);
+//            chiTietDonHang.setAnh("images (2).jpg");
+//            chiTietDonHang.setGia(i * 10000);
+//            chiTietDonHang.setLoaiMon("-Mmq0c4J6TCZ0EdkpV4W");
+//            chiTietDonHang.setMoTa("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
+//
+//            database1.child(maMon).setValue(chiTietDonHang);
+//        }
         donHangArrayList = new ArrayList<DonHang>();
         database = FirebaseDatabase.getInstance().getReference("Ban");
         donHangAdater = new DonHangAdater(getActivity(), R.layout.layout_ban, donHangArrayList);

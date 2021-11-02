@@ -22,7 +22,7 @@
             android:name=".PhaChe"
             android:exported="false" />
         <activity
-            android:name=".PhucVu"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".ThanhToan"
@@ -31,24 +31,17 @@
             android:name=".DanhSachDonHang"
             android:exported="false" />
         <activity
-            android:name=".ThanhToan"
-            android:exported="false" />
-        <activity
             android:name=".ChiTietThanhToan"
             android:exported="false" />
         <activity
             android:name=".XemDonHang"
+            android:exported="true" />
+        <activity
             android:name=".QuanLy"
             android:exported="true" />
         <activity
-            android:name=".DangNhap"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".PhucVu"
+            android:exported="false" />
         <activity
             android:name=".MainBan"
             android:exported="false" />
@@ -63,11 +56,16 @@
             android:exported="false" />
         <activity
             android:name=".DonHangCuaBan"
-            android:exported="false"
-            android:parentActivityName=".DatMon" />
-        <activity
-            android:name=".MainActivity"
             android:exported="false" />
-        </application>
+        <activity
+            android:name=".DangNhap"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    </manifest>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

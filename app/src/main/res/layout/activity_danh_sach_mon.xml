@@ -2,40 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DanhSachMon">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <LinearLayout
-            style="@style/spinnerLayout"
             android:layout_width="match_parent"
-            android:layout_weight="2">
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing4"
+            android:weightSum="15">
 
-            <Spinner
-                android:id="@+id/spnLoaiMon"
-                style="@style/spinner"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing4"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="@dimen/smallIconSize"
+                    android:layout_height="@dimen/smallIconSize"
+                    android:background="@drawable/back" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/textBar"
+                android:layout_width="0dp"
+                android:layout_weight="13"
+                android:text="Danh sách món" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        style="@style/layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                style="@style/spinnerLayout"
+                android:layout_width="match_parent"
+                android:layout_weight="2">
+
+                <Spinner
+                    android:id="@+id/spnLoaiMon"
+                    style="@style/spinner" />
+            </LinearLayout>
+
+            <SearchView
+                android:id="@+id/edtTimKiem"
+                style="@style/editText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iconSize"
+                android:layout_marginLeft="@dimen/spacing1"
+                android:layout_weight="1"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@color/white"
+                android:queryHint="@string/search"
+                android:submitBackground="@color/white" />
         </LinearLayout>
 
-        <SearchView
-            android:id="@+id/edtTimKiem"
-            style="@style/editText"
-            android:layout_height="@dimen/iconSize"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lvDanhSachMon"
             android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/spacing1"
-            android:layout_weight="1"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@color/white"
-            android:submitBackground="@color/white"
-            android:queryHint="@string/search"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lvDanhSachMon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
 </LinearLayout>

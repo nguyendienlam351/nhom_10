@@ -2,35 +2,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/layout"
-    android:weightSum="14"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DanhSachDonHang">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing4"
+            android:weightSum="15">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing4"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="@dimen/smallIconSize"
+                    android:layout_height="@dimen/smallIconSize"
+                    android:background="@drawable/back" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/textBar"
+                android:layout_width="0dp"
+                android:layout_weight="13"
+                android:text="Đơn hàng của bàn" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <LinearLayout
-        android:weightSum="10"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        tools:ignore="Suspicious0dp">
-        <TextView
-            android:id="@+id/tvTenBan"
-            android:layout_weight="10"
+        style="@style/layout"
+        android:weightSum="14">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_width="0dp"
-            style="@style/title"
-            android:text="@string/tenBan"/>
-    </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lvDanhSachMon"
-        android:layout_weight="12"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+            android:orientation="horizontal"
+            android:weightSum="10"
+            tools:ignore="Suspicious0dp">
+
+            <TextView
+                android:id="@+id/tvTenBan"
+                style="@style/title"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:gravity="center"
+                android:text="@string/tenBan" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lvDanhSachMon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="12" />
+
         <Button
             android:id="@+id/btnXong"
-            android:layout_weight="1"
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
             style="@style/addButton"
-            android:text="@string/xong"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/xong" />
+    </LinearLayout>
 </LinearLayout>

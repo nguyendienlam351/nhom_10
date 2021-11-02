@@ -1,7 +1,6 @@
 package tdc.edu.vn.nhom_10;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,11 +24,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import tdc.edu.vn.nhom_10.adater.ChiTietDonHangAdater;
-import tdc.edu.vn.nhom_10.adater.MonAdapter;
+import tdc.edu.vn.nhom_10.adapter.ChiTietDonHangAdater;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
-import tdc.edu.vn.nhom_10.model.HoaDon;
 
 public class DonHangCuaBan extends AppCompatActivity {
     RecyclerView lvDanhSachMon;
@@ -42,13 +38,12 @@ public class DonHangCuaBan extends AppCompatActivity {
     DatabaseReference database;
     DonHang donHang = new DonHang();
     ArrayList<ChiTietDonHang> chiTietDonHangArrayList;
+    ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_don_hang_cua_ban);
-        getSupportActionBar().setTitle("Đơn hàng của bàn");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setControl();
         setEvent();
     }
@@ -143,6 +138,13 @@ public class DonHangCuaBan extends AppCompatActivity {
                 }
             }
         });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void getDataDonHang(String maBan) {
@@ -185,5 +187,6 @@ public class DonHangCuaBan extends AppCompatActivity {
         btnThemMon = findViewById(R.id.btnThemMon);
         tvTong = findViewById(R.id.tvTong);
         btnDat = findViewById(R.id.btnDat);
+        btnBack = findViewById(R.id.btnBack);
     }
 }

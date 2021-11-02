@@ -1,4 +1,4 @@
-package tdc.edu.vn.nhom_10.adater;
+package tdc.edu.vn.nhom_10.adapter;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -30,18 +30,18 @@ import java.util.ArrayList;
 import tdc.edu.vn.nhom_10.R;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
 
-public class MonAdapter extends RecyclerView.Adapter<MonAdapter.MonViewHolder>{
+public class ChiTietDonHangAdater extends RecyclerView.Adapter<ChiTietDonHangAdater.ChiTietDonHangViewHolder>{
     private Activity context;
     private int layoutID;
     private ArrayList<ChiTietDonHang> chiTietDonHangArrayList;
-    private MonItemClickListener delegation;
+    private ChiTietDonHangClickListener delegation;
     private StorageReference storage;
 
-    public void setDelegation(MonItemClickListener delegation) {
+    public void setDelegation(ChiTietDonHangClickListener delegation) {
         this.delegation = delegation;
     }
 
-    public MonAdapter(Activity context, int layoutID, ArrayList<ChiTietDonHang> chiTietDonHangArrayList) {
+    public ChiTietDonHangAdater(Activity context, int layoutID, ArrayList<ChiTietDonHang> chiTietDonHangArrayList) {
         this.context = context;
         this.layoutID = layoutID;
         this.chiTietDonHangArrayList = chiTietDonHangArrayList;
@@ -51,15 +51,19 @@ public class MonAdapter extends RecyclerView.Adapter<MonAdapter.MonViewHolder>{
 
     @NonNull
     @Override
-    public MonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChiTietDonHangViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = context.getLayoutInflater();
         CardView view = (CardView) layoutInflater.inflate(viewType, parent, false);
-        return new MonViewHolder(view);
+        return new ChiTietDonHangViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MonViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ChiTietDonHangViewHolder holder, int position) {
         ChiTietDonHang chiTietDonHang = chiTietDonHangArrayList.get(position);
+
+        if(!chiTietDonHang.getTrangThai().equals("")){
+            holder.btnXoaMon.setVisibility(View.INVISIBLE);
+        }
 
         getAnhMon(chiTietDonHang.getAnh(),holder.imgMon);
 
@@ -70,30 +74,13 @@ public class MonAdapter extends RecyclerView.Adapter<MonAdapter.MonViewHolder>{
 
         holder.tvSoLuong.setText(String.valueOf(chiTietDonHang.getSoLuong()));
 
+        holder.tvTrangThai.setText(chiTietDonHang.getTrangThai()+"");
+
         holder.btnTang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (chiTietDonHang.getSoLuong() < 30) {
-                    chiTietDonHang.setSoLuong(chiTietDonHang.getSoLuong() + 1);
-                    notifyDataSetChanged();
-                }
-            }
-        });
-        holder.btnGiam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (chiTietDonHang.getSoLuong() > 1) {
-                    chiTietDonHang.setSoLuong(chiTietDonHang.getSoLuong() - 1);
-                    notifyDataSetChanged();
-                }
-            }
-        });
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 if(delegation != null){
-                    delegation.itemClick(chiTietDonHang);
+                    delegation.tangSoLuong(chiTietDonHang);
                 }
                 else {
                     Toast.makeText(context, "you must set delegation before", Toast.LENGTH_SHORT).show();
@@ -101,7 +88,19 @@ public class MonAdapter extends RecyclerView.Adapter<MonAdapter.MonViewHolder>{
             }
         });
 
-        holder.btnThemMon.setOnClickListener(new View.OnClickListener() {
+        holder.btnGiam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(delegation != null){
+                    delegation.giamSoLuong(chiTietDonHang);
+                }
+                else {
+                    Toast.makeText(context, "you must set delegation before", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        holder.btnXoaMon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(delegation != null){
@@ -149,21 +148,17 @@ public class MonAdapter extends RecyclerView.Adapter<MonAdapter.MonViewHolder>{
         return chiTietDonHangArrayList.size();
     }
 
-    public void filterList(ArrayList<ChiTietDonHang> chiTietDonHangArrayList){
-        this.chiTietDonHangArrayList = chiTietDonHangArrayList;
-        notifyDataSetChanged();
-    }
-
-    public static class MonViewHolder extends RecyclerView.ViewHolder {
+    public static class ChiTietDonHangViewHolder extends RecyclerView.ViewHolder {
         public ImageView imgMon;
         public TextView tvTenMon;
         public TextView tvGia;
         public ImageButton btnTang;
         public ImageButton btnGiam;
         public TextView tvSoLuong;
-        public ImageButton btnThemMon;
+        public ImageButton btnXoaMon;
+        public TextView tvTrangThai;
 
-        public MonViewHolder(@NonNull View itemView) {
+        public ChiTietDonHangViewHolder(@NonNull View itemView) {
             super(itemView);
             imgMon = itemView.findViewById(R.id.imgMon);
             tvTenMon = itemView.findViewById(R.id.tvTenMon);
@@ -171,11 +166,13 @@ public class MonAdapter extends RecyclerView.Adapter<MonAdapter.MonViewHolder>{
             btnTang = itemView.findViewById(R.id.btnTang);
             btnGiam = itemView.findViewById(R.id.btnGiam);
             tvSoLuong = itemView.findViewById(R.id.tvSoLuong);
-            btnThemMon = itemView.findViewById(R.id.btnThemMon);
+            btnXoaMon = itemView.findViewById(R.id.btnXoaMon);
+            tvTrangThai = itemView.findViewById(R.id.tvTrangThai);
         }
     }
-    public interface MonItemClickListener{
-        public void itemClick(ChiTietDonHang chiTietDonHang);
+    public interface ChiTietDonHangClickListener{
         public void iconClick(ChiTietDonHang chiTietDonHang);
+        public void tangSoLuong(ChiTietDonHang chiTietDonHang);
+        public void giamSoLuong(ChiTietDonHang chiTietDonHang);
     }
 }

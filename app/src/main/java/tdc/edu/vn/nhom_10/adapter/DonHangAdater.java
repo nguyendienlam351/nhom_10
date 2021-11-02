@@ -1,4 +1,4 @@
-package tdc.edu.vn.nhom_10.adater;
+package tdc.edu.vn.nhom_10.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

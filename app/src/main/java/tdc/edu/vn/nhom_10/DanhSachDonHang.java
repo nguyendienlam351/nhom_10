@@ -11,26 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
-import tdc.edu.vn.nhom_10.adater.ChiTietDonHangAdater;
-import tdc.edu.vn.nhom_10.adater.ChiTietThanhToanAdapter;
-import tdc.edu.vn.nhom_10.adater.DanhSachDonHangAdapter;
+import tdc.edu.vn.nhom_10.adapter.DanhSachDonHangAdapter;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
 import tdc.edu.vn.nhom_10.model.DonHang;
-import tdc.edu.vn.nhom_10.model.HoaDon;
 
 public class DanhSachDonHang extends AppCompatActivity {
     RecyclerView lvDanhSachMon;
@@ -40,6 +32,7 @@ public class DanhSachDonHang extends AppCompatActivity {
     DatabaseReference database;
     DonHang donHang = new DonHang();
     ArrayList<ChiTietDonHang> chiTietDonHangArrayList;
+    ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +89,13 @@ public class DanhSachDonHang extends AppCompatActivity {
             }
         });
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void getDataDonHang(String maBan) {
@@ -122,5 +122,6 @@ public class DanhSachDonHang extends AppCompatActivity {
         lvDanhSachMon = findViewById(R.id.lvDanhSachMon);
         tvTenBan = findViewById(R.id.tvTenBan);
         btnXong = findViewById(R.id.btnXong);
+        btnBack = findViewById(R.id.btnBack);
     }
 }

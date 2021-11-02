@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import tdc.edu.vn.nhom_10.adater.DonHangAdater;
+import tdc.edu.vn.nhom_10.adapter.DonHangAdater;
 import tdc.edu.vn.nhom_10.model.DonHang;
 
 public class XemDonHang extends AppCompatActivity {

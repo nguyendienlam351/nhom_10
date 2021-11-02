@@ -2,60 +2,111 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/layout"
-    android:weightSum="13"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ChiTietThanhToan">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lvDanhSachMon"
-        android:layout_weight="9"
+
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
-    <LinearLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/tvGiamGia"
-            style="@style/editText"
-            android:layout_width="match_parent"
-            android:hint="@string/nhapMaGiamGia" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_weight="3"
-        android:weightSum="10"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
         <LinearLayout
-            android:layout_weight="7"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing4"
+            android:weightSum="15">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing4"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="@dimen/smallIconSize"
+                    android:layout_height="@dimen/smallIconSize"
+                    android:background="@drawable/back" />
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/tvHoTen"
-                android:layout_weight="7"
-                android:layout_width="match_parent"
-                style="@style/text"
-                android:text="@string/hoTen"/>
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_weight="7"
-                android:layout_width="match_parent"
-                style="@style/text"
-                android:text="@string/email"/>
-            <TextView
-                android:id="@+id/tvTong"
-                android:layout_weight="7"
-                android:layout_width="match_parent"
-                style="@style/title"
-                android:text="@string/tong"/>
+                style="@style/textBar"
+                android:layout_width="0dp"
+                android:layout_weight="13"
+                android:text="Đơn hàng của bàn" />
         </LinearLayout>
-        <Button
-            android:id="@+id/btnThanhToan"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        style="@style/layout"
+        android:weightSum="13">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lvDanhSachMon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/tvGiamGia"
+                style="@style/editText"
+                android:layout_width="match_parent"
+                android:hint="@string/nhapMaGiamGia" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="3"
-            android:layout_width="0dp"
-            style="@style/addButton"
-            android:text="@string/thanhToan"/>
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvHoTen"
+                    style="@style/text"
+                    android:layout_width="match_parent"
+                    android:layout_weight="7"
+                    android:text="@string/hoTen" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    style="@style/text"
+                    android:layout_width="match_parent"
+                    android:layout_weight="7"
+                    android:text="@string/email" />
+
+                <TextView
+                    android:id="@+id/tvTong"
+                    style="@style/title"
+                    android:layout_width="match_parent"
+                    android:layout_weight="7"
+                    android:text="@string/tong" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThanhToan"
+                style="@style/addButton"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:text="@string/thanhToan" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
