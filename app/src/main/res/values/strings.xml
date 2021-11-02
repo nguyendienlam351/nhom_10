@@ -62,4 +62,20 @@
     <string name="quanLyLoaiMon">Quản Lý Loại Món</string>
     <string name="quanLyNhanVien">Quản Lý Nhân Viên</string>
     <string name="quanLyLichLamViec">Quản Lý Lịch Làm Việc</string>
+    <string name="Them">Thêm</string>
+    <string name="Xoa">Xoá</string>
+    <string name="Sua">Sửa</string>
+    <string name="HienThi">Hiển Thị</string>
+    <string name="Thoat">Thoát</string>
+    <array name="ChucVu">
+        <item>Tất cả</item>
+        <item>Quản lý</item>
+        <item>Phục vụ</item>
+        <item>Pha chế</item>
+        <item>Thu ngân</item>
+    </array>
+    <string name="NhapTieuDe">Quản lý nhân viên</string>
+    <string name="NhapTen">Nhập tên</string>
+    <string name="Timkiem">Search</string>
+    <string name="DanhSach">Danh Sách</string>
 </resources>
