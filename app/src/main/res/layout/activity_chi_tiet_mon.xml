@@ -81,7 +81,7 @@
                 android:id="@+id/btnThemMon"
                 style="@style/addButton"
                 android:layout_width="wrap_content"
-                android:text="@string/themMon" />
+                android:text="@string/tenBan" />
         </LinearLayout>
     </LinearLayout>
     <TextView

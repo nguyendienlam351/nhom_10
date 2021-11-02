@@ -47,6 +47,7 @@
     <string name="gia">Giá:</string>
     <string name="moTa">Mô tả</string>
     <string name="hoTen">Họ tên: </string>
+    <string name="email">Email: </string>
     <string name="tong">Tổng: </string>
     <string name="thanhToan">Thanh Toán</string>
     <string name="nhapMaGiamGia">Nhập mã giảm giá</string>
@@ -54,6 +55,7 @@
     <string name="tenBan">Tên bàn</string>
     <string name="dat">Đặt</string>
     <string name="soLuong">Số Lượng: </string>
+    <string name="xong">Xong</string>
     <string name="themMon">Thêm Món</string>
 
     <string name="quanLyBan">Quản Lý Bàn</string>

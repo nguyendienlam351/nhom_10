@@ -28,9 +28,16 @@
             android:name=".ThanhToan"
             android:exported="false" />
         <activity
+            android:name=".DanhSachDonHang"
+            android:exported="false" />
+        <activity
+            android:name=".ThanhToan"
+            android:exported="false" />
+        <activity
             android:name=".ChiTietThanhToan"
             android:exported="false" />
         <activity
+            android:name=".XemDonHang"
             android:name=".QuanLy"
             android:exported="true" />
         <activity
@@ -56,7 +63,8 @@
             android:exported="false" />
         <activity
             android:name=".DonHangCuaBan"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".DatMon" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

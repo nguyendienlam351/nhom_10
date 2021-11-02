@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing1"
+    card_view:cardCornerRadius="@dimen/cardview_default_elevation"
+    card_view:cardElevation="@dimen/cardview_default_elevation"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing3"
+        android:paddingRight="@dimen/spacing3"
+        android:weightSum="12">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/imgMon"
+                android:layout_width="@dimen/smallImage"
+                android:layout_height="@dimen/smallImage"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/image"
+                android:scaleType="fitXY" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/spacing3"
+            android:paddingRight="@dimen/spacing2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing1">
+
+                <TextView
+                    android:id="@+id/tvTenMon"
+                    style="@style/title"
+                    android:layout_width="wrap_content"
+                    android:text="@string/tenMon" />
+
+                <TextView
+                    android:id="@+id/tvGia"
+                    style="@style/text"
+                    android:layout_width="match_parent"
+                    android:text="@string/gia" />
+
+                <TextView
+                    android:id="@+id/tvSoLuong"
+                    style="@style/text"
+                    android:layout_width="match_parent"
+                    android:text="@string/soLuong" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="right"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btnXoaMon"
+                android:layout_width="@dimen/smallIconSize"
+                android:layout_height="@dimen/smallIconSize"
+                android:background="@drawable/delete"
+                android:layout_marginTop="@dimen/spacing3" />
+            <TextView
+                android:id="@+id/tvTrangThai"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom|right"
+                android:text="" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
