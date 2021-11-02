@@ -46,7 +46,7 @@
             android:entries="@array/testarray"
             style="@style/spinner"/>
     </LinearLayout>
-    
+
     <ImageButton
         android:background="@drawable/image"
         android:layout_width="150dp"
@@ -55,24 +55,24 @@
         android:background="@drawable/image"
         android:layout_width="60dp"
         android:layout_height="60dp" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        style="@style/text"
-        android:text="nhóm 10"/>
-    <ImageButton
-        android:background="@drawable/edit"
-        android:layout_width="22dp"
-        android:layout_height="22dp" />
-    <ImageButton
-        android:background="@drawable/delete"
-        android:layout_width="22dp"
-        android:layout_height="22dp" />
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/text"
+            android:text="nhóm 10"/>
+        <ImageButton
+            android:background="@drawable/edit"
+            android:layout_width="22dp"
+            android:layout_height="22dp" />
+        <ImageButton
+            android:background="@drawable/delete"
+            android:layout_width="22dp"
+            android:layout_height="22dp" />
 
+    </LinearLayout>
 
 </LinearLayout>

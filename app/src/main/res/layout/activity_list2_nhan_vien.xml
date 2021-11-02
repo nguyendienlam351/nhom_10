@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#eee"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/vien_left_right"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvHoTen"
+            android:layout_width="match_parent"
+            android:padding="@dimen/spacing1"
+            android:layout_weight="19"
+            style="@style/text"
+            android:text="Nguyễn Văn A" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/vien_left_right"
+            android:layout_weight="20">
+            <TextView
+                android:id="@+id/tvSDT"
+                android:layout_width="match_parent"
+                android:padding="@dimen/spacing1"
+                style="@style/text"
+                android:text="0386646543" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNgaySinh"
+            android:layout_width="match_parent"
+            android:padding="@dimen/spacing1"
+            android:layout_weight="21"
+            style="@style/text"
+            android:text="09/10/2000" />
+    </LinearLayout>
+
+</LinearLayout>

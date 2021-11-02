@@ -7,4 +7,20 @@
         <item>test 4</item>
         <item>test 5</item>
     </array>
+    <string name="Them">Thêm</string>
+    <string name="Xoa">Xoá</string>
+    <string name="Sua">Sửa</string>
+    <string name="HienThi">Hiển Thị</string>
+    <string name="Thoat">Thoát</string>
+    <array name="ChucVu">
+        <item>Tất cả</item>
+        <item>Quản lý</item>
+        <item>Phục vụ</item>
+        <item>Pha chế</item>
+        <item>Thu ngân</item>
+    </array>
+    <string name="NhapTieuDe">Quản lý nhân viên</string>
+    <string name="NhapTen">Nhập tên</string>
+    <string name="Timkiem">Search</string>
+    <string name="DanhSach">Danh Sách</string>
 </resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout"
+    tools:context=".ManHinhNV">
+
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            style="@style/spinnerLayout"
+            android:layout_width="match_parent"
+            android:layout_weight="2">
+
+            <Spinner
+                android:id="@+id/spnChucVu"
+                style="@style/spinner"
+                android:entries="@array/ChucVu"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/svSearch"
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/iconSize"
+            android:layout_marginLeft="@dimen/spacing1"
+            android:layout_marginRight="@dimen/spacing1"
+            app:iconifiedByDefault="false"
+            android:layout_weight="1"
+            android:queryBackground="@color/white"
+            app:queryHint="search"
+            android:submitBackground="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btnThem"
+            style="@style/iconButton"
+            android:background="@drawable/them" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/vien"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/vien_menu">
+
+            <TextView
+                style="@style/title"
+                android:layout_width="match_parent"
+                android:padding="@dimen/spacing1"
+                android:layout_weight="19"
+                android:text="Họ tên" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:background="@drawable/vien_left_right">
+
+                <TextView
+                    style="@style/title"
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/spacing1"
+                    android:text="Số điện thoại" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/title"
+                android:layout_width="match_parent"
+                android:padding="@dimen/spacing1"
+                android:layout_weight="21"
+                android:text="Ngày sinh" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lvNhanVien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</LinearLayout>
