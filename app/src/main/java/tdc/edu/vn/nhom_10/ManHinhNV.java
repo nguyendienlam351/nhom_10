@@ -28,6 +28,7 @@ import tdc.edu.vn.nhom_10.adapter.MyRecylerViewNhanVien;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class ManHinhNV extends AppCompatActivity {
+    ImageButton btnBack;
     ImageButton btnThem;
     RecyclerView lvNhanVien;
     ArrayList<NhanVien> list = new ArrayList<NhanVien>();
@@ -108,6 +109,12 @@ public class ManHinhNV extends AppCompatActivity {
 
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     //Hàm lọc theo tên
@@ -167,6 +174,7 @@ public class ManHinhNV extends AppCompatActivity {
         lvNhanVien = findViewById(R.id.lvNhanVien);
         spnChucVu = findViewById(R.id.spnChucVu);
         svSearch = findViewById(R.id.svSearch);
+        btnBack = findViewById(R.id.btnBack);
 
     }
 }

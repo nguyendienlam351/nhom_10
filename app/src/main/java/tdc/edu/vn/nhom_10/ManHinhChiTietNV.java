@@ -67,6 +67,7 @@ public class ManHinhChiTietNV extends AppCompatActivity {
     EditText edtHoTen, edtSDT, edtCCCD, edtDiaChi, edtEmail;
     TextView txtNgaySinh;
     Spinner spnChucVu;
+    ImageButton btnBack;
     ImageButton btndate;
     ImageView imgHinh;
     Button btnThayDoi, btnXoa;
@@ -148,6 +149,13 @@ public class ManHinhChiTietNV extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 requestPermission();
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -349,6 +357,6 @@ public class ManHinhChiTietNV extends AppCompatActivity {
         imgHinh = findViewById(R.id.imgHinh);
         edtEmail.setFocusable(false);
         edtSDT.setFocusable(false);
-
+        btnBack = findViewById(R.id.btnBack);
     }
 }

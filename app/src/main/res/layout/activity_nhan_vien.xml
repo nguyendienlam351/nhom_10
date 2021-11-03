@@ -1,91 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--suppress ALL -->
+<?xml version="1.0" encoding="utf-8"?><!--suppress ALL -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ManHinhNV">
 
-    <LinearLayout
-        android:layout_gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            style="@style/spinnerLayout"
-            android:layout_width="match_parent"
-            android:layout_weight="2">
-
-            <Spinner
-                android:id="@+id/spnChucVu"
-                style="@style/spinner"
-                android:entries="@array/ChucVu"
-                android:layout_width="wrap_content" />
-        </LinearLayout>
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/svSearch"
-            style="@style/editText"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/iconSize"
-            android:layout_marginLeft="@dimen/spacing1"
-            android:layout_marginRight="@dimen/spacing1"
-            app:iconifiedByDefault="false"
-            android:layout_weight="1"
-            android:queryBackground="@color/white"
-            app:queryHint="search"
-            android:submitBackground="@color/white" />
-
-        <ImageButton
-            android:id="@+id/btnThem"
-            style="@style/iconButton"
-            android:background="@drawable/them" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/vien"
-        android:orientation="vertical">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/blue"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@drawable/vien_menu">
+            android:padding="@dimen/spacing4"
+            android:weightSum="15">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing4"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="@dimen/smallIconSize"
+                    android:layout_height="@dimen/smallIconSize"
+                    android:background="@drawable/back" />
+            </LinearLayout>
 
             <TextView
-                style="@style/title"
+                style="@style/textBar"
+                android:layout_width="0dp"
+                android:layout_weight="13"
+                android:text="Quản lý nhân viên" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout style="@style/layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <LinearLayout
+                style="@style/spinnerLayout"
                 android:layout_width="match_parent"
-                android:padding="@dimen/spacing1"
-                android:layout_weight="19"
-                android:text="Họ tên" />
+                android:layout_weight="2">
+
+                <Spinner
+                    android:id="@+id/spnChucVu"
+                    style="@style/spinner"
+                    android:layout_width="wrap_content"
+                    android:entries="@array/ChucVu" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/svSearch"
+                style="@style/editText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iconSize"
+                android:layout_marginLeft="@dimen/spacing1"
+                android:layout_marginRight="@dimen/spacing1"
+                android:layout_weight="1"
+                android:queryBackground="@color/white"
+                android:submitBackground="@color/white"
+                app:iconifiedByDefault="false"
+                app:queryHint="search" />
+
+            <ImageButton
+                android:id="@+id/btnThem"
+                style="@style/iconButton"
+                android:background="@drawable/them" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/vien"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="20"
-                android:background="@drawable/vien_left_right">
+                android:background="@drawable/vien_menu"
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/title"
                     android:layout_width="match_parent"
+                    android:layout_weight="19"
                     android:padding="@dimen/spacing1"
-                    android:text="Số điện thoại" />
+                    android:text="Họ tên" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:background="@drawable/vien_left_right">
+
+                    <TextView
+                        style="@style/title"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/spacing1"
+                        android:text="Số điện thoại" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/title"
+                    android:layout_width="match_parent"
+                    android:layout_weight="21"
+                    android:padding="@dimen/spacing1"
+                    android:text="Ngày sinh" />
             </LinearLayout>
 
-            <TextView
-                style="@style/title"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lvNhanVien"
                 android:layout_width="match_parent"
-                android:padding="@dimen/spacing1"
-                android:layout_weight="21"
-                android:text="Ngày sinh" />
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lvNhanVien"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </LinearLayout>

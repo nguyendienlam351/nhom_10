@@ -58,25 +58,17 @@
             android:name=".DonHangCuaBan"
             android:exported="false" />
         <activity
+            android:name=".ManHinhChiTietNV"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhNV"
+            android:exported="false" />
+        <activity
+            android:name=".ManHinhThemNV"
+            android:exported="false" />
+        <activity
             android:name=".DangNhap"
             android:exported="true">
-            android:exported="false">
-        </activity>
-        <activity android:name=".ManHinhNV">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ManHinhThemNV">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ManHinhChiTietNV">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

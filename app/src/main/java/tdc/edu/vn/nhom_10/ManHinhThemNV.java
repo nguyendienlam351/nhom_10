@@ -58,6 +58,7 @@ public class ManHinhThemNV extends AppCompatActivity {
     TextView txtNgaySinh;
     String NgaySinh;
     Spinner spnChucVu;
+    ImageButton btnBack;
     ImageButton btndate;
     ImageView imgHinh;
     Button btnThem;
@@ -175,6 +176,13 @@ public class ManHinhThemNV extends AppCompatActivity {
                 requestPermission();
             }
         });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     //Kiểm tra requestPermission
@@ -251,6 +259,7 @@ public class ManHinhThemNV extends AppCompatActivity {
         imgHinh = findViewById(R.id.imgHinh);
         mAuth = FirebaseAuth.getInstance();
         btnThem.setEnabled(false);
+        btnBack = findViewById(R.id.btnBack);
 
     }
 }

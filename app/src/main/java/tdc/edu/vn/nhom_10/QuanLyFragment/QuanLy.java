@@ -15,11 +15,13 @@ import tdc.edu.vn.nhom_10.DanhSachMon;
 import tdc.edu.vn.nhom_10.DonHangCuaBan;
 import tdc.edu.vn.nhom_10.MainBan;
 import tdc.edu.vn.nhom_10.MainLoaiMon;
+import tdc.edu.vn.nhom_10.ManHinhNV;
 import tdc.edu.vn.nhom_10.R;
 
 public class QuanLy extends Fragment {
     Button btnQuanLyBan;
     Button btnQuanLyLoaiMon;
+    Button btnQuanLyNhanVien;
 
     @Nullable
     @Override
@@ -45,10 +47,19 @@ public class QuanLy extends Fragment {
                 startActivity(intent);
             }
         });
+
+        btnQuanLyNhanVien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ManHinhNV.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setControl(View view){
         btnQuanLyBan = view.findViewById(R.id.btnQuanLyBan);
         btnQuanLyLoaiMon = view.findViewById(R.id.btnQuanLyLoaiMon);
+        btnQuanLyNhanVien = view.findViewById(R.id.btnQuanLyNhanVien);
     }
 }
