@@ -47,6 +47,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import gun0912.tedbottompicker.TedBottomPicker;
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class ThemNhanVien extends AppCompatActivity {
@@ -54,7 +55,7 @@ public class ThemNhanVien extends AppCompatActivity {
     TextView txtNgaySinh;
     String NgaySinh;
     Spinner spnChucVu;
-    ImageButton btnBack;
+    CustomActionBar actionBar;
     ImageButton btndate;
     ImageView imgHinh;
     Button btnThem;
@@ -78,6 +79,14 @@ public class ThemNhanVien extends AppCompatActivity {
     StorageReference storageRef = storage.getReference("NhanVien");
 
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Thêm nhân viên");
         //
         chucVu.add("Quản lý");
         chucVu.add("Phục vụ");
@@ -173,12 +182,6 @@ public class ThemNhanVien extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     //Kiểm tra requestPermission
@@ -255,7 +258,7 @@ public class ThemNhanVien extends AppCompatActivity {
         imgHinh = findViewById(R.id.imgHinh);
         mAuth = FirebaseAuth.getInstance();
         btnThem.setEnabled(false);
-        btnBack = findViewById(R.id.btnBack);
+        actionBar = findViewById(R.id.actionBar);
 
     }
 }

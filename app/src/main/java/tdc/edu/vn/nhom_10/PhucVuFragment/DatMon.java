@@ -43,32 +43,6 @@ public class DatMon extends Fragment {
     }
 
     private void setEvent() {
-//        DatabaseReference database1 = FirebaseDatabase.getInstance().getReference("Mon");
-//        for(int i = 1; i < 5; i++){
-//            String maMon =  database1.push().getKey();
-//            ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
-//            chiTietDonHang.setMaMon(maMon);
-//            chiTietDonHang.setTenMon("Tên món " + i);
-//            chiTietDonHang.setAnh("images (1).jpg");
-//            chiTietDonHang.setGia(i * 10000);
-//            chiTietDonHang.setLoaiMon("-MmxGqIIVxahb98fjs0e");
-//            chiTietDonHang.setMoTa("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
-//
-//            database1.child(maMon).setValue(chiTietDonHang);
-//        }
-//
-//        for(int i = 5; i < 10; i++){
-//            String maMon =  database1.push().getKey();
-//            ChiTietDonHang chiTietDonHang = new ChiTietDonHang();
-//            chiTietDonHang.setMaMon(maMon);
-//            chiTietDonHang.setTenMon("Tên món " + i);
-//            chiTietDonHang.setAnh("images (2).jpg");
-//            chiTietDonHang.setGia(i * 10000);
-//            chiTietDonHang.setLoaiMon("-Mmq0c4J6TCZ0EdkpV4W");
-//            chiTietDonHang.setMoTa("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.");
-//
-//            database1.child(maMon).setValue(chiTietDonHang);
-//        }
         donHangArrayList = new ArrayList<DonHang>();
         database = FirebaseDatabase.getInstance().getReference("Ban");
         donHangAdater = new DonHangAdater(getActivity(), R.layout.layout_item_ban_2, donHangArrayList);

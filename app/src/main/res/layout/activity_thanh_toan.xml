@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/layout"
-    tools:context=".ThanhToan">
+    style="@style/layout">
     <SearchView
         android:id="@+id/edtTimKiem"
         style="@style/editText"

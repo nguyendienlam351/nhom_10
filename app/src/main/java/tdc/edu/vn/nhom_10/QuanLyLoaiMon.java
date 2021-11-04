@@ -27,12 +27,13 @@ import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.adapter.MyRecyclerViewAdapterLoaiMon;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
 
 public class QuanLyLoaiMon extends AppCompatActivity {
     EditText edtNhapTenLoaiMon;
-    ImageButton btnBack;
+    CustomActionBar actionBar;
     Button btnAdd,btnCancel,btnThayDoi;
     LinearLayout layout;
     RecyclerView lvLoaiMon;
@@ -102,6 +103,15 @@ public class QuanLyLoaiMon extends AppCompatActivity {
         });
     }
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Quản lý loại món");
+
         myRecyclerViewAdapter = new MyRecyclerViewAdapterLoaiMon(this,R.layout.layout_item_loai_mon,data);
         myRecyclerViewAdapter.setDelegation(new MyRecyclerViewAdapterLoaiMon.MyItemClickListener() {
             @Override
@@ -152,12 +162,6 @@ public class QuanLyLoaiMon extends AppCompatActivity {
         });
         getListBanFromRealTimeDatabase();
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
     //Hàm vô hiệu hoá nút thêm khi không nhập gì
     private TextWatcher watcher = new TextWatcher() {
@@ -217,6 +221,6 @@ public class QuanLyLoaiMon extends AppCompatActivity {
         btnThayDoi=findViewById(R.id.btnThayDoi);
         layout=findViewById(R.id.Layout);
         btnAdd.setEnabled(false);
-        btnBack = findViewById(R.id.btnBack);
+        actionBar = findViewById(R.id.actionBar);
     }
 }

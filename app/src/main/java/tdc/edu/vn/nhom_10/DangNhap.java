@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import tdc.edu.vn.nhom_10.QuanLyFragment.ThuChi;
+import tdc.edu.vn.nhom_10.CustomView.QuenMatKhauDialog;
 
 public class DangNhap extends AppCompatActivity {
     CheckBox cbHienmk;
@@ -121,7 +121,7 @@ public class DangNhap extends AppCompatActivity {
         btnDangNhap = findViewById(R.id.btnDangNhap);
     }
     private void quenmk()  {
-        CustomDialog.FullNameListener listener = new CustomDialog.FullNameListener() {
+        QuenMatKhauDialog.FullNameListener listener = new QuenMatKhauDialog.FullNameListener() {
             @Override
             public void fullNameEntered(String email) {
                 mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -136,7 +136,7 @@ public class DangNhap extends AppCompatActivity {
                 });
             }
         };
-        final CustomDialog dialog = new CustomDialog(this, listener);
+        final QuenMatKhauDialog dialog = new QuenMatKhauDialog(this, listener);
 
         dialog.show();
     }

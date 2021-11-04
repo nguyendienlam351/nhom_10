@@ -1,4 +1,4 @@
-package tdc.edu.vn.nhom_10;
+package tdc.edu.vn.nhom_10.CustomView;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,16 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class CustomDialog extends Dialog {
-    interface FullNameListener {
+import tdc.edu.vn.nhom_10.R;
+
+public class QuenMatKhauDialog extends Dialog {
+    public interface FullNameListener {
         public void fullNameEntered(String fullName);
     }
     public Context context;
 
     private EditText edEmail;
     private Button btnHuy, btnGui;
-    private CustomDialog.FullNameListener listener;
-    public CustomDialog(Context context, CustomDialog.FullNameListener listener) {
+    private QuenMatKhauDialog.FullNameListener listener;
+    public QuenMatKhauDialog(Context context, QuenMatKhauDialog.FullNameListener listener) {
         super(context);
         this.context = context;
         this.listener = listener;

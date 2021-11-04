@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.adapter.MyRecylerViewNhanVien;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
@@ -36,6 +37,7 @@ public class QuanLyNhanVien extends AppCompatActivity {
     ArrayList<String> chucVu = new ArrayList<String>();
     DatabaseReference mData;
     SearchView svSearch;
+    CustomActionBar actionBar;
     int viTri = 0;
 
     @Override
@@ -50,7 +52,15 @@ public class QuanLyNhanVien extends AppCompatActivity {
 
 
     private void setEvent() {
-        //
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Quản lý nhân viên");
+
         //Gọi firebase
         getFirebase();
         chucVu.add("Tất cả");
@@ -106,12 +116,6 @@ public class QuanLyNhanVien extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }
@@ -173,7 +177,6 @@ public class QuanLyNhanVien extends AppCompatActivity {
         lvNhanVien = findViewById(R.id.lvNhanVien);
         spnChucVu = findViewById(R.id.spnChucVu);
         svSearch = findViewById(R.id.svSearch);
-        btnBack = findViewById(R.id.btnBack);
-
+        actionBar = findViewById(R.id.actionBar);
     }
 }

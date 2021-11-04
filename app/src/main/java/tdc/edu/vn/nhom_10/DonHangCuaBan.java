@@ -24,6 +24,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.adapter.ChiTietDonHangAdater;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
@@ -38,7 +39,7 @@ public class DonHangCuaBan extends AppCompatActivity {
     DatabaseReference database;
     DonHang donHang = new DonHang();
     ArrayList<ChiTietDonHang> chiTietDonHangArrayList;
-    ImageButton btnBack;
+    CustomActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,15 @@ public class DonHangCuaBan extends AppCompatActivity {
     }
 
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Đơn hàng của bàn");
+
         database = FirebaseDatabase.getInstance().getReference();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -138,13 +148,6 @@ public class DonHangCuaBan extends AppCompatActivity {
                 }
             }
         });
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     private void getDataDonHang(String maBan) {
@@ -187,6 +190,6 @@ public class DonHangCuaBan extends AppCompatActivity {
         btnThemMon = findViewById(R.id.btnThemMon);
         tvTong = findViewById(R.id.tvTong);
         btnDat = findViewById(R.id.btnDat);
-        btnBack = findViewById(R.id.btnBack);
+        actionBar = findViewById(R.id.actionBar);
     }
 }

@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
@@ -48,7 +49,7 @@ public class ChiTietMon extends AppCompatActivity {
     DatabaseReference database;
     StorageReference storage;
     DonHang donHang;
-    ImageButton btnBack;
+    CustomActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,15 @@ public class ChiTietMon extends AppCompatActivity {
     }
 
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Chi tiết món");
+
         database = FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance().getReference("Mon");
         Intent intent = getIntent();
@@ -104,13 +114,6 @@ public class ChiTietMon extends AppCompatActivity {
                     chiTietDonHang.setSoLuong(chiTietDonHang.getSoLuong() - 1);
                     tvSoLuong.setText(String.valueOf(chiTietDonHang.getSoLuong()));
                 }
-            }
-        });
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }
@@ -221,6 +224,6 @@ public class ChiTietMon extends AppCompatActivity {
         btnThemMon = findViewById(R.id.btnThemMon);
         btnTang = findViewById(R.id.btnTang);
         btnGiam = findViewById(R.id.btnGiam);
-        btnBack = findViewById(R.id.btnBack);
+        actionBar = findViewById(R.id.actionBar);
     }
 }

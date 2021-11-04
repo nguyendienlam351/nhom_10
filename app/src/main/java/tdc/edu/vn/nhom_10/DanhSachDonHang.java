@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.adapter.DanhSachDonHangAdapter;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
 import tdc.edu.vn.nhom_10.model.DonHang;
@@ -32,19 +33,27 @@ public class DanhSachDonHang extends AppCompatActivity {
     DatabaseReference database;
     DonHang donHang = new DonHang();
     ArrayList<ChiTietDonHang> chiTietDonHangArrayList;
-    ImageButton btnBack;
+    CustomActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danh_sach_don_hang);
-        getSupportActionBar().setTitle("Đơn hàng của bàn");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setControl();
         setEvent();
     }
 
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Đơn hàng của bàn");
+
         chiTietDonHangArrayList = new ArrayList<ChiTietDonHang>();
         database = FirebaseDatabase.getInstance().getReference();
         Intent intent = getIntent();
@@ -89,13 +98,6 @@ public class DanhSachDonHang extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
     }
 
     private void getDataDonHang(String maBan) {
@@ -122,6 +124,6 @@ public class DanhSachDonHang extends AppCompatActivity {
         lvDanhSachMon = findViewById(R.id.lvDanhSachMon);
         tvTenBan = findViewById(R.id.tvTenBan);
         btnXong = findViewById(R.id.btnXong);
-        btnBack = findViewById(R.id.btnBack);
+        actionBar = findViewById(R.id.actionBar);
     }
 }

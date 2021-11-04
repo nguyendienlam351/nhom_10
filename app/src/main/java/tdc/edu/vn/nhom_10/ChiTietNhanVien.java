@@ -50,13 +50,14 @@ import java.util.Calendar;
 import java.util.List;
 
 import gun0912.tedbottompicker.TedBottomPicker;
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class ChiTietNhanVien extends AppCompatActivity {
     EditText edtHoTen, edtSDT, edtCCCD, edtDiaChi, edtEmail;
     TextView txtNgaySinh;
     Spinner spnChucVu;
-    ImageButton btnBack;
+    CustomActionBar actionBar;
     ImageButton btndate;
     ImageView imgHinh;
     Button btnThayDoi, btnXoa;
@@ -85,6 +86,15 @@ public class ChiTietNhanVien extends AppCompatActivity {
     DatabaseReference mData = data.getReference("NhanVien");
 
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Chi tiết nhân viên");
+
         //
         chucVu.add("Quản lý");
         chucVu.add("Phục vụ");
@@ -141,12 +151,6 @@ public class ChiTietNhanVien extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     //Kiểm tra requestPermission
@@ -346,6 +350,6 @@ public class ChiTietNhanVien extends AppCompatActivity {
         imgHinh = findViewById(R.id.imgHinh);
         edtEmail.setFocusable(false);
         edtSDT.setFocusable(false);
-        btnBack = findViewById(R.id.btnBack);
+        actionBar = findViewById(R.id.actionBar);
     }
 }

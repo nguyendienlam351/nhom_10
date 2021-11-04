@@ -43,7 +43,6 @@
         style="@style/spinnerLayout">
 
         <Spinner
-            android:entries="@array/testarray"
             style="@style/spinner"/>
     </LinearLayout>
 

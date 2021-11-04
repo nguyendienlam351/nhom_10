@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.adapter.MonAdapter;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
@@ -42,7 +43,7 @@ public class DanhSachMon extends AppCompatActivity {
     ArrayAdapter<LoaiMon> loaiMonAdapter;
     int viTriLoai = 0;
     DonHang donHang;
-    ImageButton btnBack;
+    CustomActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,15 @@ public class DanhSachMon extends AppCompatActivity {
     }
 
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Danh sách món");
+
         chiTietDonHangArrayList = new ArrayList<>();
 
         loaiMonArrayList = new ArrayList<>();
@@ -146,13 +156,6 @@ public class DanhSachMon extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
     }
@@ -276,6 +279,6 @@ public class DanhSachMon extends AppCompatActivity {
         lvDanhSachMon = findViewById(R.id.lvDanhSachMon);
         spnLoaiMon = findViewById(R.id.spnLoaiMon);
         edtTimKiem = findViewById(R.id.edtTimKiem);
-        btnBack = findViewById(R.id.btnBack);
+        actionBar = findViewById(R.id.actionBar);
     }
 }
