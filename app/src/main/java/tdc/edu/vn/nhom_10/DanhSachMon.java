@@ -60,7 +60,7 @@ public class DanhSachMon extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance().getReference();
 
-        monAdapter = new MonAdapter(this, R.layout.layout_mon, chiTietDonHangArrayList);
+        monAdapter = new MonAdapter(this, R.layout.layout_item_mon_1, chiTietDonHangArrayList);
 
         monAdapter.setDelegation(new MonAdapter.MonItemClickListener() {
 

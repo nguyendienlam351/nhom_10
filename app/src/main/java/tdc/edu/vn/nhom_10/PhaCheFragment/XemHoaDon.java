@@ -36,7 +36,7 @@ public class XemHoaDon extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.xemhoadon,container,false);
+        View view = inflater.inflate(R.layout.activity_xem_don_hang,container,false);
 
         return view;
     }
@@ -44,7 +44,7 @@ public class XemHoaDon extends Fragment {
     private void setEvent() {
         donHangArrayList = new ArrayList<DonHang>();
         database = FirebaseDatabase.getInstance().getReference("Ban");
-        donHangAdater = new DonHangAdater(getActivity(), R.layout.layout_ban, donHangArrayList);
+        donHangAdater = new DonHangAdater(getActivity(), R.layout.layout_item_ban_2, donHangArrayList);
 
         donHangAdater.setDelegation(new DonHangAdater.MyItemClickListener() {
             @Override

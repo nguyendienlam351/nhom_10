@@ -6,13 +6,6 @@
     <string name="soBan">Bàn số 01</string>
     <string name="ThayDoi">Thay đổi</string>
     <string name="cancel">Huỷ</string>
-    <array name="testarray">
-        <item>test 1</item>
-        <item>test 2</item>
-        <item>test 3</item>
-        <item>test 4</item>
-        <item>test 5</item>
-    </array>
     <string name="taikhoan">Tài khoản</string>
     <string name="dangnhap">ĐĂNG NHẬP</string>
     <string name="matkhau">Mật khẩu</string>
@@ -67,13 +60,6 @@
     <string name="Sua">Sửa</string>
     <string name="HienThi">Hiển Thị</string>
     <string name="Thoat">Thoát</string>
-    <array name="ChucVu">
-        <item>Tất cả</item>
-        <item>Quản lý</item>
-        <item>Phục vụ</item>
-        <item>Pha chế</item>
-        <item>Thu ngân</item>
-    </array>
     <string name="NhapTieuDe">Quản lý nhân viên</string>
     <string name="NhapTen">Nhập tên</string>
     <string name="Timkiem">Search</string>

@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -13,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
-            android:name=".MainLoaiMon"
+            android:name=".QuanLyLoaiMon"
             android:exported="false" />
         <activity
             android:name=".ThuNgan"
@@ -25,17 +27,11 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ThanhToan"
+            android:name=".ChiTietThanhToan"
             android:exported="false" />
         <activity
             android:name=".DanhSachDonHang"
             android:exported="false" />
-        <activity
-            android:name=".ChiTietThanhToan"
-            android:exported="false" />
-        <activity
-            android:name=".XemDonHang"
-            android:exported="true" />
         <activity
             android:name=".QuanLy"
             android:exported="true" />
@@ -43,7 +39,7 @@
             android:name=".PhucVu"
             android:exported="false" />
         <activity
-            android:name=".MainBan"
+            android:name=".QuanLyBan"
             android:exported="false" />
         <activity
             android:name=".ChiTietMon"
@@ -52,19 +48,16 @@
             android:name=".DanhSachMon"
             android:exported="false" />
         <activity
-            android:name=".DatMon"
-            android:exported="false" />
-        <activity
             android:name=".DonHangCuaBan"
             android:exported="false" />
         <activity
-            android:name=".ManHinhChiTietNV"
+            android:name=".ChiTietNhanVien"
             android:exported="false" />
         <activity
-            android:name=".ManHinhNV"
+            android:name=".QuanLyNhanVien"
             android:exported="false" />
         <activity
-            android:name=".ManHinhThemNV"
+            android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
             android:name=".DangNhap"

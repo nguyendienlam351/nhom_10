@@ -7,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 import tdc.edu.vn.nhom_10.adapter.MyRecylerViewNhanVien;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
-public class ManHinhNV extends AppCompatActivity {
+public class QuanLyNhanVien extends AppCompatActivity {
     ImageButton btnBack;
     ImageButton btnThem;
     RecyclerView lvNhanVien;
@@ -42,7 +41,7 @@ public class ManHinhNV extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nhan_vien);
+        setContentView(R.layout.activity_quan_ly_nhan_vien);
 
         setControl();
         setEvent();
@@ -65,7 +64,7 @@ public class ManHinhNV extends AppCompatActivity {
         spnChucVu.setAdapter(arrayAdapter);
 
         //
-        adapter = new MyRecylerViewNhanVien(this, R.layout.activity_list1_nhan_vien, R.layout.activity_list2_nhan_vien, R.layout.activity_list3_nhan_vien, list);
+        adapter = new MyRecylerViewNhanVien(this, R.layout.layout_item_nhan_vien, list);
         lvNhanVien.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -92,7 +91,7 @@ public class ManHinhNV extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(), ManHinhThemNV.class);
+                Intent intent = new Intent(getApplicationContext(), ThemNhanVien.class);
                 startActivity(intent);
             }
         });

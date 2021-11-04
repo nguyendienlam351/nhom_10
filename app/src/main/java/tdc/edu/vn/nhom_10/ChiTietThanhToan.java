@@ -65,7 +65,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
             getDataDonHang(maBan);
         }
 
-        chiTietThanhToanAdapter = new ChiTietThanhToanAdapter(ChiTietThanhToan.this, R.layout.layout_chi_tiet_thanh_toan, chiTietDonHangArrayList);
+        chiTietThanhToanAdapter = new ChiTietThanhToanAdapter(ChiTietThanhToan.this, R.layout.layout_item_mon_3, chiTietDonHangArrayList);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(ChiTietThanhToan.this);
 

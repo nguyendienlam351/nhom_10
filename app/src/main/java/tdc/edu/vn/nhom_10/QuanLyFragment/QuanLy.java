@@ -11,11 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import tdc.edu.vn.nhom_10.DanhSachMon;
-import tdc.edu.vn.nhom_10.DonHangCuaBan;
-import tdc.edu.vn.nhom_10.MainBan;
-import tdc.edu.vn.nhom_10.MainLoaiMon;
-import tdc.edu.vn.nhom_10.ManHinhNV;
+import tdc.edu.vn.nhom_10.QuanLyBan;
+import tdc.edu.vn.nhom_10.QuanLyLoaiMon;
+import tdc.edu.vn.nhom_10.QuanLyNhanVien;
 import tdc.edu.vn.nhom_10.R;
 
 public class QuanLy extends Fragment {
@@ -36,14 +34,14 @@ public class QuanLy extends Fragment {
         btnQuanLyBan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainBan.class);
+                Intent intent = new Intent(getActivity(), QuanLyBan.class);
                 startActivity(intent);
             }
         });
         btnQuanLyLoaiMon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainLoaiMon.class);
+                Intent intent = new Intent(getActivity(), QuanLyLoaiMon.class);
                 startActivity(intent);
             }
         });
@@ -51,7 +49,7 @@ public class QuanLy extends Fragment {
         btnQuanLyNhanVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ManHinhNV.class);
+                Intent intent = new Intent(getActivity(), QuanLyNhanVien.class);
                 startActivity(intent);
             }
         });

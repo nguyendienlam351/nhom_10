@@ -1,11 +1,8 @@
 package tdc.edu.vn.nhom_10;
 
-import static gun0912.tedbottompicker.TedBottomPicker.TAG;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,12 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,10 +26,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,7 +37,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
@@ -63,7 +52,7 @@ import java.util.List;
 import gun0912.tedbottompicker.TedBottomPicker;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
-public class ManHinhChiTietNV extends AppCompatActivity {
+public class ChiTietNhanVien extends AppCompatActivity {
     EditText edtHoTen, edtSDT, edtCCCD, edtDiaChi, edtEmail;
     TextView txtNgaySinh;
     Spinner spnChucVu;
@@ -79,7 +68,7 @@ public class ManHinhChiTietNV extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chitietnv);
+        setContentView(R.layout.activity_chi_tiet_nhan_vien);
         setControl();
         setEvent();
 
@@ -170,7 +159,7 @@ public class ManHinhChiTietNV extends AppCompatActivity {
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(ManHinhChiTietNV.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChiTietNhanVien.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
             }
         };
         TedPermission.create()
@@ -192,7 +181,7 @@ public class ManHinhChiTietNV extends AppCompatActivity {
                 }
             }
         };
-        TedBottomPicker tedBottomPicker = new TedBottomPicker.Builder(ManHinhChiTietNV.this)
+        TedBottomPicker tedBottomPicker = new TedBottomPicker.Builder(ChiTietNhanVien.this)
                 .setOnImageSelectedListener(listener)
                 .create();
         tedBottomPicker.show(getSupportFragmentManager());
@@ -227,7 +216,7 @@ public class ManHinhChiTietNV extends AppCompatActivity {
                 mData.child(String.valueOf(nhanVien.getMaNV())).updateChildren(nhanVien.toMap());
 
                 updateImage();
-                Intent intent = new Intent(getApplicationContext(), ManHinhNV.class);
+                Intent intent = new Intent(getApplicationContext(), QuanLyNhanVien.class);
                 startActivity(intent);
             }
 
@@ -252,7 +241,7 @@ public class ManHinhChiTietNV extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
-                Toast.makeText(ManHinhChiTietNV.this, "Lỗi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChiTietNhanVien.this, "Lỗi", Toast.LENGTH_SHORT).show();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -275,7 +264,7 @@ public class ManHinhChiTietNV extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         mData.child(String.valueOf(nhanVien.getMaNV())).removeValue();
-                        Intent intent = new Intent(getApplicationContext(), ManHinhNV.class);
+                        Intent intent = new Intent(getApplicationContext(), QuanLyNhanVien.class);
                         startActivity(intent);
                     }
                 });

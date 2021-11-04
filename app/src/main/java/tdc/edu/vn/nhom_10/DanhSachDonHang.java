@@ -56,7 +56,7 @@ public class DanhSachDonHang extends AppCompatActivity {
             getDataDonHang(maBan);
         }
 
-        danhSachDonHangAdapter = new DanhSachDonHangAdapter(DanhSachDonHang.this, R.layout.layout_danh_sach_don_hang, chiTietDonHangArrayList);
+        danhSachDonHangAdapter = new DanhSachDonHangAdapter(DanhSachDonHang.this, R.layout.layout_item_mon_2, chiTietDonHangArrayList);
 
         danhSachDonHangAdapter.setDelegation(new DanhSachDonHangAdapter.DanhSachDonHangClickListener() {
             @Override

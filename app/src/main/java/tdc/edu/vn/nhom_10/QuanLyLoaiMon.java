@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -29,8 +30,9 @@ import java.util.ArrayList;
 import tdc.edu.vn.nhom_10.adapter.MyRecyclerViewAdapterLoaiMon;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
 
-public class MainLoaiMon extends AppCompatActivity {
+public class QuanLyLoaiMon extends AppCompatActivity {
     EditText edtNhapTenLoaiMon;
+    ImageButton btnBack;
     Button btnAdd,btnCancel,btnThayDoi;
     LinearLayout layout;
     RecyclerView lvLoaiMon;
@@ -41,7 +43,7 @@ public class MainLoaiMon extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_ql_loaimon);
+        setContentView(R.layout.activity_quan_ly_loai_mon);
         setControl();
         setEvent();
     }
@@ -95,12 +97,12 @@ public class MainLoaiMon extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainLoaiMon.this, "Faild", Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuanLyLoaiMon.this, "Faild", Toast.LENGTH_SHORT).show();
             }
         });
     }
     private void setEvent() {
-        myRecyclerViewAdapter = new MyRecyclerViewAdapterLoaiMon(this,R.layout.layout_loaimon,data);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapterLoaiMon(this,R.layout.layout_item_loai_mon,data);
         myRecyclerViewAdapter.setDelegation(new MyRecyclerViewAdapterLoaiMon.MyItemClickListener() {
             @Override
             public void getDeleteLoaiMon(LoaiMon loaiMon) {
@@ -149,6 +151,13 @@ public class MainLoaiMon extends AppCompatActivity {
             }
         });
         getListBanFromRealTimeDatabase();
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     //Hàm vô hiệu hoá nút thêm khi không nhập gì
     private TextWatcher watcher = new TextWatcher() {
@@ -208,5 +217,6 @@ public class MainLoaiMon extends AppCompatActivity {
         btnThayDoi=findViewById(R.id.btnThayDoi);
         layout=findViewById(R.id.Layout);
         btnAdd.setEnabled(false);
+        btnBack = findViewById(R.id.btnBack);
     }
 }

@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -29,8 +30,9 @@ import java.util.ArrayList;
 import tdc.edu.vn.nhom_10.adapter.MyRecyclerViewAdapterBan;
 import tdc.edu.vn.nhom_10.model.Ban;
 
-public class MainBan extends AppCompatActivity {
+public class QuanLyBan extends AppCompatActivity {
     EditText edtNhapTenBan;
+    ImageButton btnBack;
     Button btnAdd,btnCancel,btnThayDoi;
     LinearLayout layout;
     RecyclerView lvBan;
@@ -41,7 +43,7 @@ public class MainBan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_ql_ban);
+        setContentView(R.layout.activity_quan_ly_ban);
         setControl();
         setEvent();
     }
@@ -95,12 +97,12 @@ public class MainBan extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainBan.this, "Faild", Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuanLyBan.this, "Faild", Toast.LENGTH_SHORT).show();
             }
         });
     }
     private void setEvent() {
-        myRecyclerViewAdapter = new MyRecyclerViewAdapterBan(this,R.layout.layout_item_ban,data);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapterBan(this,R.layout.layout_item_ban_1,data);
         myRecyclerViewAdapter.setDelegation(new MyRecyclerViewAdapterBan.MyItemClickListener() {
             @Override
             public void getDeleteBan(Ban ban) {
@@ -149,6 +151,13 @@ public class MainBan extends AppCompatActivity {
             }
         });
         getListBanFromRealTimeDatabase();
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     //Hàm vô hiệu hoá nút thêm khi không nhập gì
     private TextWatcher watcher = new TextWatcher() {
@@ -208,5 +217,6 @@ public class MainBan extends AppCompatActivity {
         btnThayDoi=findViewById(R.id.btnThayDoi);
         layout=findViewById(R.id.Layout);
         btnAdd.setEnabled(false);
+        btnBack = findViewById(R.id.btnBack);
     }
 }

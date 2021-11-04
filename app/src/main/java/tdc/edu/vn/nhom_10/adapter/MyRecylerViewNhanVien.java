@@ -10,21 +10,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import tdc.edu.vn.nhom_10.ManHinhChiTietNV;
+import tdc.edu.vn.nhom_10.ChiTietNhanVien;
 import tdc.edu.vn.nhom_10.R;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class MyRecylerViewNhanVien extends RecyclerView.Adapter<MyRecylerViewNhanVien.MyViewHolder> {
     Activity conText;
-    int layoutID1;
-    int layoutID2;
-    int layoutID3;
+    int layoutID;
     ArrayList<NhanVien> datanhanVien;
 
     private MyItemClickListener delegation;
@@ -33,11 +29,9 @@ public class MyRecylerViewNhanVien extends RecyclerView.Adapter<MyRecylerViewNha
         this.delegation = delegation;
     }
 
-    public MyRecylerViewNhanVien(Activity conText, int layoutID1, int layoutID2, int layoutID3, ArrayList<NhanVien> datanhanVien) {
+    public MyRecylerViewNhanVien(Activity conText, int layoutID, ArrayList<NhanVien> datanhanVien) {
         this.datanhanVien = datanhanVien;
-        this.layoutID1 = layoutID1;
-        this.layoutID2 = layoutID2;
-        this.layoutID3 = layoutID3;
+        this.layoutID = layoutID;
         this.conText = conText;
     }
 
@@ -59,7 +53,7 @@ public class MyRecylerViewNhanVien extends RecyclerView.Adapter<MyRecylerViewNha
             @Override
             public void onClick(View v) {
                 //Chuyển màn hình
-                Intent intent = new Intent(conText.getApplicationContext(), ManHinhChiTietNV.class);
+                Intent intent = new Intent(conText.getApplicationContext(), ChiTietNhanVien.class);
                 Bundle bundle = new Bundle();
 
                 bundle.putString("MaNV", nhanVien.getMaNV());
@@ -71,13 +65,8 @@ public class MyRecylerViewNhanVien extends RecyclerView.Adapter<MyRecylerViewNha
 
     @Override
     public int getItemViewType(int position) {
-        if (position % 2 != 0) {
-            return layoutID1;
-        } else if (position == datanhanVien.size() - 1) {
-            return layoutID3;
-        } else {
-            return layoutID2;
-        }
+
+        return layoutID;
     }
 
     @Override

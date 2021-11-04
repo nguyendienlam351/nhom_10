@@ -60,7 +60,7 @@ public class DonHangCuaBan extends AppCompatActivity {
         }
 
         chiTietDonHangArrayList = new ArrayList<ChiTietDonHang>();
-        chiTietDonHangAdater = new ChiTietDonHangAdater(DonHangCuaBan.this, R.layout.layout_chi_tiet_don_hang, chiTietDonHangArrayList);
+        chiTietDonHangAdater = new ChiTietDonHangAdater(DonHangCuaBan.this, R.layout.layout_item_mon_4, chiTietDonHangArrayList);
 
         chiTietDonHangAdater.setDelegation(new ChiTietDonHangAdater.ChiTietDonHangClickListener() {
 

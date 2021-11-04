@@ -71,7 +71,7 @@ public class DatMon extends Fragment {
 //        }
         donHangArrayList = new ArrayList<DonHang>();
         database = FirebaseDatabase.getInstance().getReference("Ban");
-        donHangAdater = new DonHangAdater(getActivity(), R.layout.layout_ban, donHangArrayList);
+        donHangAdater = new DonHangAdater(getActivity(), R.layout.layout_item_ban_2, donHangArrayList);
 
         donHangAdater.setDelegation(new DonHangAdater.MyItemClickListener() {
             @Override

@@ -32,12 +32,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -53,7 +49,7 @@ import java.util.List;
 import gun0912.tedbottompicker.TedBottomPicker;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
-public class ManHinhThemNV extends AppCompatActivity {
+public class ThemNhanVien extends AppCompatActivity {
     EditText edtHoTen, edtCCCD, edtEmail, edtSDT, edtDiaChi;
     TextView txtNgaySinh;
     String NgaySinh;
@@ -71,7 +67,7 @@ public class ManHinhThemNV extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_themnv);
+        setContentView(R.layout.activity_them_nhan_vien);
 
         setControl();
         setEvent();
@@ -124,7 +120,7 @@ public class ManHinhThemNV extends AppCompatActivity {
                 databaseReference = FirebaseDatabase.getInstance().getReference();
                 String SDT = edtSDT.getText().toString().trim();
                 String Email = edtEmail.getText().toString().trim();
-                mAuth.createUserWithEmailAndPassword(Email, SDT).addOnCompleteListener(ManHinhThemNV.this, new OnCompleteListener<AuthResult>() {
+                mAuth.createUserWithEmailAndPassword(Email, SDT).addOnCompleteListener(ThemNhanVien.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         String HoTen = edtHoTen.getText().toString().trim();
@@ -136,7 +132,7 @@ public class ManHinhThemNV extends AppCompatActivity {
                         NhanVien nhanVien = new NhanVien(HoTen, SDT, NgaySinh, CCCD, Email, DiaChi, ChucVu, maNV, anh);
                         nhanVien.setMaNV(maNV);
                         databaseReference.child("NhanVien").child(maNV).setValue(nhanVien);
-                        Toast.makeText(ManHinhThemNV.this, mAuth.getUid(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ThemNhanVien.this, mAuth.getUid(), Toast.LENGTH_SHORT).show();
 
                         //Thêm hình ảnh lên firebase
                         StorageReference mountainsRef = storageRef.child(maNV + ".png");
@@ -152,7 +148,7 @@ public class ManHinhThemNV extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
                                 // Handle unsuccessful uploads
-                                Toast.makeText(ManHinhThemNV.this, "Lỗi", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ThemNhanVien.this, "Lỗi", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -162,7 +158,7 @@ public class ManHinhThemNV extends AppCompatActivity {
                             }
                         });
                         //Chuyển màn hình
-                        Intent intent = new Intent(getApplicationContext(), ManHinhNV.class);
+                        Intent intent = new Intent(getApplicationContext(), QuanLyNhanVien.class);
                         startActivity(intent);
                     }
                 });
@@ -195,7 +191,7 @@ public class ManHinhThemNV extends AppCompatActivity {
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(ManHinhThemNV.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ThemNhanVien.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
             }
         };
         TedPermission.create()
@@ -217,7 +213,7 @@ public class ManHinhThemNV extends AppCompatActivity {
                 }
             }
         };
-        TedBottomPicker tedBottomPicker = new TedBottomPicker.Builder(ManHinhThemNV.this)
+        TedBottomPicker tedBottomPicker = new TedBottomPicker.Builder(ThemNhanVien.this)
                 .setOnImageSelectedListener(listener)
                 .create();
         tedBottomPicker.show(getSupportFragmentManager());
