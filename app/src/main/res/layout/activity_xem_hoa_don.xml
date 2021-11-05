@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".XemHoaDon">
+
+    <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout style="@style/layout">
+
+        <SearchView
+            android:id="@+id/svTimKiem"
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/iconSize"
+            android:layout_marginLeft="@dimen/spacing1"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@color/white"
+            android:queryHint="@string/search"
+            android:submitBackground="@color/white" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lvHoaDon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>
