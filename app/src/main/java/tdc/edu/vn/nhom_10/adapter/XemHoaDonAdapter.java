@@ -53,8 +53,10 @@ public class XemHoaDonAdapter extends RecyclerView.Adapter<XemHoaDonAdapter.MyVi
         }
         holder.tvBan.setText(hoaDon.getDonHang().getTenBan());
         NumberFormat formatter = new DecimalFormat("#,###,###");
-        holder.tvTong.setText(formatter.format(hoaDon.getTong()) + " đ");
+        holder.tvTong.setText("Tổng: "+formatter.format(hoaDon.getTong()) + " đ");
         holder.tvNgay.setText(hoaDon.getNgayThang());
+        holder.tvHoTen.setText(hoaDon.getHoTen());
+        holder.tvEmail.setText(hoaDon.getEmail());
 
         holder.imbDelete.setOnClickListener(new View.OnClickListener() {
             @Override
