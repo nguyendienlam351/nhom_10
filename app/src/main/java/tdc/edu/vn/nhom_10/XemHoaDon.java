@@ -19,7 +19,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.adapter.XemHoaDonAdapter;
+import tdc.edu.vn.nhom_10.model.Ban;
+import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.HoaDon;
 
 public class XemHoaDon extends AppCompatActivity {
@@ -28,6 +31,7 @@ public class XemHoaDon extends AppCompatActivity {
     ArrayList<HoaDon> data = new ArrayList<HoaDon>();
     XemHoaDonAdapter myRecyclerViewAdapter;
     DatabaseReference database;
+    CustomActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class XemHoaDon extends AppCompatActivity {
         setControl();
         setEvent();
     }
+    //Lấy dữ liệu firebase
     private void getlist(){
         database= FirebaseDatabase.getInstance().getReference("HoaDon");
         database.addChildEventListener(new ChildEventListener() {
@@ -77,6 +82,14 @@ public class XemHoaDon extends AppCompatActivity {
         });
     }
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Hoá đơn");
         myRecyclerViewAdapter = new XemHoaDonAdapter(this,R.layout.layout_item_hoa_don,data);
         myRecyclerViewAdapter.setDelegation(new XemHoaDonAdapter.MyItemClickListener() {
             @Override
@@ -134,5 +147,6 @@ public class XemHoaDon extends AppCompatActivity {
     private void setControl() {
         svTimKiem=findViewById(R.id.svTimKiem);
         lvHoaDon=findViewById(R.id.lvHoaDon);
+        actionBar = findViewById(R.id.actionBar);
     }
 }

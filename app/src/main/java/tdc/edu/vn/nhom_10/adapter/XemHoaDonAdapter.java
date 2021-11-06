@@ -55,8 +55,8 @@ public class XemHoaDonAdapter extends RecyclerView.Adapter<XemHoaDonAdapter.MyVi
         NumberFormat formatter = new DecimalFormat("#,###,###");
         holder.tvTong.setText("Tổng: "+formatter.format(hoaDon.getTong()) + " đ");
         holder.tvNgay.setText(hoaDon.getNgayThang());
-        holder.tvHoTen.setText(hoaDon.getHoTen());
-        holder.tvEmail.setText(hoaDon.getEmail());
+        holder.tvHoTen.setText("Họ tên: "+hoaDon.getHoTen());
+        holder.tvEmail.setText("Email: "+hoaDon.getEmail());
 
         holder.imbDelete.setOnClickListener(new View.OnClickListener() {
             @Override
