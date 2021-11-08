@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?><!--suppress ALL -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".QuanLyNhanVien">
+
+    <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout style="@style/layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/svSearch"
+                style="@style/editText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iconSize"
+                android:layout_marginLeft="@dimen/spacing1"
+                android:layout_marginRight="@dimen/spacing1"
+                android:layout_weight="1"
+                android:queryBackground="@color/white"
+                android:submitBackground="@color/white"
+                app:iconifiedByDefault="false"
+                app:queryHint="search" />
+
+            <ImageButton
+                android:id="@+id/btnThem"
+                style="@style/iconButton"
+                android:background="@drawable/them" />
+
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000">
+
+            <TableRow>
+
+                <TextView
+                    style="@style/title"
+                    android:layout_width="0dp"
+                    android:layout_marginHorizontal="@dimen/spacing1"
+                    android:layout_marginTop="@dimen/spacing1"
+                    android:layout_marginBottom="@dimen/spacing1"
+                    android:layout_weight="5"
+                    android:background="#B8B8B8"
+                    android:gravity="center_horizontal"
+                    android:text="Tên" />
+
+                <TextView
+                    style="@style/title"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/spacing1"
+                    android:layout_marginRight="@dimen/spacing1"
+                    android:layout_marginBottom="@dimen/spacing1"
+                    android:layout_weight="5"
+                    android:background="#B8B8B8"
+                    android:gravity="center_horizontal"
+                    android:text="Giá" />
+
+                <TextView
+                    style="@style/title"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/spacing1"
+                    android:layout_marginRight="@dimen/spacing1"
+                    android:layout_marginBottom="@dimen/spacing1"
+                    android:layout_weight="4"
+                    android:background="#B8B8B8"
+                    android:gravity="center_horizontal"
+                    android:text="Đơn Vị" />
+            </TableRow>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lvNhapKho"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableLayout>
+
+    </LinearLayout>
+</LinearLayout>
