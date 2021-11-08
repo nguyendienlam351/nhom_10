@@ -44,6 +44,8 @@ public class ChiTietThanhToan extends AppCompatActivity {
     DonHang donHang;
     ArrayList<ChiTietDonHang> chiTietDonHangArrayList;
     CustomActionBar actionBar;
+    String hoTen;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +137,8 @@ public class ChiTietThanhToan extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
-                tvHoTen.setText("Họ tên: "+ value);
+                hoTen = value;
+                tvHoTen.setText("Họ tên: "+ hoTen);
             }
 
             @Override
@@ -148,7 +151,8 @@ public class ChiTietThanhToan extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
-                tvEmail.setText("Email: " + value);
+                email = value;
+                tvEmail.setText("Email: " + email);
             }
 
             @Override
