@@ -22,13 +22,13 @@ import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.adapter.MyRecylerViewAdapterNguyenLieuNhap;
-import tdc.edu.vn.nhom_10.model.DanhMucKho;
+import tdc.edu.vn.nhom_10.model.NguyenLieu;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class DanhSachNguyenLieuNhap extends AppCompatActivity {
     ImageButton btnThem;
     RecyclerView lvNhapKho;
-    ArrayList<DanhMucKho> list = new ArrayList<DanhMucKho>();
+    ArrayList<NguyenLieu> list = new ArrayList<NguyenLieu>();
     MyRecylerViewAdapterNguyenLieuNhap adapter;
     DatabaseReference mData;
     SearchView svSearch;
@@ -95,10 +95,10 @@ public class DanhSachNguyenLieuNhap extends AppCompatActivity {
 
     //Hàm lọc theo tên
     private void filter(String search) {
-        ArrayList<DanhMucKho> filterList = new ArrayList<>();
-        for (DanhMucKho danhMucKho : list) {
-            if (danhMucKho.getTen().toLowerCase().contains(search.toLowerCase())) {
-                filterList.add(danhMucKho);
+        ArrayList<NguyenLieu> filterList = new ArrayList<>();
+        for (NguyenLieu nguyenLieu : list) {
+            if (nguyenLieu.getTenNL().toLowerCase().contains(search.toLowerCase())) {
+                filterList.add(nguyenLieu);
             }
             adapter.filterList(filterList);
         }
@@ -107,19 +107,21 @@ public class DanhSachNguyenLieuNhap extends AppCompatActivity {
     //Hàm đọc firebase
     private void getFirebase() {
         // Write a message to the database
-        mData = FirebaseDatabase.getInstance().getReference("DanhMucKho");
+        mData = FirebaseDatabase.getInstance().getReference("NguyenLieu");
 //        for(int i= 1; i < 6;i++){
 //            DanhMucKho danhMucKho = new DanhMucKho();
 //            danhMucKho.setMaDanhMucKho(mData.push().getKey().toString());
 //            danhMucKho.setTen("quy");
 //            danhMucKho.setGia(10);
 //            danhMucKho.setDonVi("kg");
+//            danhMucKho.setSoLuong("10");
+//            danhMucKho.setMoTa("Nam đâu rồiiiiii");
 //            mData.child(danhMucKho.getMaDanhMucKho()).setValue(danhMucKho);
 //        }
         mData.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                DanhMucKho danhMucKho = snapshot.getValue(DanhMucKho.class);
+                NguyenLieu danhMucKho = snapshot.getValue(NguyenLieu.class);
                 if (danhMucKho != null) {
                     list.add(0,danhMucKho);
                     adapter.notifyDataSetChanged();

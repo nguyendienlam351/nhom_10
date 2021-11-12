@@ -14,16 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import tdc.edu.vn.nhom_10.ChiTietNhanVien;
 import tdc.edu.vn.nhom_10.ChiTietNhapKho;
 import tdc.edu.vn.nhom_10.R;
-import tdc.edu.vn.nhom_10.model.DanhMucKho;
-import tdc.edu.vn.nhom_10.model.NhanVien;
+import tdc.edu.vn.nhom_10.model.NhapKho;
 
-public class MyRecylerViewAdapterDanhMucKho extends RecyclerView.Adapter<MyRecylerViewAdapterDanhMucKho.MyViewHolder> {
+public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHolder> {
     Activity conText;
     int layoutID;
-    ArrayList<DanhMucKho> dataDanhMucKho;
+    ArrayList<NhapKho> data;
 
     private MyItemClickListener delegation;
 
@@ -31,8 +29,8 @@ public class MyRecylerViewAdapterDanhMucKho extends RecyclerView.Adapter<MyRecyl
         this.delegation = delegation;
     }
 
-    public MyRecylerViewAdapterDanhMucKho(Activity conText, int layoutID, ArrayList<DanhMucKho> dataDanhMucKho) {
-        this.dataDanhMucKho = dataDanhMucKho;
+    public NhapKhoAdapter(Activity conText, int layoutID, ArrayList<NhapKho> data) {
+        this.data = data;
         this.layoutID = layoutID;
         this.conText = conText;
     }
@@ -47,10 +45,10 @@ public class MyRecylerViewAdapterDanhMucKho extends RecyclerView.Adapter<MyRecyl
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        DanhMucKho danhMucKho = dataDanhMucKho.get(position);
-        holder.tvTen.setText(danhMucKho.getTen());
-        holder.tvSoLuong.setText(danhMucKho.getSoLuong());
-        holder.tvNgay.setText(danhMucKho.getNgay());
+        NhapKho nhapKho = data.get(position);
+        holder.tvTen.setText(nhapKho.getTenNhapKho());
+        holder.tvSoLuong.setText(nhapKho.getSoLuong());
+        holder.tvNgay.setText(nhapKho.getNgayNhapKho());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +56,7 @@ public class MyRecylerViewAdapterDanhMucKho extends RecyclerView.Adapter<MyRecyl
                 Intent intent = new Intent(conText.getApplicationContext(), ChiTietNhapKho.class);
                 Bundle bundle = new Bundle();
 
-                bundle.putString("MaNV", danhMucKho.getMaDanhMucKho());
+                bundle.putString("MaNV", nhapKho.getMaNhapKho());
                 intent.putExtras(bundle);
                 conText.startActivity(intent);
             }
@@ -73,12 +71,12 @@ public class MyRecylerViewAdapterDanhMucKho extends RecyclerView.Adapter<MyRecyl
 
     @Override
     public int getItemCount() {
-        return dataDanhMucKho.size();
+        return data.size();
     }
 
     //Search
-    public void filterList(ArrayList<DanhMucKho> danhMucKho) {
-        this.dataDanhMucKho = danhMucKho;
+    public void filterList(ArrayList<NhapKho> danhMucKho) {
+        this.data = danhMucKho;
         notifyDataSetChanged();
     }
 
@@ -87,14 +85,14 @@ public class MyRecylerViewAdapterDanhMucKho extends RecyclerView.Adapter<MyRecyl
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTen = itemView.findViewById(R.id.tvHoTen);
+            tvTen = itemView.findViewById(R.id.tvTen);
             tvSoLuong = itemView.findViewById(R.id.tvSoLuong);
             tvNgay = itemView.findViewById(R.id.tvNgay);
         }
     }
 
     public interface MyItemClickListener {
-        void getThongTinDMK(DanhMucKho danhMucKho);
+        void getThongTinDMK(NhapKho nhapKho);
     }
 
 }

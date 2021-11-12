@@ -3,10 +3,7 @@ package tdc.edu.vn.nhom_10;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,17 +21,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
-import tdc.edu.vn.nhom_10.adapter.MyRecylerViewAdapterDanhMucKho;
-import tdc.edu.vn.nhom_10.adapter.MyRecylerViewNhanVien;
-import tdc.edu.vn.nhom_10.model.DanhMucKho;
+import tdc.edu.vn.nhom_10.adapter.NhapKhoAdapter;
 import tdc.edu.vn.nhom_10.model.NhanVien;
+import tdc.edu.vn.nhom_10.model.NhapKho;
 
 public class DanhSachNhapKho extends AppCompatActivity {
     ImageButton btnBack;
     ImageButton btnThem;
     RecyclerView lvNhapKho;
-    ArrayList<DanhMucKho> list = new ArrayList<DanhMucKho>();
-    MyRecylerViewAdapterDanhMucKho adapter;
+    ArrayList<NhapKho> list = new ArrayList<NhapKho>();
+    NhapKhoAdapter adapter;
     ArrayList<String> chucVu = new ArrayList<String>();
     DatabaseReference mData;
     SearchView svSearch;
@@ -60,13 +56,13 @@ public class DanhSachNhapKho extends AppCompatActivity {
             }
         });
 
-        actionBar.setActionBarName("Quản lý nhân viên");
+        actionBar.setActionBarName("Danh sách nhập kho");
 
         //Gọi firebase
-//        getFirebase();
+        getFirebase();
 
         //
-        adapter = new MyRecylerViewAdapterDanhMucKho(this, R.layout.layout_item_danh_muc_kho, list);
+        adapter = new NhapKhoAdapter(this, R.layout.layout_item_nhap_kho, list);
         lvNhapKho.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -101,10 +97,10 @@ public class DanhSachNhapKho extends AppCompatActivity {
 
     //Hàm lọc theo tên
     private void filter(String search) {
-        ArrayList<DanhMucKho> filterList = new ArrayList<>();
-        for (DanhMucKho danhMucKho : list) {
-            if (danhMucKho.getTen().toLowerCase().contains(search.toLowerCase())) {
-                filterList.add(danhMucKho);
+        ArrayList<NhapKho> filterList = new ArrayList<>();
+        for (NhapKho nhapKho : list) {
+            if (nhapKho.getTenNhapKho().toLowerCase().contains(search.toLowerCase())) {
+                filterList.add(nhapKho);
             }
             adapter.filterList(filterList);
         }
@@ -113,13 +109,13 @@ public class DanhSachNhapKho extends AppCompatActivity {
     //Hàm đọc firebase
     private void getFirebase() {
         // Write a message to the database
-        mData = FirebaseDatabase.getInstance().getReference("DanhMucKho");
+        mData = FirebaseDatabase.getInstance().getReference("NhapKho");
         mData.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                DanhMucKho danhMucKho = snapshot.getValue(DanhMucKho.class);
-                if (danhMucKho != null) {
-                    list.add(0,danhMucKho);
+                NhapKho nhapKho = snapshot.getValue(NhapKho.class);
+                if (nhapKho != null) {
+                    list.add(0,nhapKho);
                     adapter.notifyDataSetChanged();
                 }
             }

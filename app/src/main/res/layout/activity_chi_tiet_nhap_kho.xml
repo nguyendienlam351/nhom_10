@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChiTietNhanVien">
+    tools:context=".ChiTietNhapKho">
 
     <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
         android:id="@+id/actionBar"
