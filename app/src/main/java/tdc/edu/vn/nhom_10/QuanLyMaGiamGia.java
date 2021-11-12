@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -29,6 +33,7 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
     ArrayList<MaGiamGia> maGiamGiaArrayList;
     MaGiamGiaAdapter maGiamGiaAdapter;
     SearchView edtTimKiem;
+    ImageButton btnThem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,14 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 filter(newText);
                 return true;
+            }
+        });
+
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuanLyMaGiamGia.this, ThemMaGiamGia.class);
+                startActivity(intent);
             }
         });
     }
@@ -122,5 +135,6 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
         actionBar = findViewById(R.id.actionBar);
         lvDanhSachGiamGia = findViewById(R.id.lvDanhSachGiamGia);
         edtTimKiem = findViewById(R.id.edtTimKiem);
+        btnThem = findViewById(R.id.btnThem);
     }
 }

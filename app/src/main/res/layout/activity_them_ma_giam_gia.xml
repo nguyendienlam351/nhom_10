@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ThemMaGiamGia">
+
+    <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout style="@style/layout">
+
+        <EditText
+            android:id="@+id/edtTenMa"
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapCharacters"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            android:maxLength="15"
+            android:hint="Nhập mã"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/tvNgayBatDau"
+                style="@style/text"
+                android:layout_width="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="3"
+                android:paddingLeft="5dp"
+                android:text="Ngày bắt đầu: 12/12/2001" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
+
+                <ImageButton
+                    android:id="@+id/btnDate1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/themmm" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/tvNgayKetThuc"
+                style="@style/text"
+                android:layout_width="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="3"
+                android:paddingLeft="5dp"
+                android:text="Ngày kết thúc: 12/12/2001" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
+
+                <ImageButton
+                    android:id="@+id/btnDate2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/themmm" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edtGiaTriApDung"
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập giá trị áp dụng"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edtPhanTramGiamGia"
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập phần trăm giảm giá"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edtSoLuong"
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập số lượng"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnThem"
+            style="@style/addButton"
+            android:layout_width="wrap_content"
+            android:layout_gravity="right"
+            android:text="Thêm mã" />
+    </LinearLayout>
+
+</LinearLayout>

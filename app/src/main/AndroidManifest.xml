@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
+            android:name=".ThemMaGiamGia"
+            android:exported="false" />
+        <activity
             android:name=".DangNhap"
             android:exported="false" />
         <activity
