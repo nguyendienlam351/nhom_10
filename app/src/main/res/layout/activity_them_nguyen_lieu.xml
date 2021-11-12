@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ThemNguyenLieu"
+    android:orientation="vertical">
+
+    <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edTenNL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ten_nl"
+        android:background="@drawable/boder"
+        style="@style/editText"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        style="@style/spinnerLayout">
+
+        <Spinner
+            android:id="@+id/spDonVi"
+            android:entries="@array/donvi"
+            style="@style/spinner"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edGiaNL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/gia_nl"
+        android:background="@drawable/boder"
+        style="@style/editText"/>
+    <EditText
+        android:id="@+id/edMota"
+        android:layout_width="match_parent"
+        android:gravity="top"
+        android:layout_height="150dp"
+        android:hint="@string/moTa"
+        android:background="@drawable/boder"
+        style="@style/editText"
+        />
+    <Button
+        android:id="@+id/btnThem"
+        style="@style/addButton"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thêm"/>
+
+
+</LinearLayout>

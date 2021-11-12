@@ -3,6 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_chi_tiet_nguyen_lieu.xml" value="0.1" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_chi_tiet_nhan_vien.xml" value="0.14356884057971014" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_danh_sach_don_hang.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_danh_sach_mon.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_danh_sach_nguyen_lieu.xml" value="0.1" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_don_hang_cua_ban.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_main.xml" value="0.11141304347826086" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_pha_che.xml" value="0.1" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_quan_ly.xml" value="0.1" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_quan_ly_ban.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_quan_ly_nhan_vien.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_thanh_toan.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_them_nguyen_lieu.xml" value="0.1" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_them_nhan_vien.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_thu_ngan.xml" value="0.1" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_xem_don_hang.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/email_dialog.xml" value="0.1" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_mon_4.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_nguyen_lieu.xml" value="0.1" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_nhan_vien.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/nhapxuatkho.xml" value="0.1" />
+        <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/quanly.xml" value="0.1" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/boder.xml" value="0.2846153846153846" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/vien.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/vien_bottom.xml" value="0.2846153846153846" />
