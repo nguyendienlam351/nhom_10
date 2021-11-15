@@ -45,7 +45,7 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
-        actionBar.setActionBarName("Danh sách nguyên liệu");
+        actionBar.setActionBarName("Chi tiết nguyên liệu");
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
