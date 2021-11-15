@@ -61,14 +61,16 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
         btnThayDoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nguyenLieu.setMaNL(maNL);
-                nguyenLieu.setGia(Integer.parseInt(edGia.getText().toString()));
-                nguyenLieu.setMoTa(edMoTa.getText().toString());
-                nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
-                nguyenLieu.setTenNL(edTenNL.getText().toString());
-                myref.child(maNL).setValue(nguyenLieu);
-                Intent intent2 = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
-                startActivity(intent2);
+                if (kiemtratrong()){
+                    nguyenLieu.setMaNL(maNL);
+                    nguyenLieu.setGia(Integer.parseInt(edGia.getText().toString()));
+                    nguyenLieu.setMoTa(edMoTa.getText().toString());
+                    nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
+                    nguyenLieu.setTenNL(edTenNL.getText().toString());
+                    myref.child(maNL).setValue(nguyenLieu);
+                    Intent intent2 = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
+                    startActivity(intent2);
+                }
             }
         });
     }
@@ -109,5 +111,21 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
         btnXoa = findViewById(R.id.btnXoa);
         btnThayDoi = findViewById(R.id.btnThayDoi);
         actionBar = findViewById(R.id.actionBar);
+    }
+    private boolean kiemtratrong (){
+        boolean kiemtra = true;
+        if (edTenNL.getText().toString().trim().length() == 0){
+            edTenNL.setError("Nhập tên nguyên liệu !");
+            kiemtra = false;
+        }
+        if (edMoTa.getText().toString().trim().length() == 0){
+            edMoTa.setError("Nhập mô tả nguyên liệu !");
+            kiemtra = false;
+        }
+        if (edGia.getText().toString().trim().length() == 0){
+            edGia.setError("Nhập giá nguyên liệu !");
+            kiemtra = false;
+        }
+        return kiemtra;
     }
 }

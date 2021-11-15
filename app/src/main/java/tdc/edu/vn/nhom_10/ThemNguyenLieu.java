@@ -47,19 +47,21 @@ public class ThemNguyenLieu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                NguyenLieu nguyenLieu = new NguyenLieu();
-                String maNguyenlieu = myref.push().getKey();
-                nguyenLieu.setGia(Integer.parseInt(edGiaNL.getText().toString()));
-                nguyenLieu.setSoLuong(0);
-                nguyenLieu.setTenNL(edTenNL.getText().toString());
-                nguyenLieu.setMoTa(edMoTa.getText().toString());
-                nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
-                nguyenLieu.setMaNL(maNguyenlieu);
+                if(kiemtratrong()){
+                    NguyenLieu nguyenLieu = new NguyenLieu();
+                    String maNguyenlieu = myref.push().getKey();
+                    nguyenLieu.setGia(Integer.parseInt(edGiaNL.getText().toString()));
+                    nguyenLieu.setSoLuong(0);
+                    nguyenLieu.setTenNL(edTenNL.getText().toString());
+                    nguyenLieu.setMoTa(edMoTa.getText().toString());
+                    nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
+                    nguyenLieu.setMaNL(maNguyenlieu);
 
-                myref.child(maNguyenlieu).setValue(nguyenLieu);
+                    myref.child(maNguyenlieu).setValue(nguyenLieu);
 
-                Intent intent = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
-                startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -71,5 +73,21 @@ public class ThemNguyenLieu extends AppCompatActivity {
         spDonVi = findViewById(R.id.spDonVi);
         btnThem = findViewById(R.id.btnThem);
         actionBar = findViewById(R.id.actionBar);
+    }
+    private boolean kiemtratrong (){
+        boolean kiemtra = true;
+        if (edTenNL.getText().toString().trim().length() == 0){
+            edTenNL.setError("Nhập tên nguyên liệu !");
+            kiemtra = false;
+        }
+        if (edMoTa.getText().toString().trim().length() == 0){
+            edMoTa.setError("Nhập mô tả nguyên liệu !");
+            kiemtra = false;
+        }
+        if (edGiaNL.getText().toString().trim().length() == 0){
+            edGiaNL.setError("Nhập giá nguyên liệu !");
+            kiemtra = false;
+        }
+        return kiemtra;
     }
 }
