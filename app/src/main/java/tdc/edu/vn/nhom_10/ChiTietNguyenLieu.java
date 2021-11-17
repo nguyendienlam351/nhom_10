@@ -61,16 +61,31 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
         btnThayDoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (kiemtratrong()){
-                    nguyenLieu.setMaNL(maNL);
-                    nguyenLieu.setGia(Integer.parseInt(edGia.getText().toString()));
-                    nguyenLieu.setMoTa(edMoTa.getText().toString());
-                    nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
-                    nguyenLieu.setTenNL(edTenNL.getText().toString());
-                    myref.child(maNL).setValue(nguyenLieu);
-                    Intent intent2 = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
-                    startActivity(intent2);
-                }
+                myref.orderByChild("tenNL").equalTo(edTenNL.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            edTenNL.setError("Tên nguyên liệu đã tồn tại");
+                        }else{
+                            if (kiemtratrong()){
+                                nguyenLieu.setMaNL(maNL);
+                                nguyenLieu.setGia(Integer.parseInt(edGia.getText().toString()));
+                                nguyenLieu.setMoTa(edMoTa.getText().toString());
+                                nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
+                                nguyenLieu.setTenNL(edTenNL.getText().toString());
+                                myref.child(maNL).setValue(nguyenLieu);
+                                Intent intent2 = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
+                                startActivity(intent2);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
     }

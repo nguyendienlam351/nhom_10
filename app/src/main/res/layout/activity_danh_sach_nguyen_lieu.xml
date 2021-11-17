@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <SearchView
-                android:id="@+id/edtTimKiem"
+                android:id="@+id/svSearch"
                 style="@style/editText"
                 android:layout_weight="9"
                 android:layout_height="@dimen/iconSize"

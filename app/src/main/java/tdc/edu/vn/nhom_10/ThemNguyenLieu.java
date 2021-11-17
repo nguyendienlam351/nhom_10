@@ -1,5 +1,7 @@
 package tdc.edu.vn.nhom_10;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,9 +11,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.CustomView.MinMaxFilter;
@@ -24,6 +33,7 @@ public class ThemNguyenLieu extends AppCompatActivity {
     Button btnThem;
     DatabaseReference myref;
     CustomActionBar actionBar;
+    ArrayList<NguyenLieu> data = new ArrayList<NguyenLieu>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,22 +56,35 @@ public class ThemNguyenLieu extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myref.orderByChild("tenNL").equalTo(edTenNL.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            edTenNL.setError("Tên nguyên liệu đã tồn tại !");
+                        }else{
+                            if(kiemtratrong() == true){
+                                NguyenLieu nguyenLieu = new NguyenLieu();
+                                String maNguyenlieu = myref.push().getKey();
+                                nguyenLieu.setGia(Integer.parseInt(edGiaNL.getText().toString()));
+                                nguyenLieu.setSoLuong(0);
+                                nguyenLieu.setTenNL(edTenNL.getText().toString());
+                                nguyenLieu.setMoTa(edMoTa.getText().toString());
+                                nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
+                                nguyenLieu.setMaNL(maNguyenlieu);
 
-                if(kiemtratrong()){
-                    NguyenLieu nguyenLieu = new NguyenLieu();
-                    String maNguyenlieu = myref.push().getKey();
-                    nguyenLieu.setGia(Integer.parseInt(edGiaNL.getText().toString()));
-                    nguyenLieu.setSoLuong(0);
-                    nguyenLieu.setTenNL(edTenNL.getText().toString());
-                    nguyenLieu.setMoTa(edMoTa.getText().toString());
-                    nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
-                    nguyenLieu.setMaNL(maNguyenlieu);
+                                myref.child(maNguyenlieu).setValue(nguyenLieu);
 
-                    myref.child(maNguyenlieu).setValue(nguyenLieu);
+                                Intent intent = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
+                                startActivity(intent);
+                            }
+                        }
+                    }
 
-                    Intent intent = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
-                    startActivity(intent);
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
     }
@@ -90,4 +113,5 @@ public class ThemNguyenLieu extends AppCompatActivity {
         }
         return kiemtra;
     }
+
 }

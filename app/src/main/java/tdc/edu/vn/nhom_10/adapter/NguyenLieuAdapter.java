@@ -91,4 +91,8 @@ public class NguyenLieuAdapter extends RecyclerView.Adapter<NguyenLieuAdapter.Ng
         public void itemClick(NguyenLieu nguyenLieu);
         public void iconClick(NguyenLieu nguyenLieu);
     }
+    public void filterList(ArrayList<NguyenLieu> nguyenLieuArrayList) {
+        this.data = nguyenLieuArrayList;
+        notifyDataSetChanged();
+    }
 }
