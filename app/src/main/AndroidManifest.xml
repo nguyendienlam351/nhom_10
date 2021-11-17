@@ -15,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
+            android:name=".QuanLyThemMon"
+            android:exported="false" />
+        <activity
+            android:name=".DangNhap"
+            android:exported="false" />
+        <activity
             android:name=".QuanLyLoaiMon"
             android:exported="false" />
         <activity
@@ -60,9 +66,10 @@
             android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
-            android:name=".DangNhap"
+            android:name=".QuanLyMon"
             android:exported="true">
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

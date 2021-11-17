@@ -1,5 +1,6 @@
 package tdc.edu.vn.nhom_10.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -58,7 +59,7 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DanhSachDonHangViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DanhSachDonHangViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ChiTietDonHang chiTietDonHang = chiTietDonHangArrayList.get(position);
 
         if(!chiTietDonHang.getTrangThai().equals("chờ")){
