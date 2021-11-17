@@ -87,6 +87,7 @@ public class QuanLyMon extends AppCompatActivity {
             }
         });
         actionBar.setActionBarName("MonAn");
+
         loaiMonArrayList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<LoaiMon>(this, android.R.layout.simple_spinner_item, loaiMonArrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

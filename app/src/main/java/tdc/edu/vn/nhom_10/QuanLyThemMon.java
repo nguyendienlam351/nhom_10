@@ -55,6 +55,13 @@ public class QuanLyThemMon extends AppCompatActivity {
     StorageReference storageRef = storage.getReference("Mon");
 
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,6 +172,7 @@ public class QuanLyThemMon extends AppCompatActivity {
         imgHinh = findViewById(R.id.imgHinh);
         spMon = findViewById(R.id.spMon);
         btnThem = findViewById(R.id.btnThem);
+        actionBar = findViewById(R.id.actionBar);
 
     }
 
