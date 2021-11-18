@@ -3,22 +3,22 @@ package tdc.edu.vn.nhom_10.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NhapKho {
+public class XuatKho {
     NguyenLieu nguyenLieu;
-    String maNhapKho;
-    String tenNhapKho;
-    String ngayNhapKho;
+    String maXuatKho;
+    String tenXuatKho;
+    String ngayXuatKho;
     int soLuong;
     String donVi;
 
-    public NhapKho() {
+    public XuatKho() {
     }
 
-    public NhapKho(NguyenLieu nguyenLieu, String maNhapKho, String tenNhapKho, String ngayNhapKho, int soLuong, String donVi) {
+    public XuatKho(NguyenLieu nguyenLieu, String maXuatKho, String tenXuatKho, String ngayXuatKho, int soLuong, String donVi) {
         this.nguyenLieu = nguyenLieu;
-        this.maNhapKho = maNhapKho;
-        this.tenNhapKho = tenNhapKho;
-        this.ngayNhapKho = ngayNhapKho;
+        this.maXuatKho = maXuatKho;
+        this.tenXuatKho = tenXuatKho;
+        this.ngayXuatKho = ngayXuatKho;
         this.soLuong = soLuong;
         this.donVi = donVi;
     }
@@ -31,28 +31,28 @@ public class NhapKho {
         this.nguyenLieu = nguyenLieu;
     }
 
-    public String getMaNhapKho() {
-        return maNhapKho;
+    public String getMaXuatKho() {
+        return maXuatKho;
     }
 
-    public void setMaNhapKho(String maNhapKho) {
-        this.maNhapKho = maNhapKho;
+    public void setMaXuatKho(String maXuatKho) {
+        this.maXuatKho = maXuatKho;
     }
 
-    public String getTenNhapKho() {
-        return tenNhapKho;
+    public String getTenXuatKho() {
+        return tenXuatKho;
     }
 
-    public void setTenNhapKho(String tenNhapKho) {
-        this.tenNhapKho = tenNhapKho;
+    public void setTenXuatKho(String tenXuatKho) {
+        this.tenXuatKho = tenXuatKho;
     }
 
-    public String getNgayNhapKho() {
-        return ngayNhapKho;
+    public String getNgayXuatKho() {
+        return ngayXuatKho;
     }
 
-    public void setNgayNhapKho(String ngayNhapKho) {
-        this.ngayNhapKho = ngayNhapKho;
+    public void setNgayXuatKho(String ngayXuatKho) {
+        this.ngayXuatKho = ngayXuatKho;
     }
 
     public int getSoLuong() {
@@ -74,9 +74,9 @@ public class NhapKho {
     public Map<String, Object> toMap(){
         HashMap<String,Object> result = new HashMap<>();
         result.put("nguyenLieu",nguyenLieu);
-        result.put("maNhapKho",maNhapKho);
-        result.put("tenNhapKho",tenNhapKho);
-        result.put("ngayNhapKho",ngayNhapKho);
+        result.put("maXuatKho",maXuatKho);
+        result.put("tenXuatKho",tenXuatKho);
+        result.put("ngayXuatKho",ngayXuatKho);
         result.put("soLuong",soLuong);
         result.put("donVi",donVi);
         return result;

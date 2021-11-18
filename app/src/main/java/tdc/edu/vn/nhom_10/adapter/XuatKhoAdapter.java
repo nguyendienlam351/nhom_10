@@ -14,14 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import tdc.edu.vn.nhom_10.ChiTietNhapKho;
+import tdc.edu.vn.nhom_10.ChiTietXuatKho;
 import tdc.edu.vn.nhom_10.R;
-import tdc.edu.vn.nhom_10.model.NhapKho;
+import tdc.edu.vn.nhom_10.model.XuatKho;
 
-public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHolder> {
+public class XuatKhoAdapter extends RecyclerView.Adapter<XuatKhoAdapter.MyViewHolder> {
     Activity conText;
     int layoutID;
-    ArrayList<NhapKho> data;
+    ArrayList<XuatKho> data;
 
     private MyItemClickListener delegation;
 
@@ -29,7 +29,7 @@ public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHo
         this.delegation = delegation;
     }
 
-    public NhapKhoAdapter(Activity conText, int layoutID, ArrayList<NhapKho> data) {
+    public XuatKhoAdapter(Activity conText, int layoutID, ArrayList<XuatKho> data) {
         this.data = data;
         this.layoutID = layoutID;
         this.conText = conText;
@@ -45,18 +45,18 @@ public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        NhapKho nhapKho = data.get(position);
-        holder.tvTen.setText(nhapKho.getTenNhapKho());
-        holder.tvSoLuong.setText(nhapKho.getSoLuong() + " " + nhapKho.getDonVi());
-        holder.tvNgay.setText(nhapKho.getNgayNhapKho());
+        XuatKho xuatKho = data.get(position);
+        holder.tvTen.setText(xuatKho.getTenXuatKho());
+        holder.tvSoLuong.setText(xuatKho.getSoLuong() + " " + xuatKho.getDonVi());
+        holder.tvNgay.setText(xuatKho.getNgayXuatKho());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Chuyển màn hình
-                Intent intent = new Intent(conText.getApplicationContext(), ChiTietNhapKho.class);
+                Intent intent = new Intent(conText.getApplicationContext(), ChiTietXuatKho.class);
                 Bundle bundle = new Bundle();
 
-                bundle.putString("MaNhapKho", nhapKho.getMaNhapKho());
+                bundle.putString("MaXuatKho", xuatKho.getMaXuatKho());
                 intent.putExtras(bundle);
                 conText.startActivity(intent);
             }
@@ -75,8 +75,8 @@ public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHo
     }
 
     //Search
-    public void filterList(ArrayList<NhapKho> nhapKhoArrayList) {
-        this.data = nhapKhoArrayList;
+    public void filterList(ArrayList<XuatKho> xuatKhoArrayList) {
+        this.data = xuatKhoArrayList;
         notifyDataSetChanged();
     }
 
@@ -92,7 +92,7 @@ public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHo
     }
 
     public interface MyItemClickListener {
-        void getThongTinDMK(NhapKho nhapKho);
+        void getThongTinDMK(XuatKho xuatKho);
     }
 
 }

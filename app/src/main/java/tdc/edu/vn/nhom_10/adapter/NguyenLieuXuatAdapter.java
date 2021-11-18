@@ -12,16 +12,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
-
-import tdc.edu.vn.nhom_10.ChiTietNhapKho;
 import tdc.edu.vn.nhom_10.R;
-import tdc.edu.vn.nhom_10.model.NhapKho;
+import tdc.edu.vn.nhom_10.ThemXuatKho;
+import tdc.edu.vn.nhom_10.model.NguyenLieu;
 
-public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHolder> {
+public class NguyenLieuXuatAdapter extends RecyclerView.Adapter<NguyenLieuXuatAdapter.MyViewHolder> {
     Activity conText;
     int layoutID;
-    ArrayList<NhapKho> data;
+    ArrayList<NguyenLieu> data;
 
     private MyItemClickListener delegation;
 
@@ -29,7 +30,7 @@ public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHo
         this.delegation = delegation;
     }
 
-    public NhapKhoAdapter(Activity conText, int layoutID, ArrayList<NhapKho> data) {
+    public NguyenLieuXuatAdapter(Activity conText, int layoutID, ArrayList<NguyenLieu> data) {
         this.data = data;
         this.layoutID = layoutID;
         this.conText = conText;
@@ -45,18 +46,19 @@ public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        NhapKho nhapKho = data.get(position);
-        holder.tvTen.setText(nhapKho.getTenNhapKho());
-        holder.tvSoLuong.setText(nhapKho.getSoLuong() + " " + nhapKho.getDonVi());
-        holder.tvNgay.setText(nhapKho.getNgayNhapKho());
+        NguyenLieu nguyenLieu = data.get(position);
+        holder.tvTen.setText(nguyenLieu.getTenNL());
+        NumberFormat formatter = new DecimalFormat("#,###,###");
+        holder.tvGia.setText(formatter.format(nguyenLieu.getGia()) + " đ");
+        holder.tvDonVi.setText(nguyenLieu.getDonVi());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Chuyển màn hình
-                Intent intent = new Intent(conText.getApplicationContext(), ChiTietNhapKho.class);
+                Intent intent = new Intent(conText.getApplicationContext(), ThemXuatKho.class);
                 Bundle bundle = new Bundle();
 
-                bundle.putString("MaNhapKho", nhapKho.getMaNhapKho());
+                bundle.putString("MaNL", nguyenLieu.getMaNL());
                 intent.putExtras(bundle);
                 conText.startActivity(intent);
             }
@@ -75,24 +77,24 @@ public class NhapKhoAdapter extends RecyclerView.Adapter<NhapKhoAdapter.MyViewHo
     }
 
     //Search
-    public void filterList(ArrayList<NhapKho> nhapKhoArrayList) {
-        this.data = nhapKhoArrayList;
+    public void filterList(ArrayList<NguyenLieu> nguyenLieuArrayList) {
+        this.data = nguyenLieuArrayList;
         notifyDataSetChanged();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTen, tvSoLuong, tvNgay;
+        TextView tvTen, tvGia, tvDonVi;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTen = itemView.findViewById(R.id.tvTen);
-            tvSoLuong = itemView.findViewById(R.id.tvSoLuong);
-            tvNgay = itemView.findViewById(R.id.tvNgay);
+            tvGia = itemView.findViewById(R.id.tvGia);
+            tvDonVi = itemView.findViewById(R.id.tvDonVi);
         }
     }
 
     public interface MyItemClickListener {
-        void getThongTinDMK(NhapKho nhapKho);
+        void getThongTinDMK(NguyenLieu nguyenLieu);
     }
 
 }

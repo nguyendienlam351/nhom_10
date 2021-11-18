@@ -54,7 +54,7 @@ public class DanhSachNguyenLieuNhap extends AppCompatActivity {
             }
         });
 
-        actionBar.setActionBarName("Quản lý nhân viên");
+        actionBar.setActionBarName("Danh sách nguyên liệu nhập");
 
         //Gọi firebase
         getFirebase();
@@ -79,16 +79,6 @@ public class DanhSachNguyenLieuNhap extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 filter(newText);
                 return true;
-            }
-        });
-
-        //Chuyển màn hình thêm
-        btnThem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), ThemNhapKho.class);
-                startActivity(intent);
             }
         });
     }
@@ -121,9 +111,9 @@ public class DanhSachNguyenLieuNhap extends AppCompatActivity {
         mData.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                NguyenLieu danhMucKho = snapshot.getValue(NguyenLieu.class);
-                if (danhMucKho != null) {
-                    list.add(0,danhMucKho);
+                NguyenLieu nguyenLieu = snapshot.getValue(NguyenLieu.class);
+                if (nguyenLieu != null) {
+                    list.add(0,nguyenLieu);
                     adapter.notifyDataSetChanged();
                 }
             }

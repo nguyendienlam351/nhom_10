@@ -50,12 +50,13 @@ import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.model.NguyenLieu;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 import tdc.edu.vn.nhom_10.model.NhapKho;
+import tdc.edu.vn.nhom_10.model.XuatKho;
 
-public class ThemNhapKho extends AppCompatActivity {
+public class ThemXuatKho extends AppCompatActivity {
     EditText edtSoLuong;
     TextView tvHoTen, tvEmail, tvTen, tvDonVi, tvGia, tvSoLuong, tvMoTa, tvNgay;
     CustomActionBar actionBar;
-    Button btnThem;
+    Button btnXuat;
     String Ngay;
     NguyenLieu nguyenLieu;
     DatabaseReference mData;
@@ -63,7 +64,7 @@ public class ThemNhapKho extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_them_nhap_kho);
+        setContentView(R.layout.activity_them_xuat_kho);
         setControl();
         setEvent();
 
@@ -78,7 +79,7 @@ public class ThemNhapKho extends AppCompatActivity {
             }
         });
 
-        actionBar.setActionBarName("Thêm nhập kho");
+        actionBar.setActionBarName("Thêm Xuất kho");
 
         //
         Intent intent = getIntent();
@@ -97,7 +98,7 @@ public class ThemNhapKho extends AppCompatActivity {
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
         Ngay = day + "/" + (month + 1) + "/" + year;
         tvNgay.setText("Ngày: " + Ngay);
-        btnThem.setOnClickListener(new View.OnClickListener() {
+        btnXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mData = FirebaseDatabase.getInstance().getReference();
@@ -105,32 +106,32 @@ public class ThemNhapKho extends AppCompatActivity {
 //                String Email = edtEmail.getText().toString().trim();
                 String Ten = tvTen.getText().toString().trim();
                 int SoLuong = Integer.parseInt(edtSoLuong.getText().toString().trim());
-                String maNhapKho = mData.push().getKey();
-                NhapKho nhapKho = new NhapKho(nguyenLieu, maNhapKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
-                nhapKho.setMaNhapKho(maNhapKho);
-                mData.child("NhapKho").child(maNhapKho).setValue(nhapKho).addOnSuccessListener(new OnSuccessListener<Void>() {
+                String maXuatKho = mData.push().getKey();
+                XuatKho xuatKho = new XuatKho(nguyenLieu, maXuatKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
+                xuatKho.setMaXuatKho(maXuatKho);
+                mData.child("XuatKho").child(maXuatKho).setValue(xuatKho).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         mData.child("NguyenLieu").child(nguyenLieu.getMaNL())
-                                .child("soLuong").setValue(SoLuong + nguyenLieu.getSoLuong()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                .child("soLuong").setValue(nguyenLieu.getSoLuong() - SoLuong).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 //Chuyển màn hình
-                                Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
+                                Intent intent = new Intent(getApplicationContext(), DanhSachXuatKho.class);
                                 startActivity(intent);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                mData.child("NhapKho").child(maNhapKho).removeValue();
-                                Toast.makeText(ThemNhapKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                mData.child("XuatKho").child(maXuatKho).removeValue();
+                                Toast.makeText(ThemXuatKho.this, e.toString(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ThemNhapKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ThemXuatKho.this, e.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -155,33 +156,12 @@ public class ThemNhapKho extends AppCompatActivity {
                     tvGia.setText("Giá: " + formatter.format(nguyenLieu.getGia()) + " đ");
                     tvSoLuong.setText("Số lượng: " + nguyenLieu.getSoLuong());
                     tvMoTa.setText("Mô tả: " + nguyenLieu.getMoTa());
-//                    getDataSoLuongNL(String.valueOf(nguyenLieu.getSoLuong()));
 
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-
-    //
-    private void getDataSoLuongNL(String maNguyenLieu) {
-        mData.child("NguyenLieu").child(maNguyenLieu).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                NguyenLieu nguyenLieu = snapshot.getValue(NguyenLieu.class);
-                if (nguyenLieu != null) {
-                    tvSoLuong.setText(nguyenLieu.getSoLuong());
-                } else {
-                    tvSoLuong.setText("Lỗi số lượng");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -228,7 +208,7 @@ public class ThemNhapKho extends AppCompatActivity {
         tvSoLuong = findViewById(R.id.tvSoLuong);
         tvMoTa = findViewById(R.id.tvMoTa);
         edtSoLuong = findViewById(R.id.edtSoLuong);
-        btnThem = findViewById(R.id.btnThem);
+        btnXuat = findViewById(R.id.btnXuat);
         actionBar = findViewById(R.id.actionBar);
     }
 }

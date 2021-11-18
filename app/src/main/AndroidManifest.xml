@@ -15,6 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
+            android:name=".ChiTietXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".ThemXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachNguyenLieuXuat"
+            android:exported="false" />
+        <activity
             android:name=".DanhSachNguyenLieuNhap"
             android:exported="false" />
         <activity

@@ -61,7 +61,7 @@ public class MyRecylerViewAdapterNguyenLieuNhap extends RecyclerView.Adapter<MyR
                 Intent intent = new Intent(conText.getApplicationContext(), ThemNhapKho.class);
                 Bundle bundle = new Bundle();
 
-                bundle.putString("MaDanhMucKho", nguyenLieu.getMaNL());
+                bundle.putString("MaNL", nguyenLieu.getMaNL());
                 intent.putExtras(bundle);
                 conText.startActivity(intent);
             }
@@ -80,8 +80,8 @@ public class MyRecylerViewAdapterNguyenLieuNhap extends RecyclerView.Adapter<MyR
     }
 
     //Search
-    public void filterList(ArrayList<NguyenLieu> danhMucKho) {
-        this.data = danhMucKho;
+    public void filterList(ArrayList<NguyenLieu> nguyenLieuArrayList) {
+        this.data = nguyenLieuArrayList;
         notifyDataSetChanged();
     }
 

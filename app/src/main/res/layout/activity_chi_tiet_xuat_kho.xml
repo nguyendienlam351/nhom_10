@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChiTietNhapKho">
+    tools:context=".ChiTietXuatKho">
 
     <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
         android:id="@+id/actionBar"
@@ -90,31 +90,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left">
 
-            <Button
-                android:id="@+id/btnXoa"
-                style="@style/deleteButton"
-                android:layout_width="wrap_content"
-                android:text="Xoá" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/btnXoa"
+                    style="@style/deleteButton"
+                    android:layout_width="wrap_content"
+                    android:text="Xoá" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right">
 
-            <Button
-                android:id="@+id/btnThayDoi"
-                style="@style/editButton"
-                android:layout_width="wrap_content"
-                android:text="Thay Đổi" />
-          </LinearLayout>
+                <Button
+                    android:id="@+id/btnThayDoi"
+                    style="@style/editButton"
+                    android:layout_width="wrap_content"
+                    android:text="Thay Đổi" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

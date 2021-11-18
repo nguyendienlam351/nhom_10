@@ -37,7 +37,7 @@
             android:maxLength="13" />
 
         <TextView
-            android:id="@+id/tvDonVi"
+            android:id="@+id/tvSoLuong"
             style="@style/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,16 +54,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ngày:" />
-
-            <ImageButton
-                android:id="@+id/btnDate"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/themmm" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvSoLuong"
+            android:id="@+id/tvDonVi"
             style="@style/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,7 +93,7 @@
                 android:gravity="right">
 
                 <Button
-                    android:id="@+id/btnNhap"
+                    android:id="@+id/btnThem"
                     style="@style/addButton"
                     android:layout_width="wrap_content"
                     android:text="Thêm" />

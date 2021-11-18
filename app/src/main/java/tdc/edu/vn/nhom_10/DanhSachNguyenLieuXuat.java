@@ -21,23 +21,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
-import tdc.edu.vn.nhom_10.adapter.NhapKhoAdapter;
+import tdc.edu.vn.nhom_10.adapter.MyRecylerViewAdapterNguyenLieuNhap;
+import tdc.edu.vn.nhom_10.adapter.NguyenLieuXuatAdapter;
+import tdc.edu.vn.nhom_10.model.NguyenLieu;
 import tdc.edu.vn.nhom_10.model.NhanVien;
-import tdc.edu.vn.nhom_10.model.NhapKho;
 
-public class DanhSachNhapKho extends AppCompatActivity {
+public class DanhSachNguyenLieuXuat extends AppCompatActivity {
     ImageButton btnThem;
     RecyclerView lvNhapKho;
-    ArrayList<NhapKho> list = new ArrayList<NhapKho>();
-    NhapKhoAdapter adapter;
+    ArrayList<NguyenLieu> list = new ArrayList<NguyenLieu>();
+    NguyenLieuXuatAdapter adapter;
     DatabaseReference mData;
     SearchView svSearch;
     CustomActionBar actionBar;
+    int viTri = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danh_sach_nhap_kho);
+        setContentView(R.layout.activity_danh_sach_nguyen_lieu_xuat);
 
         setControl();
         setEvent();
@@ -53,13 +55,13 @@ public class DanhSachNhapKho extends AppCompatActivity {
             }
         });
 
-        actionBar.setActionBarName("Danh sách nhập kho");
+        actionBar.setActionBarName("Danh sách nguyên liệu xuất");
 
         //Gọi firebase
         getFirebase();
 
         //
-        adapter = new NhapKhoAdapter(this, R.layout.layout_item_nhap_kho, list);
+        adapter = new NguyenLieuXuatAdapter(this, R.layout.layout_item_nguyen_lieu_nhap, list);
         lvNhapKho.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -80,24 +82,14 @@ public class DanhSachNhapKho extends AppCompatActivity {
                 return true;
             }
         });
-
-        //Chuyển màn hình thêm
-        btnThem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), DanhSachNguyenLieuNhap.class);
-                startActivity(intent);
-            }
-        });
     }
 
     //Hàm lọc theo tên
     private void filter(String search) {
-        ArrayList<NhapKho> filterList = new ArrayList<>();
-        for (NhapKho nhapKho : list) {
-            if (nhapKho.getTenNhapKho().toLowerCase().contains(search.toLowerCase())) {
-                filterList.add(nhapKho);
+        ArrayList<NguyenLieu> filterList = new ArrayList<>();
+        for (NguyenLieu nguyenLieu : list) {
+            if (nguyenLieu.getTenNL().toLowerCase().contains(search.toLowerCase())) {
+                filterList.add(nguyenLieu);
             }
             adapter.filterList(filterList);
         }
@@ -106,13 +98,23 @@ public class DanhSachNhapKho extends AppCompatActivity {
     //Hàm đọc firebase
     private void getFirebase() {
         // Write a message to the database
-        mData = FirebaseDatabase.getInstance().getReference("NhapKho");
+        mData = FirebaseDatabase.getInstance().getReference("NguyenLieu");
+//        for(int i= 1; i < 6;i++){
+//            DanhMucKho danhMucKho = new DanhMucKho();
+//            danhMucKho.setMaDanhMucKho(mData.push().getKey().toString());
+//            danhMucKho.setTen("quy");
+//            danhMucKho.setGia(10);
+//            danhMucKho.setDonVi("kg");
+//            danhMucKho.setSoLuong("10");
+//            danhMucKho.setMoTa("Nam đâu rồiiiiii");
+//            mData.child(danhMucKho.getMaDanhMucKho()).setValue(danhMucKho);
+//        }
         mData.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                NhapKho nhapKho = snapshot.getValue(NhapKho.class);
-                if (nhapKho != null) {
-                    list.add(0,nhapKho);
+                NguyenLieu nguyenLieu = snapshot.getValue(NguyenLieu.class);
+                if (nguyenLieu != null) {
+                    list.add(0,nguyenLieu);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -124,6 +126,7 @@ public class DanhSachNhapKho extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                NhanVien nhanVien = snapshot.getValue(NhanVien.class);
             }
 
             @Override
