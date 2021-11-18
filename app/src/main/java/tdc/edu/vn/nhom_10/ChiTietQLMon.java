@@ -65,7 +65,7 @@ public class ChiTietQLMon extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             String maMon = bundle.getString("maMon", "");
-            getDataMon(maMon);
+//            getDataMon(maMon);
         }
 
 
@@ -79,26 +79,26 @@ public class ChiTietQLMon extends AppCompatActivity {
 
     }
 
-    //Hàm lấy dữ liệu từ màn hình RV
-    private void getDataMon(String maMon) {
-        databaseReference = FirebaseDatabase.getInstance().getReference("Mon");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                MonAn nMon = snapshot.getValue(MonAn.class);
-                if (nMon != null) {
-                    nMon = monAn;
-                    edtTenMon.setText(monAn.getTenMon());
-                    edtMoTa.setText(monAn.getMoTa());
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
+//    //Hàm lấy dữ liệu từ màn hình RV
+//    private void getDataMon(String maMon) {
+//        databaseReference = FirebaseDatabase.getInstance().getReference("Mon");
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                MonAn nMon = snapshot.getValue(MonAn.class);
+//                if (nMon != null) {
+//                    nMon = monAn;
+//                    edtTenMon.setText(monAn.getTenMon());
+//
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
+//    }
 
 
 
