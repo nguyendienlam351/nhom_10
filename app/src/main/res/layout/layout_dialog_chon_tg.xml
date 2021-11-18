@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="center"
+            android:background="@color/blue"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text="Chọn thời gian"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="@dimen/spacing2">
+
+            <ImageButton
+                android:id="@+id/imbGiamThang"
+                android:layout_margin="@dimen/spacing4"
+                android:background="@drawable/left_arrow"
+                android:layout_width="@dimen/smallIconSize"
+                android:layout_height="@dimen/smallIconSize" />
+
+            <TextView
+                android:id="@+id/tvThang"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:background="@drawable/boder"
+                android:paddingLeft="@dimen/spacing3"
+                android:paddingTop="@dimen/spacing1"
+                android:paddingRight="@dimen/spacing3"
+                android:paddingBottom="@dimen/spacing1"
+                android:text="Tháng: 1" />
+
+
+            <ImageButton
+                android:id="@+id/imbTangThang"
+                android:layout_margin="@dimen/spacing4"
+                android:background="@drawable/right_arrow"
+                android:layout_width="@dimen/smallIconSize"
+                android:layout_height="@dimen/smallIconSize" />
+        </LinearLayout>
+
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:padding="@dimen/spacing2"
+           android:gravity="center"
+            android:orientation="horizontal">
+
+           <ImageButton
+               android:id="@+id/imbGiamNam"
+               android:layout_margin="@dimen/spacing4"
+               android:background="@drawable/left_arrow"
+               android:layout_width="@dimen/smallIconSize"
+               android:layout_height="@dimen/smallIconSize" />
+
+           <TextView
+               android:id="@+id/tvNam"
+               style="@style/text"
+               android:layout_width="wrap_content"
+               android:background="@drawable/boder"
+               android:paddingLeft="@dimen/spacing3"
+               android:paddingTop="@dimen/spacing1"
+               android:paddingRight="@dimen/spacing3"
+               android:paddingBottom="@dimen/spacing1"
+               android:text="Năm: 2000" />
+
+           <ImageButton
+               android:id="@+id/imbTangNam"
+               android:layout_margin="@dimen/spacing4"
+               android:background="@drawable/right_arrow"
+               android:layout_width="@dimen/smallIconSize"
+               android:layout_height="@dimen/smallIconSize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnHuy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/blue"
+                android:text="Huỷ"/>
+
+            <Button
+                android:id="@+id/btnDongY"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/blue"
+                android:layout_weight="1"
+                android:text="Đồng ý"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -33,6 +33,12 @@
             android:name=".DanhSachNguyenLieu"
             android:exported="false" />
         <activity
+            android:name=".XemHoaDon"
+            android:exported="false" />
+        <activity
+            android:name=".KiemKeKho"
+            android:exported="false" />
+        <activity
             android:name=".QuanLyLoaiMon"
             android:exported="false" />
         <activity

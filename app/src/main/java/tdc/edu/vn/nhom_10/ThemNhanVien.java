@@ -246,7 +246,6 @@ public class ThemNhanVien extends AppCompatActivity {
 
     //Ánh xạ
     private void setControl() {
-
         btndate = findViewById(R.id.btndate);
         edtHoTen = findViewById(R.id.edtHoTen);
         edtSDT = findViewById(R.id.edtSDT);

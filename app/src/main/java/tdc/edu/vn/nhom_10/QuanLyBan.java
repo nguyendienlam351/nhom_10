@@ -18,12 +18,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -40,6 +43,7 @@ public class QuanLyBan extends AppCompatActivity {
     ArrayList<Ban> data = new ArrayList<Ban>();
     MyRecyclerViewAdapterBan myRecyclerViewAdapter;
     DatabaseReference database;
+    Ban selected = new Ban();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,26 +125,30 @@ public class QuanLyBan extends AppCompatActivity {
             }
             @Override
             public void getUpDate(Ban ban) {
-                edtNhapTenBan.setText(ban.getTenBan());
+                int dot = ban.getTenBan().lastIndexOf(' ');
+                String catChuoi = (dot == -1) ? "" : ban.getTenBan().substring(dot + 1);
+                selected.setMaBan(ban.getMaBan());
+                selected.setTenBan(catChuoi);
+                edtNhapTenBan.setText(catChuoi);
                 if(layout.getVisibility() == View.GONE){
                     btnAdd.setVisibility(View.GONE);
                     layout.setVisibility(View.VISIBLE);
                 }
-                btnThayDoi.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        openDiaLogUpdateItem(ban);
-                    }
-                });
-                btnCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        edtNhapTenBan.setText("");
-                        btnAdd.setVisibility(View.VISIBLE);
-                        layout.setVisibility(View.GONE);
+            }
+        });
+        btnThayDoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDiaLogUpdateItem();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtNhapTenBan.setText("");
+                btnAdd.setVisibility(View.VISIBLE);
+                layout.setVisibility(View.GONE);
 
-                    }
-                });
             }
         });
         lvBan.setAdapter(myRecyclerViewAdapter);
@@ -158,7 +166,33 @@ public class QuanLyBan extends AppCompatActivity {
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                 Ban ban = new Ban("Bàn số "+name);
                 ban.setMaBan(maBan);
-                mDatabase.child("Ban").child(maBan).setValue(ban);
+
+                database.orderByChild("tenBan").equalTo(ban.getTenBan()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            edtNhapTenBan.setError("Tên bàn đã tồn tại");
+                        } else {
+                            mDatabase.child("Ban").child(maBan).setValue(ban).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(QuanLyBan.this, "Thành công", Toast.LENGTH_SHORT).show();
+                                    edtNhapTenBan.setText("");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(QuanLyBan.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
         getListBanFromRealTimeDatabase();
@@ -178,7 +212,7 @@ public class QuanLyBan extends AppCompatActivity {
         }
     };
     //Hàm Sửa
-    private void openDiaLogUpdateItem(Ban ban){
+    private void openDiaLogUpdateItem(){
         new AlertDialog.Builder(this)
                 .setTitle("Thay đổi")
                 .setMessage("Bạn có muốn thay đổi?")
@@ -187,8 +221,37 @@ public class QuanLyBan extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         database=FirebaseDatabase.getInstance().getReference("Ban");
                         String newTenBan = edtNhapTenBan.getText().toString().trim();
-                        ban.setTenBan(newTenBan);
-                        database.child(String.valueOf(ban.getMaBan())).updateChildren(ban.toMap());
+                        selected.setTenBan("Bàn số "+newTenBan);
+                        //database.child(String.valueOf(ban.getMaBan())).updateChildren(ban.toMap());
+                        database.orderByChild("tenBan").equalTo(selected.getTenBan()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists()){
+                                    edtNhapTenBan.setError("Tên bàn đã tồn tại");
+                                } else {
+                                    database.child(String.valueOf(selected.getMaBan())).updateChildren(selected.toMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(QuanLyBan.this, "Thành công", Toast.LENGTH_SHORT).show();
+                                            edtNhapTenBan.setText("");
+                                            selected = new Ban();
+                                            btnAdd.setVisibility(View.VISIBLE);
+                                            layout.setVisibility(View.GONE);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(QuanLyBan.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
 
                 })

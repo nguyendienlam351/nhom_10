@@ -18,17 +18,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.adapter.MyRecyclerViewAdapterLoaiMon;
+import tdc.edu.vn.nhom_10.model.Ban;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
 
 public class QuanLyLoaiMon extends AppCompatActivity {
@@ -40,6 +44,7 @@ public class QuanLyLoaiMon extends AppCompatActivity {
     ArrayList<LoaiMon> data = new ArrayList<LoaiMon>();
     MyRecyclerViewAdapterLoaiMon myRecyclerViewAdapter;
     DatabaseReference database;
+    LoaiMon selected = new LoaiMon();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,26 +125,30 @@ public class QuanLyLoaiMon extends AppCompatActivity {
             }
             @Override
             public void getUpDateLoaiMon(LoaiMon loaiMon) {
-                edtNhapTenLoaiMon.setText(loaiMon.getTenLoaiMon());
+                int dot = loaiMon.getTenLoaiMon().lastIndexOf(' ');
+                String catChuoi = (dot == -1) ? "" : loaiMon.getTenLoaiMon().substring(dot + 1);
+                selected.setMaLoaiMon(loaiMon.getMaLoaiMon());
+                selected.setTenLoaiMon(catChuoi);
+                edtNhapTenLoaiMon.setText(catChuoi);
                 if(layout.getVisibility() == View.GONE){
                     btnAdd.setVisibility(View.GONE);
                     layout.setVisibility(View.VISIBLE);
                 }
-                btnThayDoi.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        openDiaLogUpdateItem(loaiMon);
-                    }
-                });
-                btnCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        edtNhapTenLoaiMon.setText("");
-                        btnAdd.setVisibility(View.VISIBLE);
-                        layout.setVisibility(View.GONE);
+            }
+        });
+        btnThayDoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDiaLogUpdateItem();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtNhapTenLoaiMon.setText("");
+                btnAdd.setVisibility(View.VISIBLE);
+                layout.setVisibility(View.GONE);
 
-                    }
-                });
             }
         });
         lvLoaiMon.setAdapter(myRecyclerViewAdapter);
@@ -157,7 +166,33 @@ public class QuanLyLoaiMon extends AppCompatActivity {
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                 LoaiMon loaiMon = new LoaiMon("Loại "+name);
                 loaiMon.setMaLoaiMon(maLoaiMon);
-                mDatabase.child("LoaiMon").child(maLoaiMon).setValue(loaiMon);
+
+                database.orderByChild("tenLoaiMon").equalTo(loaiMon.getTenLoaiMon()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            edtNhapTenLoaiMon.setError("Tên loại món đã tồn tại");
+                        } else {
+                            mDatabase.child("LoaiMon").child(maLoaiMon).setValue(loaiMon).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(QuanLyLoaiMon.this, "Thành công", Toast.LENGTH_SHORT).show();
+                                    edtNhapTenLoaiMon.setText("");
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(QuanLyLoaiMon.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
         getListBanFromRealTimeDatabase();
@@ -178,7 +213,7 @@ public class QuanLyLoaiMon extends AppCompatActivity {
         }
     };
     //Hàm Sửa
-    private void openDiaLogUpdateItem(LoaiMon loaiMon){
+    private void openDiaLogUpdateItem(){
         new AlertDialog.Builder(this)
                 .setTitle("Thay đổi")
                 .setMessage("Bạn có muốn thay đổi?")
@@ -187,8 +222,36 @@ public class QuanLyLoaiMon extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         database=FirebaseDatabase.getInstance().getReference("LoaiMon");
                         String newTenLoaiMon = edtNhapTenLoaiMon.getText().toString().trim();
-                        loaiMon.setTenLoaiMon(newTenLoaiMon);
-                        database.child(String.valueOf(loaiMon.getMaLoaiMon())).updateChildren(loaiMon.toMap());
+                        selected.setTenLoaiMon("Loại "+newTenLoaiMon);
+                        database.orderByChild("tenLoaiMon").equalTo(selected.getTenLoaiMon()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists()){
+                                    edtNhapTenLoaiMon.setError("Tên loại món đã tồn tại");
+                                } else {
+                                    database.child(String.valueOf(selected.getMaLoaiMon())).updateChildren(selected.toMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(QuanLyLoaiMon.this, "Thành công", Toast.LENGTH_SHORT).show();
+                                            edtNhapTenLoaiMon.setText("");
+                                            selected = new LoaiMon();
+                                            btnAdd.setVisibility(View.VISIBLE);
+                                            layout.setVisibility(View.GONE);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(QuanLyLoaiMon.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
 
                 })
