@@ -64,7 +64,11 @@ public class ChiTietMon extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                finish();
+                Intent intent = new Intent(ChiTietMon.this, DanhSachMon.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("maBan", donHang.getMaBan());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

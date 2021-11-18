@@ -53,7 +53,8 @@ public class DonHangCuaBan extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                finish();
+                Intent intent = new Intent(DonHangCuaBan.this, PhucVu.class);
+                startActivity(intent);
             }
         });
 

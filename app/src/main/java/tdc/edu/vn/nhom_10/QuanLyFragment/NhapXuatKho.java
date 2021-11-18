@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import tdc.edu.vn.nhom_10.DanhSachNguyenLieu;
+import tdc.edu.vn.nhom_10.KiemKeKho;
 import tdc.edu.vn.nhom_10.QuanLyBan;
 import tdc.edu.vn.nhom_10.R;
 
@@ -51,7 +52,7 @@ public class NhapXuatKho extends Fragment {
         btnKiemKeKho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DanhSachNguyenLieu.class);
+                Intent intent = new Intent(getActivity(), KiemKeKho.class);
                 startActivity(intent);
             }
         });
