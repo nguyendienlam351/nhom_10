@@ -78,6 +78,7 @@ public class ChiTietXuatKho extends AppCompatActivity {
     }
 
     private void setEvent() {
+        mData = FirebaseDatabase.getInstance().getReference();
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
@@ -85,13 +86,13 @@ public class ChiTietXuatKho extends AppCompatActivity {
             }
         });
 
-        actionBar.setActionBarName("Chi tiết nhập kho");
+        actionBar.setActionBarName("Chi tiết xuất kho");
         //
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
-            String MaNhapKho = bundle.getString("MaXuatKho", "");
-            getDataNV(MaNhapKho);
+            String MaXuatKho = bundle.getString("MaXuatKho", "");
+            getDataXK(MaXuatKho);
         }
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,14 +120,61 @@ public class ChiTietXuatKho extends AppCompatActivity {
         b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mData = FirebaseDatabase.getInstance().getReference("XuatKho");
-                int newSoLuong =Integer.parseInt(edtSoLuong.getText().toString());
-
+                mData = FirebaseDatabase.getInstance().getReference();
+                int SoLuongCu = xuatKho.getSoLuong();
+                int newSoLuong = Integer.parseInt(edtSoLuong.getText().toString());
                 xuatKho.setSoLuong(newSoLuong);
-                mData.child(String.valueOf(xuatKho.getMaXuatKho())).updateChildren(xuatKho.toMap());
+                mData.child("XuatKho").child(String.valueOf(xuatKho.getMaXuatKho())).updateChildren(xuatKho.toMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        if (newSoLuong > SoLuongCu) {
+                            int sSoLuong = newSoLuong - SoLuongCu;
+                            int soLuong = nguyenLieu.getSoLuong() - sSoLuong;
+                            mData.child("NguyenLieu").child(xuatKho.getNguyenLieu().getMaNL())
+                                    .child("soLuong").setValue(soLuong).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    //Chuyển màn hình
 
-                Intent intent = new Intent(getApplicationContext(), DanhSachXuatKho.class);
-                startActivity(intent);
+                                    Intent intent = new Intent(getApplicationContext(), DanhSachXuatKho.class);
+                                    startActivity(intent);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ChiTietXuatKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else if(newSoLuong < SoLuongCu){
+                            int sSoLuong = SoLuongCu - newSoLuong;
+                            int soLuong = sSoLuong + nguyenLieu.getSoLuong();
+                            mData.child("NguyenLieu").child(xuatKho.getNguyenLieu().getMaNL())
+                                    .child("soLuong").setValue(soLuong).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    //Chuyển màn hình
+
+                                    Intent intent = new Intent(getApplicationContext(), DanhSachXuatKho.class);
+                                    startActivity(intent);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ChiTietXuatKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                        else {
+                            Intent intent = new Intent(getApplicationContext(), DanhSachXuatKho.class);
+                            startActivity(intent);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ChiTietXuatKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
         });
@@ -144,10 +192,28 @@ public class ChiTietXuatKho extends AppCompatActivity {
         b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                int SoLuongCu = xuatKho.getSoLuong();
+                mData.child("XuatKho").child(String.valueOf(xuatKho.getMaXuatKho())).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        int soLuong = nguyenLieu.getSoLuong() + SoLuongCu;
+                        mData.child("NguyenLieu").child(xuatKho.getNguyenLieu().getMaNL())
+                                .child("soLuong").setValue(soLuong).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                //Chuyển màn hình
 
-                mData.child(String.valueOf(xuatKho.getMaXuatKho())).removeValue();
-                Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
-                startActivity(intent);
+                                Intent intent = new Intent(getApplicationContext(), DanhSachXuatKho.class);
+                                startActivity(intent);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ChiTietXuatKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
         b.setNegativeButton("Từ chối", null);
@@ -156,47 +222,45 @@ public class ChiTietXuatKho extends AppCompatActivity {
     }
 
     //Hàm lấy dữ liệu từ màn hình RV
-    private void getDataNV(String MaXK) {
-        mData = FirebaseDatabase.getInstance().getReference("XuatKho");
-        mData.child(MaXK).addValueEventListener(new ValueEventListener() {
+    private void getDataXK(String MaXK) {
+        mData.child("XuatKho").child(MaXK).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 XuatKho nXuatKho = snapshot.getValue(XuatKho.class);
                 if (nXuatKho != null) {
                     xuatKho = nXuatKho;
-//                    tvHoTen.setText(danhMucKho.get());
-//                    tvEmail.setText(danhMucKho.get());
-                    tvTen.setText(xuatKho.getTenXuatKho());
-                    tvNgay.setText("Ngày sinh: " + xuatKho.getNgayXuatKho());
-                    tvDonVi.setText("Đơn vị: " + xuatKho.getNguyenLieu().getDonVi());
-                    NumberFormat formatter = new DecimalFormat("#,###,###");
-                    tvGia.setText( "Giá: " + formatter.format(xuatKho.getNguyenLieu().getGia()) + " đ");
-                    tvSoLuong.setText("Số lượng: " + xuatKho.getSoLuong());
-                    tvMoTa.setText("Mô tả: " + xuatKho.getNguyenLieu().getMoTa());
-//                    getDataNguyenLieu(String.valueOf(nguyenLieu.getSoLuong()));
+                    getDataNguyenLieu(xuatKho.getNguyenLieu().getMaNL());
+                    tvHoTen.setText(xuatKho.getHoTen());
+                    tvEmail.setText(xuatKho.getEmail());
+                    tvNgay.setText("Ngày :" + xuatKho.getNgayXuatKho());
+                    edtSoLuong.setText(String.valueOf(xuatKho.getSoLuong()));
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
-    private void getDataNguyenLieu(String maNguyenLieu) {
-        mData.child("NguyenLieu").child(maNguyenLieu).addValueEventListener(new ValueEventListener() {
+    private void getDataNguyenLieu(String MaNguyenLieu) {
+        mData.child("NguyenLieu").child(MaNguyenLieu).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                NguyenLieu nguyenLieu = snapshot.getValue(NguyenLieu.class);
-                if(nguyenLieu!= null) {
-                    tvSoLuong.setText(nguyenLieu.getSoLuong());
-                }
-                else {
-                    tvSoLuong.setText("Lỗi số lượng");
+                NguyenLieu nNguyenLieu = snapshot.getValue(NguyenLieu.class);
+                if (nNguyenLieu != null) {
+                    nguyenLieu = nNguyenLieu;
+                    tvTen.setText(nguyenLieu.getTenNL());
+                    tvDonVi.setText("Đơn vị: " + nguyenLieu.getDonVi());
+                    NumberFormat formatter = new DecimalFormat("#,###,###");
+                    tvGia.setText("Giá: " + formatter.format(nguyenLieu.getGia()) + " đ");
+                    tvSoLuong.setText("Số lượng: " + nguyenLieu.getSoLuong());
+                    tvMoTa.setText("Mô tả: " + nguyenLieu.getMoTa());
+
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

@@ -24,12 +24,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -76,14 +78,8 @@ public class ChiTietNhapKho extends AppCompatActivity {
 
     }
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference("NhanVien");
-
-    //Xoá user
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    FirebaseUser User = firebaseAuth.getCurrentUser();
-
     private void setEvent() {
+        mData = FirebaseDatabase.getInstance().getReference();
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
@@ -125,29 +121,65 @@ public class ChiTietNhapKho extends AppCompatActivity {
         b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mData = FirebaseDatabase.getInstance().getReference("NhapKho");
-                int newSoLuong =Integer.parseInt(edtSoLuong.getText().toString());
-
+                mData = FirebaseDatabase.getInstance().getReference();
+                int SoLuongCu = nhapKho.getSoLuong();
+                int newSoLuong = Integer.parseInt(edtSoLuong.getText().toString());
                 nhapKho.setSoLuong(newSoLuong);
-                mData.child(String.valueOf(nhapKho.getMaNhapKho())).updateChildren(nhapKho.toMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                mData.child("NhapKho").child(String.valueOf(nhapKho.getMaNhapKho())).updateChildren(nhapKho.toMap()).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        if(newSoLuong > nhapKho.getNguyenLieu().getSoLuong()) {
-                            mData.child("NguyenLieu").child(nguyenLieu.getMaNL())
-                                    .child("soLuong").setValue(newSoLuong + nguyenLieu.getSoLuong()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        if (newSoLuong > SoLuongCu) {
+                            int sSoLuong = newSoLuong - SoLuongCu;
+                            int soLuong = sSoLuong + nguyenLieu.getSoLuong();
+                            mData.child("NguyenLieu").child(nhapKho.getNguyenLieu().getMaNL())
+                                    .child("soLuong").setValue(soLuong).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     //Chuyển màn hình
+
                                     Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
                                     startActivity(intent);
                                 }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ChiTietNhapKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
                             });
-                        }else{}
+                        } else if(newSoLuong < SoLuongCu){
+                            int sSoLuong = SoLuongCu - newSoLuong;
+                            int soLuong = nguyenLieu.getSoLuong() - sSoLuong;
+                            mData.child("NguyenLieu").child(nhapKho.getNguyenLieu().getMaNL())
+                                    .child("soLuong").setValue(soLuong).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    //Chuyển màn hình
+
+                                    Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
+                                    startActivity(intent);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ChiTietNhapKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                        else {
+                            Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
+                            startActivity(intent);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ChiTietNhapKho.this, e.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
-                startActivity(intent);
+
+//                Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
+//                startActivity(intent);
             }
 
         });
@@ -165,10 +197,28 @@ public class ChiTietNhapKho extends AppCompatActivity {
         b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                int SoLuongCu = nhapKho.getSoLuong();
+                mData.child("NhapKho").child(String.valueOf(nhapKho.getMaNhapKho())).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        int soLuong = nguyenLieu.getSoLuong() - SoLuongCu;
+                        mData.child("NguyenLieu").child(nhapKho.getNguyenLieu().getMaNL())
+                                .child("soLuong").setValue(soLuong).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                //Chuyển màn hình
 
-                        mData.child(String.valueOf(nhapKho.getMaNhapKho())).removeValue();
-                        Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
-                        startActivity(intent);
+                                Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
+                                startActivity(intent);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ChiTietNhapKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
         b.setNegativeButton("Từ chối", null);
@@ -178,29 +228,48 @@ public class ChiTietNhapKho extends AppCompatActivity {
 
     //Hàm lấy dữ liệu từ màn hình RV
     private void getDataNV(String MaNV) {
-        mData = FirebaseDatabase.getInstance().getReference("NhapKho");
-        mData.child(MaNV).addValueEventListener(new ValueEventListener() {
+        mData.child("NhapKho").child(MaNV).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 NhapKho nNhapKho = snapshot.getValue(NhapKho.class);
                 if (nNhapKho != null) {
-                     nhapKho = nNhapKho;
-//                    tvHoTen.setText(danhMucKho.get());
-//                    tvEmail.setText(danhMucKho.get());
-                    tvTen.setText(nhapKho.getTenNhapKho());
-                    tvNgay.setText("Ngày sinh: " + nhapKho.getNgayNhapKho());
-                    tvDonVi.setText("Đơn vị: " + nhapKho.getNguyenLieu().getDonVi());
-                    NumberFormat formatter = new DecimalFormat("#,###,###");
-                    tvGia.setText( "Giá: " + formatter.format(nhapKho.getNguyenLieu().getGia()) + " đ");
-                    tvSoLuong.setText("Số lượng: " + nhapKho.getSoLuong());
-                    tvMoTa.setText("Mô tả: " + nhapKho.getNguyenLieu().getMoTa());
+                    nhapKho = nNhapKho;
+                    getDataNguyenLieu(nhapKho.getNguyenLieu().getMaNL());
+                    tvHoTen.setText(nhapKho.getHoTen());
+                    tvEmail.setText(nhapKho.getEmail());
+                    tvNgay.setText("Ngày :" + nhapKho.getNgayNhapKho());
+                    edtSoLuong.setText(String.valueOf(nhapKho.getSoLuong()));
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
+    private void getDataNguyenLieu(String MaNguyenLieu) {
+        mData.child("NguyenLieu").child(MaNguyenLieu).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                NguyenLieu nNguyenLieu = snapshot.getValue(NguyenLieu.class);
+                if (nNguyenLieu != null) {
+                    nguyenLieu = nNguyenLieu;
+                    tvTen.setText(nguyenLieu.getTenNL());
+                    tvDonVi.setText("Đơn vị: " + nguyenLieu.getDonVi());
+                    NumberFormat formatter = new DecimalFormat("#,###,###");
+                    tvGia.setText("Giá: " + formatter.format(nguyenLieu.getGia()) + " đ");
+                    tvSoLuong.setText("Số lượng: " + nguyenLieu.getSoLuong());
+                    tvMoTa.setText("Mô tả: " + nguyenLieu.getMoTa());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
     private void setControl() {
         tvHoTen = findViewById(R.id.tvHoTen);
         tvEmail = findViewById(R.id.tvEmail);

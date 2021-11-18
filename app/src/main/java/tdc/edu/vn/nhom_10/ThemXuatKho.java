@@ -102,12 +102,12 @@ public class ThemXuatKho extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mData = FirebaseDatabase.getInstance().getReference();
-//                String HoTen = edtSDT.getText().toString().trim();
-//                String Email = edtEmail.getText().toString().trim();
+                String HoTen = tvTen.getText().toString().trim();
+                String Email = tvEmail.getText().toString().trim();
                 String Ten = tvTen.getText().toString().trim();
                 int SoLuong = Integer.parseInt(edtSoLuong.getText().toString().trim());
                 String maXuatKho = mData.push().getKey();
-                XuatKho xuatKho = new XuatKho(nguyenLieu, maXuatKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
+                XuatKho xuatKho = new XuatKho(nguyenLieu, HoTen, Email, maXuatKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
                 xuatKho.setMaXuatKho(maXuatKho);
                 mData.child("XuatKho").child(maXuatKho).setValue(xuatKho).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -148,8 +148,6 @@ public class ThemXuatKho extends AppCompatActivity {
                 NguyenLieu nNguyenLieu = snapshot.getValue(NguyenLieu.class);
                 if (nNguyenLieu != null) {
                     nguyenLieu = nNguyenLieu;
-//                    tvHoTen.setText(danhMucKho.get());
-//                    tvEmail.setText(danhMucKho.get());
                     tvTen.setText(nguyenLieu.getTenNL());
                     tvDonVi.setText("Đơn vị: " + nguyenLieu.getDonVi());
                     NumberFormat formatter = new DecimalFormat("#,###,###");

@@ -88,7 +88,7 @@ public class ThemNhapKho extends AppCompatActivity {
             getDataNguyenLieu(MaNguyenLieu);
         }
         //Gọi hàm NV
-        getNhanVien();
+
         //Tạo ngày, tháng, năm sinh
         final Context context = this;
         Calendar calendar = Calendar.getInstance();
@@ -101,12 +101,12 @@ public class ThemNhapKho extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mData = FirebaseDatabase.getInstance().getReference();
-//                String HoTen = edtSDT.getText().toString().trim();
-//                String Email = edtEmail.getText().toString().trim();
+                String HoTen = tvTen.getText().toString().trim();
+                String Email = tvEmail.getText().toString().trim();
                 String Ten = tvTen.getText().toString().trim();
                 int SoLuong = Integer.parseInt(edtSoLuong.getText().toString().trim());
                 String maNhapKho = mData.push().getKey();
-                NhapKho nhapKho = new NhapKho(nguyenLieu, maNhapKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
+                NhapKho nhapKho = new NhapKho(nguyenLieu, HoTen, Email, maNhapKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
                 nhapKho.setMaNhapKho(maNhapKho);
                 mData.child("NhapKho").child(maNhapKho).setValue(nhapKho).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -147,41 +147,19 @@ public class ThemNhapKho extends AppCompatActivity {
                 NguyenLieu nNguyenLieu = snapshot.getValue(NguyenLieu.class);
                 if (nNguyenLieu != null) {
                     nguyenLieu = nNguyenLieu;
-//                    tvHoTen.setText(danhMucKho.get());
-//                    tvEmail.setText(danhMucKho.get());
+                    getNhanVien();
                     tvTen.setText(nguyenLieu.getTenNL());
                     tvDonVi.setText("Đơn vị: " + nguyenLieu.getDonVi());
                     NumberFormat formatter = new DecimalFormat("#,###,###");
                     tvGia.setText("Giá: " + formatter.format(nguyenLieu.getGia()) + " đ");
                     tvSoLuong.setText("Số lượng: " + nguyenLieu.getSoLuong());
                     tvMoTa.setText("Mô tả: " + nguyenLieu.getMoTa());
-//                    getDataSoLuongNL(String.valueOf(nguyenLieu.getSoLuong()));
 
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-
-    //
-    private void getDataSoLuongNL(String maNguyenLieu) {
-        mData.child("NguyenLieu").child(maNguyenLieu).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                NguyenLieu nguyenLieu = snapshot.getValue(NguyenLieu.class);
-                if (nguyenLieu != null) {
-                    tvSoLuong.setText(nguyenLieu.getSoLuong());
-                } else {
-                    tvSoLuong.setText("Lỗi số lượng");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
