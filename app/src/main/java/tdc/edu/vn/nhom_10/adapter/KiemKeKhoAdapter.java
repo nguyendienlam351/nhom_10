@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.R;
-import tdc.edu.vn.nhom_10.model.Kiemkekho;
+import tdc.edu.vn.nhom_10.model.KiemKe;
 
 public class KiemKeKhoAdapter extends RecyclerView.Adapter<KiemKeKhoAdapter.MyViewHolder>{
     private Activity context;
     private int layoutID;
-    private ArrayList<Kiemkekho> kiemKeKhoArrayList;
+    private ArrayList<KiemKe> kiemKeKhoArrayList;
 
-    public KiemKeKhoAdapter(Activity context, int layoutID, ArrayList<Kiemkekho> kiemKeKhoArrayList){
+    public KiemKeKhoAdapter(Activity context, int layoutID, ArrayList<KiemKe> kiemKeKhoArrayList){
         this.context= context;
         this.layoutID=layoutID;
         this.kiemKeKhoArrayList=kiemKeKhoArrayList;
@@ -32,18 +32,19 @@ public class KiemKeKhoAdapter extends RecyclerView.Adapter<KiemKeKhoAdapter.MyVi
         LinearLayout view = (LinearLayout) layoutInflater.inflate(viewType, parent, false);
         return new KiemKeKhoAdapter.MyViewHolder(view);
     }
-    public void filterList(ArrayList<Kiemkekho> kiemKeKhoArrayList){
+    public void filterList(ArrayList<KiemKe> kiemKeKhoArrayList){
         this.kiemKeKhoArrayList = kiemKeKhoArrayList;
         notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Kiemkekho kiemKeKho = kiemKeKhoArrayList.get(position);
+        KiemKe kiemKeKho = kiemKeKhoArrayList.get(position);
         if(kiemKeKho==null){
             return;
         }
-        holder.tvTen.setText(kiemKeKho.getTenNguyenLieu());
+
+        holder.tvTen.setText(kiemKeKho.getTen());
         holder.tvNhap.setText(String.valueOf(kiemKeKho.getNhap()));
         holder.tvXuat.setText(String.valueOf(kiemKeKho.getXuat()));
         holder.tvTon.setText(String.valueOf(kiemKeKho.getTon()));

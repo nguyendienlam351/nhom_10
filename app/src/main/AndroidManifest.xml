@@ -21,7 +21,7 @@
             android:name=".DangNhap"
             android:exported="false" />
         <activity
-            android:name=".KiemKeKho"
+            android:name=".QuanLyLoaiMon"
             android:exported="false" />
         <activity
             android:name=".ThuNgan"
@@ -66,7 +66,7 @@
             android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
-            android:name=".QuanLyLoaiMon"
+            android:name=".KiemKeKho"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
