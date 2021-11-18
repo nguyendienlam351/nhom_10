@@ -65,7 +65,6 @@ public class MyRecylerViewNhanVien extends RecyclerView.Adapter<MyRecylerViewNha
 
     @Override
     public int getItemViewType(int position) {
-
         return layoutID;
     }
 

@@ -24,6 +24,15 @@
             android:name=".QuanLyMaGiamGia"
             android:exported="false" />
         <activity
+            android:name=".ChiTietNguyenLieu"
+            android:exported="false" />
+        <activity
+            android:name=".ThemNguyenLieu"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachNguyenLieu"
+            android:exported="false" />
+        <activity
             android:name=".QuanLyLoaiMon"
             android:exported="false" />
         <activity

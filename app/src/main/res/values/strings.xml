@@ -65,4 +65,16 @@
     <string name="Timkiem">Search</string>
     <string name="DanhSach">Danh Sách</string>
     <string name="MaGiamGia">Mã Giảm Giá</string>
+    <string name="nguyenlieu">Nguyên liệu</string>
+    <string name="nhapkho">Nhập kho</string>
+    <string name="ten_nl">Tên</string>
+    <string name="gia_nl">Giá</string>
+    <string name="don_vi">Đơn vị</string>
+    <string name="ten_NL">Tên nguyên liệu</string>
+    <string name="mota">Mô tả</string>
+    <string name="kiemkekho">Kiểm kê kho</string>
+    <array name="donvi">
+        <item>Kg</item>
+        <item>Lít</item>
+    </array>
 </resources>
