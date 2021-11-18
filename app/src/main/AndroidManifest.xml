@@ -15,10 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
+            android:name=".ChiTietMaGiamGia"
+            android:exported="false" />
+        <activity
             android:name=".ThemMaGiamGia"
             android:exported="false" />
         <activity
-            android:name=".DangNhap"
+            android:name=".QuanLyMaGiamGia"
             android:exported="false" />
         <activity
             android:name=".QuanLyLoaiMon"
@@ -66,7 +69,7 @@
             android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
-            android:name=".QuanLyMaGiamGia"
+            android:name=".DangNhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

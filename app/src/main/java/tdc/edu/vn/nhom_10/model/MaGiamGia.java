@@ -67,4 +67,17 @@ public class MaGiamGia {
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
+
+    @Override
+    public String toString() {
+        return "MaGiamGia{" +
+                "maGiamGia='" + maGiamGia + '\'' +
+                ", tenMaGiamGia='" + tenMaGiamGia + '\'' +
+                ", ngayBatDau='" + ngayBatDau + '\'' +
+                ", ngayKetThuc='" + ngayKetThuc + '\'' +
+                ", giaTriApDung=" + giaTriApDung +
+                ", phanTramGiamGia=" + phanTramGiamGia +
+                ", soLuong=" + soLuong +
+                '}';
+    }
 }

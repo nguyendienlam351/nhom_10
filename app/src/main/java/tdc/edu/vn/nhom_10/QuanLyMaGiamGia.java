@@ -56,6 +56,18 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference("MaGiamGia");
         maGiamGiaArrayList = new ArrayList<MaGiamGia>();
         maGiamGiaAdapter = new MaGiamGiaAdapter(QuanLyMaGiamGia.this, R.layout.layout_item_ma_giam_gia, maGiamGiaArrayList);
+
+        maGiamGiaAdapter.setDelegation(new MaGiamGiaAdapter.MyItemClickListener() {
+            @Override
+            public void getMaGiamGia(MaGiamGia maGiamGia) {
+                Intent intent = new Intent(QuanLyMaGiamGia.this, ChiTietMaGiamGia.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("maGiamGia", maGiamGia.getMaGiamGia());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(QuanLyMaGiamGia.this);
 
         layoutManager.setOrientation(RecyclerView.VERTICAL);

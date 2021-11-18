@@ -9,6 +9,7 @@
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/vien_left_right.xml" value="0.2846153846153846" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/vien_menu.xml" value="0.2846153846153846" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/vien_right.xml" value="0.2846153846153846" />
+        <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_chi_tiet_ma_giam_gia.xml" value="0.25815217391304346" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_chi_tiet_mon.xml" value="0.25" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_chi_tiet_nhan_vien.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_chi_tiet_thanh_toan.xml" value="0.27291666666666664" />
@@ -50,6 +51,9 @@
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_don_hang_cua_ban.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_ma_giam_gia.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_mon_1.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_mon_2.xml" value="0.24365942028985507" />
+        <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_mon_3.xml" value="0.24365942028985507" />
+        <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_mon_4.xml" value="0.24365942028985507" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_nhan_vien.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_nhan_vien_1.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_nhan_vien_2.xml" value="0.27291666666666664" />
@@ -63,6 +67,7 @@
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/nhapxuatkho.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/phantren.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/quanly.xml" value="0.25" />
+        <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/quanlybanhang.xml" value="0.2586050724637681" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/test.xml" value="0.25" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/xemhoadon.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/xuatkho.xml" value="0.27291666666666664" />

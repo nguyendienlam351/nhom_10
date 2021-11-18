@@ -1,40 +1,56 @@
 package tdc.edu.vn.nhom_10;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.ThuNganFragment.ThanhToan;
 import tdc.edu.vn.nhom_10.adapter.ChiTietThanhToanAdapter;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
 import tdc.edu.vn.nhom_10.model.HoaDon;
+import tdc.edu.vn.nhom_10.model.MaGiamGia;
 
 public class ChiTietThanhToan extends AppCompatActivity {
     RecyclerView lvDanhSachMon;
+    EditText edtGiamGia;
     TextView tvTong;
     TextView tvHoTen;
     TextView tvEmail;
@@ -46,6 +62,10 @@ public class ChiTietThanhToan extends AppCompatActivity {
     CustomActionBar actionBar;
     String hoTen;
     String email;
+    int tong = 0;
+    NumberFormat formatter = new DecimalFormat("#,###,###");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    MaGiamGia maGiamGia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +113,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(chiTietDonHangArrayList.size() != 0){
+                if (chiTietDonHangArrayList.size() != 0) {
                     Calendar calendar = Calendar.getInstance();
                     final int year = calendar.get(Calendar.YEAR);
                     final int month = calendar.get(Calendar.MONTH);
@@ -106,39 +126,151 @@ public class ChiTietThanhToan extends AppCompatActivity {
                     hoaDon.setMaHoaDon(maHoaDon);
                     hoaDon.setDonHang(donHang);
                     hoaDon.setNgayThang(day + "/" + (month + 1) + "/" + year);
-                    hoaDon.setTong(tongDonHang());
+                    hoaDon.setTong(tong);
                     hoaDon.setEmail(tvEmail.getText().toString());
                     hoaDon.setHoTen(tvHoTen.getText().toString());
 
                     myRef.child(maHoaDon).setValue(hoaDon).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            if(maGiamGia != null){
+                                database.child("MaGiamGia").child(maGiamGia.getMaGiamGia())
+                                        .child("soLuong").setValue(maGiamGia.getSoLuong() - 1);
+                            }
                             database.child("Ban").child(String.valueOf(donHang.getMaBan())).child("chiTietDonHang").removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
+                                    Intent intent = new Intent(ChiTietThanhToan.this, ThuNgan.class);
+                                    startActivity(intent);
                                     Toast.makeText(ChiTietThanhToan.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(ChiTietThanhToan.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     });
-                }
-                else {
+                } else {
                     Toast.makeText(ChiTietThanhToan.this, "Hãy chọn thêm món", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        edtGiamGia.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
+        edtGiamGia.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(edtGiamGia.getText().toString().trim().length() != 0) {
+                    getMaGiamGia(edtGiamGia.getText().toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
-    private void getNhanVien(){
+    private void getMaGiamGia(String ma) {
+        final MaGiamGia[] maGiamGias = new MaGiamGia[1];
+        database.child("MaGiamGia").orderByChild("tenMaGiamGia").equalTo(ma).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                maGiamGias[0] = snapshot.getValue(MaGiamGia.class);
+                if (maGiamGias[0] == null) {
+                    edtGiamGia.setError("Mã giam giá không tồn tại");
+                } else {
+                    if (kiemTraMaGiamGia(maGiamGias[0])) {
+                        int iGiamGia = maGiamGias[0].getPhanTramGiamGia() * tong / 100;
+                        tong = tong - iGiamGia;
+                        tvTong.setText("Tổng: " + formatter.format(tong) + " đ ( -" + formatter.format(iGiamGia) + " đ)");
+                        maGiamGia = maGiamGias[0];
+                        edtGiamGia.setError(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        if (maGiamGias[0] == null) {
+            maGiamGia = null;
+            tongDonHang();
+            tvTong.setText("Tổng: " + formatter.format(tong) + " đ");
+            edtGiamGia.setError("Mã giam giá không tồn tại");
+        }
+    }
+
+    private boolean kiemTraMaGiamGia(MaGiamGia maGiamGia) {
+        if (maGiamGia.getSoLuong() == 0) {
+            edtGiamGia.setError("Mã giảm giá hết lượt sử dụng");
+            return false;
+        }
+        if (maGiamGia.getGiaTriApDung() > tong) {
+            edtGiamGia.setError("Giá trị áp dụng chưa đủ");
+            return false;
+        }
+        Date todayDate = new Date();
+        Date ngayBatDau = null;
+        try {
+            ngayBatDau = dateFormat.parse(maGiamGia.getNgayBatDau());
+        } catch (ParseException e) {
+            edtGiamGia.setError(e.getMessage());
+            return false;
+        }
+        if(todayDate.compareTo(ngayBatDau) < 0){
+            edtGiamGia.setError("Mã giảm giá chưa được áp dụng");
+            return false;
+        }
+        Date ngayKetThuc = null;
+        try {
+            ngayKetThuc = dateFormat.parse(maGiamGia.getNgayKetThuc());
+        } catch (ParseException e) {
+            edtGiamGia.setError(e.getMessage());
+            return false;
+        }
+        if(todayDate.compareTo(ngayKetThuc)>0){
+            edtGiamGia.setError("Mã giảm giá đã hết được áp dụng");
+            return false;
+        }
+        return true;
+    }
+
+    private void getNhanVien() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String maNhanVien = user.getUid();
 
-        database.child("NhanVien/"+maNhanVien).child("hoTen").addValueEventListener(new ValueEventListener() {
+        database.child("NhanVien/" + maNhanVien).child("hoTen").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
                 hoTen = value;
-                tvHoTen.setText("Họ tên: "+ hoTen);
+                tvHoTen.setText("Họ tên: " + hoTen);
             }
 
             @Override
@@ -147,7 +279,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
             }
         });
 
-        database.child("NhanVien/"+maNhanVien).child("email").addValueEventListener(new ValueEventListener() {
+        database.child("NhanVien/" + maNhanVien).child("email").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
@@ -173,8 +305,8 @@ public class ChiTietThanhToan extends AppCompatActivity {
                     chiTietDonHangArrayList.clear();
                     chiTietDonHangArrayList.addAll(filter(donHang.getChiTietDonHang()));
                     chiTietThanhToanAdapter.notifyDataSetChanged();
-                    NumberFormat formatter = new DecimalFormat("#,###,###");
-                    tvTong.setText("Tổng: " + formatter.format(tongDonHang())+ " đ");
+                    tongDonHang();
+                    tvTong.setText("Tổng: " + formatter.format(tong) + " đ");
                 }
             }
 
@@ -185,13 +317,12 @@ public class ChiTietThanhToan extends AppCompatActivity {
         });
     }
 
-    public int tongDonHang() {
+    public void tongDonHang() {
         int tong = 0;
         for (ChiTietDonHang item : chiTietDonHangArrayList) {
             tong += item.getGia() * item.getSoLuong();
         }
-
-        return tong;
+        this.tong = tong;
     }
 
     private ArrayList<ChiTietDonHang> filter(ArrayList<ChiTietDonHang> arrayList) {
@@ -207,6 +338,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
 
     private void setControl() {
         lvDanhSachMon = findViewById(R.id.lvDanhSachMon);
+        edtGiamGia = findViewById(R.id.edtGiamGia);
         tvTong = findViewById(R.id.tvTong);
         tvHoTen = findViewById(R.id.tvHoTen);
         tvEmail = findViewById(R.id.tvEmail);

@@ -233,6 +233,7 @@ public class DanhSachMon extends AppCompatActivity {
                 for (int i = 0; i < chiTietDonHangArrayList.size(); i++) {
                     if (chiTietDonHang.getMaMon() == chiTietDonHangArrayList.get(i).getMaMon()) {
                         chiTietDonHangArrayList.set(i, chiTietDonHang);
+                        break;
                     }
                 }
                 monAdapter.notifyDataSetChanged();

@@ -178,7 +178,7 @@ public class ThemMaGiamGia extends AppCompatActivity {
             checkValdated = false;
         }
         if (edtSoLuong.getText().length() == 0) {
-            edtSoLuong.setError("Hãy nhập số lươợng");
+            edtSoLuong.setError("Hãy nhập số lượng");
             checkValdated = false;
         }
 
