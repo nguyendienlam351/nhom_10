@@ -32,6 +32,7 @@ import tdc.edu.vn.nhom_10.ChiTietQLMon;
 import tdc.edu.vn.nhom_10.QuanLyThemMon;
 import tdc.edu.vn.nhom_10.R;
 import tdc.edu.vn.nhom_10.model.MonAn;
+import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHolder> {
     private Activity context;
@@ -59,25 +60,27 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHol
     @Override
     public void onBindViewHolder(@NonNull MonAnViewHolder holder, int position) {
         MonAn monAn = monAnArrayList.get(position);
-
         getAnhMon(monAn.getAnh(), holder.imgMon);
 
         holder.tvTenMon.setText(monAn.getTenMon());
-
         NumberFormat formatter = new DecimalFormat("#,###,###");
         holder.tvGia.setText(formatter.format(monAn.getGia()) + " đ");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Chuyển màn hình
-                Intent intent = new Intent(context.getApplicationContext(), ChiTietQLMon.class);
+                Intent intent = new Intent(context, ChiTietQLMon.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("maMon", monAn.getMaMon());
+                intent.putExtras(bundle);
 
                 context.startActivity(intent);
+
             }
         });
 
     }
+
 
 
     private void getAnhMon(String anh, ImageView imgMon) {
@@ -116,6 +119,7 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHol
     public int getItemViewType(int position) {
         return layoutID;
     }
+
 
     public class MonAnViewHolder extends RecyclerView.ViewHolder {
         public ImageView imgMon;

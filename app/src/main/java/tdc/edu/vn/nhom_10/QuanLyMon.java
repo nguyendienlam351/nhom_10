@@ -112,21 +112,6 @@ public class QuanLyMon extends AppCompatActivity {
         });
 
 
-//            imgMon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                MonAn mon = mangMonAn.get(position);
-//                Intent intent = new Intent(MainActivity.this, ChiTietMon.class);
-//                intent.putExtra("TenMon", mon.getTenMon());
-//                intent.putExtra("Gia", mon.getGia());
-//                intent.putExtra("Anh", mon.getAnh());
-//                startActivity(intent);
-//
-//            }
-//        });
-
-
-
     }
 
     // lay du lieu tu loai mon
@@ -156,7 +141,6 @@ public class QuanLyMon extends AppCompatActivity {
     private void getDataMon() {
         databaseReference = FirebaseDatabase.getInstance().getReference("Mon");
         databaseReference.addChildEventListener(new ChildEventListener() {
-
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 MonAn monAn = snapshot.getValue(MonAn.class);

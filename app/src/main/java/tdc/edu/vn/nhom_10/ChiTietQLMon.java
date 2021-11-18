@@ -3,6 +3,8 @@ package tdc.edu.vn.nhom_10;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +17,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.model.MonAn;
@@ -44,7 +54,20 @@ public class ChiTietQLMon extends AppCompatActivity {
 
     }
 
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference("Mon");
+
+
     private void setEvent() {
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            String maMon = bundle.getString("maMon", "");
+            getDataMon(maMon);
+        }
+
 
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
@@ -54,6 +77,27 @@ public class ChiTietQLMon extends AppCompatActivity {
         });
 
 
+    }
+
+    //Hàm lấy dữ liệu từ màn hình RV
+    private void getDataMon(String maMon) {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Mon");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                MonAn nMon = snapshot.getValue(MonAn.class);
+                if (nMon != null) {
+                    nMon = monAn;
+                    edtTenMon.setText(monAn.getTenMon());
+                    edtMoTa.setText(monAn.getMoTa());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
 

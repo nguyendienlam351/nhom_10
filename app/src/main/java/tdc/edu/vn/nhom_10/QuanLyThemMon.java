@@ -95,7 +95,6 @@ public class QuanLyThemMon extends AppCompatActivity {
                 monAn.setLoaiMon(spMon.getSelectedItem().toString());
                 monAn.setMoTa(edtMoTa.getText().toString());
 
-
                 String mamon = databaseReference.child("Mon").push().getKey();
                 monAn.setMaMon(mamon);
                 monAn.setAnh(monAn.getMaMon() + ".png");

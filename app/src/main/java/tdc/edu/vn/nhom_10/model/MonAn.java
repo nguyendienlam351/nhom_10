@@ -1,6 +1,8 @@
 package tdc.edu.vn.nhom_10.model;
 
-public class MonAn {
+import java.io.Serializable;
+
+public class MonAn implements Serializable {
 
         String maMon,tenMon,anh,loaiMon,moTa;
         int Gia;
