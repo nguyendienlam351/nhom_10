@@ -25,5 +25,12 @@
         android:layout_height="match_parent"
         android:text="@string/xuatkho"
         style="@style/button"/>
+    <Button
+        android:id="@+id/btnKiemKeKho"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/kiemkekho"
+        style="@style/button"/>
 
 </LinearLayout>

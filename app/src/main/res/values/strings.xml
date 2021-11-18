@@ -71,6 +71,7 @@
     <string name="don_vi">Đơn vị</string>
     <string name="ten_NL">Tên nguyên liệu</string>
     <string name="mota">Mô tả</string>
+    <string name="kiemkekho">Kiểm kê kho</string>
     <array name="donvi">
         <item>Kg</item>
         <item>Lít</item>
