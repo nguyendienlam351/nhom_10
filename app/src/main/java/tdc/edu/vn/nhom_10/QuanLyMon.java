@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -78,7 +79,8 @@ public class QuanLyMon extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         imgMon.setLayoutManager(layoutManager);
         getDataMon();
-// spiner
+
+// actionBar
         databaseReference = FirebaseDatabase.getInstance().getReference();
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
@@ -108,6 +110,21 @@ public class QuanLyMon extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+//            imgMon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                MonAn mon = mangMonAn.get(position);
+//                Intent intent = new Intent(MainActivity.this, ChiTietMon.class);
+//                intent.putExtra("TenMon", mon.getTenMon());
+//                intent.putExtra("Gia", mon.getGia());
+//                intent.putExtra("Anh", mon.getAnh());
+//                startActivity(intent);
+//
+//            }
+//        });
+
 
 
     }

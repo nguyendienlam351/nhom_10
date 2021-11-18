@@ -73,18 +73,32 @@
 
 
             <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left">
+
+                <Button
+                    android:id="@+id/btnXoa"
+                    style="@style/deleteButton"
+                    android:layout_width="wrap_content"
+                    android:text="Xóa" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right">
 
                 <Button
-                    android:id="@+id/btnThem"
+                    android:id="@+id/btnThayDoi"
                     style="@style/editButton"
                     android:layout_width="wrap_content"
-                    android:text="Thêm" />
+                    android:text="Thay đổi" />
 
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+</LinearLayout>
 </LinearLayout>

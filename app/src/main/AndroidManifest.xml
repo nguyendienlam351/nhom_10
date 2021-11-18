@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
+            android:name=".ChiTietQLMon"
+            android:exported="false" />
+        <activity
             android:name=".QuanLyThemMon"
             android:exported="false" />
         <activity

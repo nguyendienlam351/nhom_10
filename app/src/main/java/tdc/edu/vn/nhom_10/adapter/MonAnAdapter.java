@@ -1,8 +1,10 @@
 package tdc.edu.vn.nhom_10.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import tdc.edu.vn.nhom_10.ChiTietNhanVien;
+import tdc.edu.vn.nhom_10.ChiTietQLMon;
+import tdc.edu.vn.nhom_10.QuanLyThemMon;
 import tdc.edu.vn.nhom_10.R;
 import tdc.edu.vn.nhom_10.model.MonAn;
 
@@ -61,6 +66,17 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHol
 
         NumberFormat formatter = new DecimalFormat("#,###,###");
         holder.tvGia.setText(formatter.format(monAn.getGia()) + " đ");
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Chuyển màn hình
+                Intent intent = new Intent(context.getApplicationContext(), ChiTietQLMon.class);
+
+                context.startActivity(intent);
+            }
+        });
+
     }
 
 
