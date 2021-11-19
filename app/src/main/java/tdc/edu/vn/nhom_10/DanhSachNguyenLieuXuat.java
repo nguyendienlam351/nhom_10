@@ -51,7 +51,8 @@ public class DanhSachNguyenLieuXuat extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                finish();
+                Intent intent = new Intent(getApplicationContext(), DanhSachXuatKho.class);
+                startActivity(intent);
             }
         });
 

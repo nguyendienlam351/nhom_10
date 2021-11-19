@@ -83,7 +83,8 @@ public class ChiTietNhapKho extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                finish();
+                Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
+                startActivity(intent);
             }
         });
 

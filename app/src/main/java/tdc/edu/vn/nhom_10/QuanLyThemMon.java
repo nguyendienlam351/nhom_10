@@ -67,8 +67,6 @@ public class QuanLyThemMon extends AppCompatActivity {
     StorageReference storageRef = storage.getReference("Mon");
 
     private void setEvent() {
-
-
         databaseReference = FirebaseDatabase.getInstance().getReference();
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
@@ -76,6 +74,7 @@ public class QuanLyThemMon extends AppCompatActivity {
                 finish();
             }
         });
+        actionBar.setActionBarName("Thêm món");
 
         loaiMonArrayList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<LoaiMon>(this, android.R.layout.simple_spinner_item, loaiMonArrayList);
@@ -93,12 +92,8 @@ public class QuanLyThemMon extends AppCompatActivity {
 
             }
         });
-        actionBar.setActionBarName("MonAn");
-
 
         getDataLoaiMon();
-
-
 
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override

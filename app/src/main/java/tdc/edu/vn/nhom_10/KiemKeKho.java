@@ -32,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.ChonThangNamDialog;
+import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.CustomView.QuenMatKhauDialog;
 import tdc.edu.vn.nhom_10.adapter.KiemKeKhoAdapter;
 import tdc.edu.vn.nhom_10.model.KiemKe;
@@ -48,7 +49,9 @@ public class KiemKeKho extends AppCompatActivity {
     ArrayList<XuatKho> data2 = new ArrayList<XuatKho>();
     ArrayList<NguyenLieu> data3 = new ArrayList<NguyenLieu>();
     KiemKeKhoAdapter myRecyclerViewAdapter;
-    DatabaseReference database;
+    CustomActionBar actionBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +59,17 @@ public class KiemKeKho extends AppCompatActivity {
         setControl();
         setEvent();
     }
+
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                finish();
+            }
+        });
+
+        actionBar.setActionBarName("Kiểm kê kho");
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("NhapKho");
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("XuatKho");
         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("NguyenLieu");
@@ -179,20 +192,21 @@ public class KiemKeKho extends AppCompatActivity {
     private void chonTG()  {
         ChonThangNamDialog.FullNameListener listener = new ChonThangNamDialog.FullNameListener() {
             @Override
-            public void fullNameEntered(String email) {
+            public void fullNameEntered(String gopTN) {
+                btnChonTG.setText(gopTN);
                 data.clear();
                 for (int i = 0; i< data3.size();i++){
                     KiemKe kiemKe = new KiemKe();
                     kiemKe.setMa("ma"+i);
                     NguyenLieu nguyenLieu = data3.get(i);
                     kiemKe.setTen(nguyenLieu.getTenNL());
-                    kiemKe.setThangnam(email);
+                    kiemKe.setThangnam(gopTN);
                     int nhap = 0;
                     int xuat = 0;
                     for(int j = 0; j<data1.size();j++){
                         NhapKho nhapKho = data1.get(j);
                         String ngaythang = nhapKho.getNgayNhapKho();
-                        if(nguyenLieu.getTenNL().compareTo(nhapKho.getTenNhapKho()) == 0 && ngaythang.contains(email) == true){
+                        if(nguyenLieu.getTenNL().compareTo(nhapKho.getTenNhapKho()) == 0 && ngaythang.contains(gopTN) == true){
                             nhap = nhap + nhapKho.getSoLuong();
                         }
                     }
@@ -200,7 +214,7 @@ public class KiemKeKho extends AppCompatActivity {
                     for(int l = 0; l<data2.size();l++){
                         XuatKho xuatKho = data2.get(l);
                         String ngaythang = xuatKho.getNgayXuatKho();
-                        if(nguyenLieu.getTenNL().compareTo(xuatKho.getTenXuatKho()) == 0 && ngaythang.contains(email)==true){
+                        if(nguyenLieu.getTenNL().compareTo(xuatKho.getTenXuatKho()) == 0 && ngaythang.contains(gopTN)==true){
                             xuat = xuat + xuatKho.getSoLuong();
                         }
                     }
@@ -230,5 +244,6 @@ public class KiemKeKho extends AppCompatActivity {
         svSearch=findViewById(R.id.svSearch);
         lvKiemKeKho=findViewById(R.id.lvKiemKeKho);
         btnChonTG=findViewById(R.id.btnChonTG);
+        actionBar = findViewById(R.id.actionBar);
     }
 }

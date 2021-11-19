@@ -89,23 +89,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="19"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnHuy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
+                android:layout_weight="9"
                 android:backgroundTint="@color/blue"
                 android:text="Huỷ"/>
+            <Space
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                />
 
             <Button
                 android:id="@+id/btnDongY"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/blue"
-                android:layout_weight="1"
+                android:layout_weight="9"
                 android:text="Đồng ý"/>
         </LinearLayout>
 

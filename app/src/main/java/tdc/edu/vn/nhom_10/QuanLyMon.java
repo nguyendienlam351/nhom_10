@@ -91,7 +91,7 @@ public class QuanLyMon extends AppCompatActivity {
                 finish();
             }
         });
-        actionBar.setActionBarName("MonAn");
+        actionBar.setActionBarName("Quản lý món");
 // spiner
         loaiMonArrayList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<LoaiMon>(this, android.R.layout.simple_spinner_item, loaiMonArrayList);

@@ -58,10 +58,22 @@ public class QuanLy extends AppCompatActivity implements NavigationView.OnNaviga
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-
         navigationView.setNavigationItemSelectedListener(this);
 
-        replaceFragment(new tdc.edu.vn.nhom_10.QuanLyFragment.QuanLy());
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null) {
+            int ManHinh = bundle.getInt("ManHinh", 1);
+            if(ManHinh == 2){
+                replaceFragment(new NhapXuatKho());
+                CurrentFragment = Fragment_nhapxuatkho;
+                toolbar.setTitle(R.string.nhapxuatkho);
+            }
+        }
+        else {
+            replaceFragment(new tdc.edu.vn.nhom_10.QuanLyFragment.QuanLy());
+        }
         navigationView.getMenu().findItem(R.id.quanly).setChecked(true);
 
     }

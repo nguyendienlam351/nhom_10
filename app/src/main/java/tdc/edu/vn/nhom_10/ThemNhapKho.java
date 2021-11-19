@@ -76,7 +76,8 @@ public class ThemNhapKho extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                finish();
+                Intent intent = new Intent(getApplicationContext(), DanhSachNguyenLieuNhap.class);
+                startActivity(intent);
             }
         });
 

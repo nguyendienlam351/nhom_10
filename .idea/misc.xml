@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.2212323682256867" />
         <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_chi_tiet_nguyen_lieu.xml" value="0.1" />
         <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_chi_tiet_nhan_vien.xml" value="0.14356884057971014" />
         <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_dang_nhap.xml" value="0.1" />
@@ -31,51 +32,7 @@
         <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/phantren.xml" value="0.1068840579710145" />
         <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/quanly.xml" value="0.1" />
         <entry key="..\:/Users/Nam/AndroidStudioProjects/nhom_10/app/src/main/res/layout/test_layout.xml" value="0.12318840579710146" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25416666666666665" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.25416666666666665" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/drawable/ic_calendar.xml" value="0.25416666666666665" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/drawable/ic_hoadon.xml" value="0.25416666666666665" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/drawable/ic_launcher_background.xml" value="0.25416666666666665" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/drawable/ic_order.xml" value="0.25416666666666665" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_chi_tiet_mon.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_chi_tiet_nhan_vien.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_chi_tiet_ql.xml" value="0.2558876811594203" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_chi_tiet_ql_mon.xml" value="0.2558876811594203" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_chi_tiet_thanh_toan.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_dang_nhap.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_danh_sach_don_hang.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_danh_sach_mon.xml" value="0.28020833333333334" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_dat_mon.xml" value="0.23802083333333332" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_don_hang_cua_ban.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_main.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_pha_che.xml" value="0.23802083333333332" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_phuc_vu.xml" value="0.2558876811594203" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_quan_ly.xml" value="0.23802083333333332" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_quan_ly_ban.xml" value="0.23802083333333332" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_quan_ly_loai_mon.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_quan_ly_mon.xml" value="0.23802083333333332" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_quan_ly_nhan_vien.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_thanh_toan.xml" value="0.223731884057971" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_them_nhan_vien.xml" value="0.23802083333333332" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_them_ql_mon.xml" value="0.20208333333333334" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_thu_ngan.xml" value="0.23802083333333332" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/activity_xem_don_hang.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_action_bar.xml" value="0.11041666666666666" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_item_ban_1.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_item_ban_2.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_item_loai_mon.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_item_mon_1.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_item_mon_2.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_item_mon_3.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_item_mon_4.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_item_nhan_vien.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_item_ql_mon.xml" value="0.35190217391304346" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/layout_ql_mon.xml" value="0.36666666666666664" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/lichlamviec.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/nhapxuatkho.xml" value="0.1636271529888551" />
-        <entry key="..\:/Chuyendedd2/Nhom 10/nhom_10/app/src/main/res/layout/xemhoadon.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/boder.xml" value="0.2846153846153846" />
-        <entry key="../../../../../layout/custom_preview.xml" value="0.2212323682256867" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/vien.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/vien_bottom.xml" value="0.2846153846153846" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/drawable/vien_left_right.xml" value="0.2846153846153846" />
@@ -92,6 +49,7 @@
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_danh_sach_mon.xml" value="0.25" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_dat_mon.xml" value="0.33" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_don_hang_cua_ban.xml" value="0.25" />
+        <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_kiem_ke_kho.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_ma_giam_gia.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/activity_nhan_vien.xml" value="0.27291666666666664" />
@@ -117,6 +75,7 @@
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_chi_tiet_don_hang.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_chi_tiet_thanh_toan.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_danh_sach_don_hang.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_dialog_chon_tg.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_ban.xml" value="0.25" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_ban_1.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/ThinkPad/AndroidStudioProjects/nhom_10/app/src/main/res/layout/layout_item_ban_2.xml" value="0.27291666666666664" />

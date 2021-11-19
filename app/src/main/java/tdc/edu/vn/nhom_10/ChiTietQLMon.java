@@ -102,9 +102,6 @@ public class ChiTietQLMon extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<LoaiMon>(this, android.R.layout.simple_spinner_item, loaiMonArrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spMon.setAdapter(arrayAdapter);
-        actionBar.setActionBarName("MonAn");
-
-
 
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
@@ -112,6 +109,7 @@ public class ChiTietQLMon extends AppCompatActivity {
                 finish();
             }
         });
+        actionBar.setActionBarName("Chi tiết món");
 
         //Chọn hình ảnh
         imgHinh.setOnClickListener(new View.OnClickListener() {

@@ -49,7 +49,11 @@ public class DanhSachNhapKho extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                finish();
+                Intent intent = new Intent(getApplicationContext(), QuanLy.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("ManHinh", 2);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

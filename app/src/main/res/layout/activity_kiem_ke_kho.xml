@@ -10,20 +10,22 @@
     <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
         android:id="@+id/actionBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <LinearLayout style="@style/layout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+            android:gravity="center_vertical">
 
-                <Button
-                    android:id="@+id/btnChonTG"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tháng/Năm"/>
+            <Button
+                android:id="@+id/btnChonTG"
+                style="@style/button"
+                android:backgroundTint="#B8B8B8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tháng/Năm" />
 
             <SearchView
                 android:id="@+id/svSearch"
@@ -33,10 +35,10 @@
                 android:layout_marginLeft="@dimen/spacing1"
                 android:layout_marginRight="@dimen/spacing1"
                 android:layout_weight="1"
-                android:queryBackground="@color/white"
-                android:submitBackground="@color/white"
                 android:iconifiedByDefault="false"
-                android:queryHint="search" />
+                android:queryBackground="@color/white"
+                android:queryHint="search"
+                android:submitBackground="@color/white" />
 
         </LinearLayout>
 
