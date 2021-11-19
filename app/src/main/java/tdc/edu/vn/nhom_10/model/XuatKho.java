@@ -16,8 +16,6 @@ public class XuatKho {
     public XuatKho() {
     }
 
-    public XuatKho(NguyenLieu nguyenLieu, String maXuatKho, String tenXuatKho, String ngayXuatKho, int soLuong, String donVi) {
-        this.nguyenLieu = nguyenLieu;
     public XuatKho(NguyenLieu nguyenLieu, String hoTen, String email, String maXuatKho, String tenXuatKho, String ngayXuatKho, int soLuong, String donVi) {
         this.nguyenLieu = nguyenLieu;
         this.hoTen = hoTen;

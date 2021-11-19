@@ -15,6 +15,8 @@ import tdc.edu.vn.nhom_10.DanhSachNguyenLieu;
 import tdc.edu.vn.nhom_10.KiemKeKho;
 import tdc.edu.vn.nhom_10.QuanLyBan;
 import tdc.edu.vn.nhom_10.R;
+import tdc.edu.vn.nhom_10.model.NhapKho;
+import tdc.edu.vn.nhom_10.model.XuatKho;
 
 public class NhapXuatKho extends Fragment {
     Button btnNguyenLieu, btnNhapKho, btnXuatKho, btnKiemKeKho;
@@ -38,14 +40,14 @@ public class NhapXuatKho extends Fragment {
         btnXuatKho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DanhSachNguyenLieu.class);
+                Intent intent = new Intent(getActivity(), XuatKho.class);
                 startActivity(intent);
             }
         });
         btnNhapKho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DanhSachNguyenLieu.class);
+                Intent intent = new Intent(getActivity(), NhapKho.class);
                 startActivity(intent);
             }
         });
