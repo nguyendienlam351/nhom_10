@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChiTietNhanVien">
+
+    <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout style="@style/layout">
+
+        <ImageView
+            android:id="@+id/imgHinh"
+            android:layout_width="@dimen/largeImage"
+            android:layout_height="@dimen/largeImage"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/image" />
+
+        <EditText
+            android:id="@+id/edtTenMon"
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:digits="qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM._ "
+            android:hint="Tên Món"
+            android:inputType="text"
+            android:maxLength="30" />
+
+        <LinearLayout
+            style="@style/spinnerLayout"
+            android:layout_width="match_parent"
+            >
+            <Spinner
+                android:id="@+id/spMon"
+                style="@style/spinner"
+
+                android:layout_width="match_parent"
+                />
+
+        </LinearLayout>
+        <EditText
+            android:id="@+id/edtGia"
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Giá"
+            android:inputType="number"
+
+            />
+
+        <EditText
+            android:id="@+id/edtMota"
+            style="@style/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="qwertyuiopasdfghjklzxcvbnm123456789QWERTYUIOPASDFGHJKLZXCVBNM/,. "
+            android:hint="Mô Tả "
+            android:inputType="text"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right">
+
+                <Button
+                    android:id="@+id/btnThem"
+                    style="@style/editButton"
+                    android:layout_width="wrap_content"
+                    android:text="Thêm" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

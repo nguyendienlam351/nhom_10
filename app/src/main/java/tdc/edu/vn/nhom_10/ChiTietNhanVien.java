@@ -307,11 +307,9 @@ public class ChiTietNhanVien extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
     }
 
-    //tẽttt
+    // lay anh
     private void getAnhNhanVien(String anh) {
         int dot = anh.lastIndexOf('.');
         String base = (dot == -1) ? anh : anh.substring(0, dot);
@@ -335,6 +333,7 @@ public class ChiTietNhanVien extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 
     private void setControl() {
         txtNgaySinh = findViewById(R.id.txtNgaySinh);

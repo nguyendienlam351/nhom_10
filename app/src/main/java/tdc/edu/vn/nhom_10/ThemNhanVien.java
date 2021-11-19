@@ -159,6 +159,7 @@ public class ThemNhanVien extends AppCompatActivity {
                             public void onFailure(@NonNull Exception exception) {
                                 // Handle unsuccessful uploads
                                 Toast.makeText(ThemNhanVien.this, "Lỗi", Toast.LENGTH_SHORT).show();
+
                             }
                         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -228,7 +229,6 @@ public class ThemNhanVien extends AppCompatActivity {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
-
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             String newHoTen = edtHoTen.getText().toString().trim();
@@ -238,7 +238,6 @@ public class ThemNhanVien extends AppCompatActivity {
             String newDiaChi = edtDiaChi.getText().toString().trim();
             btnThem.setEnabled(!newHoTen.isEmpty() && !newCCCD.isEmpty() && !newEmail.isEmpty() && !newSDT.isEmpty() && !newDiaChi.isEmpty());
         }
-
         @Override
         public void afterTextChanged(Editable s) {
         }

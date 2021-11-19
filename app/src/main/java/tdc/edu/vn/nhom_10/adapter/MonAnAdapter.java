@@ -1,16 +1,15 @@
 package tdc.edu.vn.nhom_10.adapter;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -28,67 +27,62 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import tdc.edu.vn.nhom_10.ChiTietNhanVien;
+import tdc.edu.vn.nhom_10.ChiTietQLMon;
+import tdc.edu.vn.nhom_10.QuanLyThemMon;
 import tdc.edu.vn.nhom_10.R;
-import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
+import tdc.edu.vn.nhom_10.model.MonAn;
+import tdc.edu.vn.nhom_10.model.NhanVien;
 
-public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHangAdapter.DanhSachDonHangViewHolder>{
+public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHolder> {
     private Activity context;
     private int layoutID;
-    private ArrayList<ChiTietDonHang> chiTietDonHangArrayList;
-    private DanhSachDonHangClickListener delegation;
+    private ArrayList<MonAn> monAnArrayList;
+
     private StorageReference storage;
 
-    public void setDelegation(DanhSachDonHangClickListener delegation) {
-        this.delegation = delegation;
-    }
-
-    public DanhSachDonHangAdapter(Activity context, int layoutID, ArrayList<ChiTietDonHang> chiTietDonHangArrayList) {
+    public MonAnAdapter(Activity context, int layoutID, ArrayList<MonAn> monAnArrayList) {
         this.context = context;
         this.layoutID = layoutID;
-        this.chiTietDonHangArrayList = chiTietDonHangArrayList;
+        this.monAnArrayList = monAnArrayList;
         storage = FirebaseStorage.getInstance().getReference("Mon");
     }
 
-
     @NonNull
     @Override
-    public DanhSachDonHangViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MonAnViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater layoutInflater = context.getLayoutInflater();
         CardView view = (CardView) layoutInflater.inflate(viewType, parent, false);
-        return new DanhSachDonHangViewHolder(view);
+        return new MonAnViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DanhSachDonHangViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        ChiTietDonHang chiTietDonHang = chiTietDonHangArrayList.get(position);
+    public void onBindViewHolder(@NonNull MonAnViewHolder holder, int position) {
+        MonAn monAn = monAnArrayList.get(position);
 
-        if(!chiTietDonHang.getTrangThai().equals("chờ")){
-            holder.btnXoaMon.setVisibility(View.INVISIBLE);
-        }
+        getAnhMon(monAn.getAnh(), holder.imgMon);
 
-        getAnhMon(chiTietDonHang.getAnh(),holder.imgMon);
-
-        holder.tvTenMon.setText(chiTietDonHang.getTenMon());
-
+        holder.tvTenMon.setText(monAn.getTenMon());
         NumberFormat formatter = new DecimalFormat("#,###,###");
-        holder.tvGia.setText(formatter.format(chiTietDonHang.getGia()) + " đ");
+        holder.tvGia.setText(formatter.format(monAn.getGia()) + " đ");
 
-        holder.tvSoLuong.setText("Số lượng: " + chiTietDonHang.getSoLuong());
-
-        holder.tvTrangThai.setText(chiTietDonHang.getTrangThai()+"");
-
-        holder.btnXoaMon.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(delegation != null){
-                    delegation.iconClick(chiTietDonHang,position);
-                }
-                else {
-                    Toast.makeText(context, "you must set delegation before", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(context, ChiTietQLMon.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("maMon", monAn.getMaMon());
+                intent.putExtras(bundle);
+
+                context.startActivity(intent);
+
             }
         });
+
     }
+
+
 
     private void getAnhMon(String anh, ImageView imgMon) {
         int dot = anh.lastIndexOf('.');
@@ -115,35 +109,41 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
         }
     }
 
+
+    @Override
+    public int getItemCount() {
+        return monAnArrayList.size();
+
+    }
+    //Search
+    public void filterList(ArrayList<MonAn> monAnArrayList) {
+        this.monAnArrayList = monAnArrayList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemViewType(int position) {
         return layoutID;
     }
 
-    @Override
-    public int getItemCount() {
-        return chiTietDonHangArrayList.size();
-    }
 
-    public static class DanhSachDonHangViewHolder extends RecyclerView.ViewHolder {
+    public class MonAnViewHolder extends RecyclerView.ViewHolder {
         public ImageView imgMon;
-        public TextView tvTenMon;
-        public TextView tvGia;
-        public TextView tvSoLuong;
-        public ImageButton btnXoaMon;
-        public TextView tvTrangThai;
+        public TextView tvTenMon, tvGia;
 
-        public DanhSachDonHangViewHolder(@NonNull View itemView) {
+        public MonAnViewHolder(@NonNull View itemView) {
             super(itemView);
             imgMon = itemView.findViewById(R.id.imgMon);
             tvTenMon = itemView.findViewById(R.id.tvTenMon);
             tvGia = itemView.findViewById(R.id.tvGia);
-            tvSoLuong = itemView.findViewById(R.id.tvSoLuong);
-            btnXoaMon = itemView.findViewById(R.id.btnXoaMon);
-            tvTrangThai = itemView.findViewById(R.id.tvTrangThai);
         }
-    }
-    public interface DanhSachDonHangClickListener{
-        public void iconClick(ChiTietDonHang chiTietDonHang, int position);
+
     }
 }
+
+
+
+
+
+
+
