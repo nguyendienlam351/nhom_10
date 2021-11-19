@@ -81,6 +81,8 @@ public class ChiTietQLMon extends AppCompatActivity {
     StorageReference storageRef = storage.getReference("Mon");
     //Xoá Mon An
 
+    FirebaseDatabase data = FirebaseDatabase.getInstance();
+    DatabaseReference mData = data.getReference("Mon");
 
 
     private void setEvent() {
@@ -128,28 +130,71 @@ public class ChiTietQLMon extends AppCompatActivity {
             }
         });
 
+        btnThayDoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Gọi hàm update
+                openDiaLogUpdateItem(monAn);
+            }
+        });
+
 //   giới hạn số lượng nhập
         edtGia.setFilters(new InputFilter[]{new MinMaxFilter(1, Integer.MAX_VALUE)});
     }
-
-    private void openDiaLogDelete(MonAn monAn) {
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference("Mon");
+// Ham update
+    private void openDiaLogUpdateItem(MonAn monAn) {
 
         AlertDialog.Builder b = new AlertDialog.Builder(this);
 //        new AlertDialog.Builder(this)
-        b.setTitle("Xoá");
-        b.setMessage("Bạn có muốn xoá?");
+        b.setTitle("Thay đổi");
+        b.setMessage("Bạn có muốn thay đổi?");
         b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mData = FirebaseDatabase.getInstance().getReference("Mon");
+                String newTenMon = edtTenMon.getText().toString().trim();
+                Integer newGia = Integer.parseInt(edtGia.getText().toString().trim());
+                String newMoTa = edtMoTa.getText().toString().trim();
+                String newMon = spMon.getSelectedItem().toString();
 
 
+                monAn.setTenMon(newTenMon);
+                monAn.setMoTa(newMoTa);
+                monAn.setGia(newGia);
+                monAn.setLoaiMon(newMon);
+                mData.child(String.valueOf(monAn.getMaMon())).updateChildren(monAn.toMap());
+                updateImage();
+
+                Intent intent = new Intent(getApplicationContext(), QuanLyMon.class);
+                startActivity(intent);
             }
+
         });
         b.setNegativeButton("Từ chối", null);
         b.setCancelable(false);
         b.show();
+    }
+
+
+    private void openDiaLogDelete(MonAn monAn) {
+        new AlertDialog.Builder(this)
+                .setTitle("Xoá")
+                .setMessage("Bạn có muốn xoá?")
+                .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        databaseReference=FirebaseDatabase.getInstance().getReference("Mon");
+                        databaseReference.child(String.valueOf(monAn.getMaMon())).removeValue();
+
+                        Intent intent = new Intent(getApplicationContext(), QuanLyMon.class);
+                        startActivity(intent);
+
+                    }
+
+                })
+                .setNegativeButton("Từ chối",null)
+                .setCancelable(false)
+                .show();
     }
 
     // Kiểm tra chọn ảnh
@@ -217,7 +262,6 @@ public class ChiTietQLMon extends AppCompatActivity {
         });
     }
 
-
     // lay anh
     private void getAnhMon(String anh) {
         int dot = anh.lastIndexOf('.');
@@ -271,29 +315,29 @@ public class ChiTietQLMon extends AppCompatActivity {
     }
 
 
-//    private void updateImage() {
-//        //Thêm hình ảnh lên firebase
-//        StorageReference mountainsRef = storageRef.child(monAn.getMaMon() + ".png");
-//        imgHinh.setDrawingCacheEnabled(true);
-//        imgHinh.buildDrawingCache();
-//        Bitmap bitmap = ((BitmapDrawable) imgHinh.getDrawable()).getBitmap();
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-//        byte[] data = baos.toByteArray();
-//
-//        UploadTask uploadTask = mountainsRef.putBytes(data);
-//        uploadTask.addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                // Handle unsuccessful uploads
-//                Toast.makeText(ChiTietQLMon.this, "Lỗi", Toast.LENGTH_SHORT).show();
-//            }
-//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//            }
-//        });
-//    }
+    private void updateImage() {
+        //Thêm hình ảnh lên firebase
+        StorageReference mountainsRef = storageRef.child(monAn.getMaMon() + ".png");
+        imgHinh.setDrawingCacheEnabled(true);
+        imgHinh.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imgHinh.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                Toast.makeText(ChiTietQLMon.this, "Lỗi", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            }
+        });
+    }
 
     private void setControl() {
         edtTenMon = findViewById(R.id.edtTenMon);
@@ -304,6 +348,7 @@ public class ChiTietQLMon extends AppCompatActivity {
         btnThayDoi = findViewById(R.id.btnThayDoi);
         btnXoa = findViewById(R.id.btnXoa);
         actionBar = findViewById(R.id.actionBar);
+
 
     }
 }

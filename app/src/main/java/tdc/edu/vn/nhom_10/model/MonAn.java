@@ -1,6 +1,8 @@
 package tdc.edu.vn.nhom_10.model;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MonAn implements Serializable {
 
@@ -78,4 +80,15 @@ public class MonAn implements Serializable {
                     ", Gia=" + Gia +
                     '}';
         }
+
+    public Map<String, Object> toMap(){
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("tenMon",tenMon);
+        result.put("loaiMon",loaiMon);
+        result.put("moTa",moTa);
+        result.put("maMon",maMon);
+        result.put("Gia",Gia);
+        result.put("anh",anh);
+        return result;
+    }
     }

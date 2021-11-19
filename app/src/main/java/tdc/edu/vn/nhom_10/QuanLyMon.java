@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.adapter.MonAnAdapter;
 import tdc.edu.vn.nhom_10.adapter.MyRecylerViewNhanVien;
+import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
 import tdc.edu.vn.nhom_10.model.MonAn;
 import tdc.edu.vn.nhom_10.model.NhanVien;
@@ -51,9 +52,10 @@ public class QuanLyMon extends AppCompatActivity {
     ImageButton btnThem;
     SearchView edtTimKiem;
     MonAnAdapter monAnAdapter;
-
+    int viTri = 0;
     ArrayList<LoaiMon> loaiMonArrayList;
     ArrayList<MonAn> monAnArrayList= new ArrayList<MonAn>();
+
     DatabaseReference databaseReference;
     ArrayAdapter arrayAdapter;
 
@@ -109,7 +111,47 @@ public class QuanLyMon extends AppCompatActivity {
             }
         });
 
+// search theo spiner
+        spMon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                viTri = position;
+                filter(edtTimKiem.getQuery().toString());
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //Search
+        edtTimKiem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return true;
+            }
+        });
+    }
+
+
+
+
+
+    private void filter(String tenMon){
+        String maLoaiMon = loaiMonArrayList.get(viTri).getMaLoaiMon();
+        ArrayList<MonAn> filterList = new ArrayList<MonAn>();
+        for (MonAn monAn  : monAnArrayList) {
+            if(monAn.getLoaiMon().contains(maLoaiMon) && monAn.getTenMon().toLowerCase().contains(tenMon.toLowerCase())){
+                filterList.add(monAn);
+            }
+        }
+        monAnAdapter.filterList(filterList);
     }
 
     // lay du lieu tu loai mon
@@ -134,6 +176,7 @@ public class QuanLyMon extends AppCompatActivity {
             }
         });
     }
+
 
 //    //Hàm lấy dữ liệu từ màn hình RCV
     private void getDataMon() {
@@ -177,7 +220,7 @@ public class QuanLyMon extends AppCompatActivity {
     private void setControl() {
         imgMon = findViewById(R.id.imgMon);
         actionBar = findViewById(R.id.actionBar);
-        edtTimKiem = findViewById(R.id.edtTimKiem);
+        edtTimKiem = findViewById(R.id.Search);
         spMon = findViewById(R.id.spMon);
         btnThem = findViewById(R.id.btnThem);
 

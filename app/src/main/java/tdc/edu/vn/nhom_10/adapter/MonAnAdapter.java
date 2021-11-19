@@ -115,6 +115,11 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHol
         return monAnArrayList.size();
 
     }
+    //Search
+    public void filterList(ArrayList<MonAn> monAnArrayList) {
+        this.monAnArrayList = monAnArrayList;
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemViewType(int position) {

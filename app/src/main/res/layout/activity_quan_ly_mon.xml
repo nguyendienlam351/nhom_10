@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".MainActivity">
+    tools:context=".QuanLyMon">
 
 
     <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
@@ -31,8 +31,8 @@
                     android:layout_width="wrap_content" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/edtTimkiem"
+            <SearchView
+                android:id="@+id/Search"
                 style="@style/editText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/iconSize"
@@ -41,8 +41,8 @@
                 android:layout_weight="1"
                 android:queryBackground="@color/white"
                 android:submitBackground="@color/white"
-                app:iconifiedByDefault="false"
-                app:queryHint="search" />
+                android:iconifiedByDefault="false"
+                android:queryHint="search" />
 
             <ImageButton
                 android:id="@+id/btnThem"
