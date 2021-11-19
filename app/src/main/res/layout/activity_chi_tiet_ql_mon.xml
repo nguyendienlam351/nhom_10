@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:digits="qwertyuiopasdfghjklzxcvbnm123456789QWERTYUIOPASDFGHJKLZXCVBNM._ "
+            android:digits="qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM._ "
             android:hint="Tên Món"
             android:inputType="text"
             android:maxLength="30" />
@@ -51,7 +51,6 @@
             android:layout_height="wrap_content"
             android:hint="Giá"
             android:inputType="number"
-            android:digits="qwertyuiopasdfghjklzxcvbnm123456789QWERTYUIOPASDFGHJKLZXCVBNM._ "
             />
 
         <EditText

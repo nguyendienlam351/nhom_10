@@ -67,8 +67,8 @@ public class QuanLyMon extends AppCompatActivity {
     }
 
 
-//    FirebaseDatabase data = FirebaseDatabase.getInstance();
-//    DatabaseReference mData = data.getReference("Mon");
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference("Mon");
 
 
     private void setEvent() {
@@ -78,6 +78,7 @@ public class QuanLyMon extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         imgMon.setLayoutManager(layoutManager);
+
         getDataMon();
 
 // actionBar
@@ -89,15 +90,12 @@ public class QuanLyMon extends AppCompatActivity {
             }
         });
         actionBar.setActionBarName("MonAn");
-
+// spiner
         loaiMonArrayList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<LoaiMon>(this, android.R.layout.simple_spinner_item, loaiMonArrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spMon.setAdapter(arrayAdapter);
         getDataLoaiMon();
-
-
-
 
 
 
@@ -172,6 +170,9 @@ public class QuanLyMon extends AppCompatActivity {
             }
         });
     }
+    //Hàm lọc theo tên
+
+
 
     private void setControl() {
         imgMon = findViewById(R.id.imgMon);

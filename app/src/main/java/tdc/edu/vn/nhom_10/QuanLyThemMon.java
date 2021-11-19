@@ -6,7 +6,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +40,7 @@ import java.util.List;
 
 import gun0912.tedbottompicker.TedBottomPicker;
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.MinMaxFilter;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
 import tdc.edu.vn.nhom_10.model.MonAn;
 
@@ -49,7 +52,7 @@ public class QuanLyThemMon extends AppCompatActivity {
     ImageView imgHinh;
     CustomActionBar actionBar;
     DatabaseReference databaseReference;
-
+    int viTriLoai= 0;
     ArrayList<LoaiMon> loaiMonArrayList;
     ArrayAdapter arrayAdapter;
 
@@ -78,6 +81,18 @@ public class QuanLyThemMon extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<LoaiMon>(this, android.R.layout.simple_spinner_item, loaiMonArrayList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spMon.setAdapter(arrayAdapter);
+        spMon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                viTriLoai = position;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         actionBar.setActionBarName("MonAn");
 
 
@@ -92,7 +107,8 @@ public class QuanLyThemMon extends AppCompatActivity {
                 MonAn monAn = new MonAn();
                 monAn.setTenMon(edtTenMon.getText().toString().trim());
                 monAn.setGia(Integer.parseInt(edtGia.getText().toString()));
-                monAn.setLoaiMon(spMon.getSelectedItem().toString());
+
+                monAn.setLoaiMon(loaiMonArrayList.get(viTriLoai).getMaLoaiMon());
                 monAn.setMoTa(edtMoTa.getText().toString());
 
                 String mamon = databaseReference.child("Mon").push().getKey();
@@ -102,8 +118,8 @@ public class QuanLyThemMon extends AppCompatActivity {
                 databaseReference.child("Mon").push();
 
                 // Them hinh Anh
-                Calendar calendar = Calendar.getInstance();
-                StorageReference mountainsRef = storageRef.child(calendar.getTimeInMillis() + ".png");
+
+                StorageReference mountainsRef = storageRef.child( mamon + ".png");
                 imgHinh.setDrawingCacheEnabled(true);
                 imgHinh.buildDrawingCache();
                 Bitmap bitmap = ((BitmapDrawable) imgHinh.getDrawable()).getBitmap();
@@ -128,7 +144,7 @@ public class QuanLyThemMon extends AppCompatActivity {
                         edtTenMon.getText().clear();
                         edtGia.getText().clear();
                         edtMoTa.getText().clear();
-                        spMon.setAdapter(null);
+
                         imgHinh.invalidate();
                         imgHinh.setImageBitmap(null);
 
@@ -144,6 +160,9 @@ public class QuanLyThemMon extends AppCompatActivity {
                 requestPermission();
             }
         });
+
+// gioi han gia tri nhap
+        edtGia.setFilters(new InputFilter[]{new MinMaxFilter(1, Integer.MAX_VALUE)});
 
 
     }
@@ -186,9 +205,6 @@ public class QuanLyThemMon extends AppCompatActivity {
 
     // lay du lieu tu loai mon
     private void getDataLoaiMon() {
-        LoaiMon tatCa = new LoaiMon("Tất cả");
-        tatCa.setMaLoaiMon("");
-        loaiMonArrayList.add(tatCa);
         databaseReference.child("LoaiMon").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

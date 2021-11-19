@@ -60,6 +60,7 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHol
     @Override
     public void onBindViewHolder(@NonNull MonAnViewHolder holder, int position) {
         MonAn monAn = monAnArrayList.get(position);
+
         getAnhMon(monAn.getAnh(), holder.imgMon);
 
         holder.tvTenMon.setText(monAn.getTenMon());
