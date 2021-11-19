@@ -60,6 +60,8 @@ public class ThemXuatKho extends AppCompatActivity {
     String Ngay;
     NguyenLieu nguyenLieu;
     DatabaseReference mData;
+    String hoTen;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +104,7 @@ public class ThemXuatKho extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mData = FirebaseDatabase.getInstance().getReference();
-                String HoTen = tvTen.getText().toString().trim();
+                String HoTen = tvHoTen.getText().toString().trim();
                 String Email = tvEmail.getText().toString().trim();
                 String Ten = tvTen.getText().toString().trim();
                 int SoLuong = Integer.parseInt(edtSoLuong.getText().toString().trim());
@@ -141,8 +143,7 @@ public class ThemXuatKho extends AppCompatActivity {
 
     //Hàm lấy dữ liệu từ màn hình RV
     private void getDataNguyenLieu(String MaNguyenLieu) {
-        mData = FirebaseDatabase.getInstance().getReference("NguyenLieu");
-        mData.child(MaNguyenLieu).addValueEventListener(new ValueEventListener() {
+        mData.child("NguyenLieu").child(MaNguyenLieu).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 NguyenLieu nNguyenLieu = snapshot.getValue(NguyenLieu.class);
@@ -172,7 +173,8 @@ public class ThemXuatKho extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
-                tvHoTen.setText("Họ tên: " + value);
+                hoTen = value;
+                tvHoTen.setText("Họ tên: " + hoTen);
             }
 
             @Override
@@ -185,7 +187,8 @@ public class ThemXuatKho extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
-                tvEmail.setText("Email: " + value);
+                email = value;
+                tvEmail.setText("Email: " + email);
             }
 
             @Override

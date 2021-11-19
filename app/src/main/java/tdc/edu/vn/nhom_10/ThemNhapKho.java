@@ -59,6 +59,8 @@ public class ThemNhapKho extends AppCompatActivity {
     String Ngay;
     NguyenLieu nguyenLieu;
     DatabaseReference mData;
+    String hoTen;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +89,6 @@ public class ThemNhapKho extends AppCompatActivity {
             String MaNguyenLieu = bundle.getString("MaNL", "");
             getDataNguyenLieu(MaNguyenLieu);
         }
-        //Gọi hàm NV
-
         //Tạo ngày, tháng, năm sinh
         final Context context = this;
         Calendar calendar = Calendar.getInstance();
@@ -97,12 +97,15 @@ public class ThemNhapKho extends AppCompatActivity {
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
         Ngay = day + "/" + (month + 1) + "/" + year;
         tvNgay.setText("Ngày: " + Ngay);
+        //Gọi hàm NV
+        getNhanVien();
+        //
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mData = FirebaseDatabase.getInstance().getReference();
-                String HoTen = tvTen.getText().toString().trim();
-                String Email = tvEmail.getText().toString().trim();
+                String HoTen = hoTen;
+                String Email = email;
                 String Ten = tvTen.getText().toString().trim();
                 int SoLuong = Integer.parseInt(edtSoLuong.getText().toString().trim());
                 String maNhapKho = mData.push().getKey();
@@ -140,14 +143,12 @@ public class ThemNhapKho extends AppCompatActivity {
 
     //Hàm lấy dữ liệu từ màn hình RV
     private void getDataNguyenLieu(String MaNguyenLieu) {
-        mData = FirebaseDatabase.getInstance().getReference("NguyenLieu");
-        mData.child(MaNguyenLieu).addValueEventListener(new ValueEventListener() {
+        mData.child("NguyenLieu").child(MaNguyenLieu).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 NguyenLieu nNguyenLieu = snapshot.getValue(NguyenLieu.class);
                 if (nNguyenLieu != null) {
                     nguyenLieu = nNguyenLieu;
-                    getNhanVien();
                     tvTen.setText(nguyenLieu.getTenNL());
                     tvDonVi.setText("Đơn vị: " + nguyenLieu.getDonVi());
                     NumberFormat formatter = new DecimalFormat("#,###,###");
@@ -172,7 +173,8 @@ public class ThemNhapKho extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
-                tvHoTen.setText("Họ tên: " + value);
+                hoTen = value;
+                tvHoTen.setText("Họ tên: " + hoTen);
             }
 
             @Override
@@ -185,7 +187,8 @@ public class ThemNhapKho extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
-                tvEmail.setText("Email: " + value);
+                email = value;
+                tvEmail.setText("Email: " + email);
             }
 
             @Override

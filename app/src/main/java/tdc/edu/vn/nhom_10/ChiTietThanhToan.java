@@ -127,8 +127,8 @@ public class ChiTietThanhToan extends AppCompatActivity {
                     hoaDon.setDonHang(donHang);
                     hoaDon.setNgayThang(day + "/" + (month + 1) + "/" + year);
                     hoaDon.setTong(tong);
-                    hoaDon.setEmail(tvEmail.getText().toString());
-                    hoaDon.setHoTen(tvHoTen.getText().toString());
+                    hoaDon.setEmail(email);
+                    hoaDon.setHoTen(hoTen);
 
                     myRef.child(maHoaDon).setValue(hoaDon).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
