@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class NhapKho {
     NguyenLieu nguyenLieu;
+    String hoTen;
+    String email;
     String maNhapKho;
     String tenNhapKho;
     String ngayNhapKho;
@@ -16,6 +18,10 @@ public class NhapKho {
 
     public NhapKho(NguyenLieu nguyenLieu, String maNhapKho, String tenNhapKho, String ngayNhapKho, int soLuong, String donVi) {
         this.nguyenLieu = nguyenLieu;
+    public NhapKho(NguyenLieu nguyenLieu, String hoTen, String email, String maNhapKho, String tenNhapKho, String ngayNhapKho, int soLuong, String donVi) {
+        this.nguyenLieu = nguyenLieu;
+        this.hoTen = hoTen;
+        this.email = email;
         this.maNhapKho = maNhapKho;
         this.tenNhapKho = tenNhapKho;
         this.ngayNhapKho = ngayNhapKho;
@@ -29,6 +35,22 @@ public class NhapKho {
 
     public void setNguyenLieu(NguyenLieu nguyenLieu) {
         this.nguyenLieu = nguyenLieu;
+    }
+
+    public String getHoTen() {
+        return hoTen;
+    }
+
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMaNhapKho() {
@@ -74,6 +96,8 @@ public class NhapKho {
     public Map<String, Object> toMap(){
         HashMap<String,Object> result = new HashMap<>();
         result.put("nguyenLieu",nguyenLieu);
+        result.put("hoTen",hoTen);
+        result.put("email",email);
         result.put("maNhapKho",maNhapKho);
         result.put("tenNhapKho",tenNhapKho);
         result.put("ngayNhapKho",ngayNhapKho);

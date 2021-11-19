@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing1">
+
+        <TextView
+            android:id="@+id/tvTen"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/spacing1"
+            android:layout_weight="5"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:text="cafe"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize" />
+
+        <TextView
+            android:id="@+id/tvSoLuong"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/spacing1"
+            android:layout_weight="5"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:text="Số lương"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize" />
+
+        <TextView
+            android:id="@+id/tvNgay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/spacing1"
+            android:layout_weight="4"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:text="Ngày"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize" />
+    </TableRow>
+
+
+</LinearLayout>

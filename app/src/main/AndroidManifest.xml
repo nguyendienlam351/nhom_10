@@ -39,6 +39,30 @@
             android:name=".KiemKeKho"
             android:exported="false" />
         <activity
+            android:name=".ChiTietXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".ThemXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachNguyenLieuXuat"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachNguyenLieuNhap"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietNhapKho"
+            android:exported="false" />
+        <activity
+            android:name=".ThemNhapKho"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachNhapKho"
+            android:exported="false" />
+        <activity
             android:name=".QuanLyLoaiMon"
             android:exported="false" />
         <activity

@@ -1,5 +1,8 @@
 package tdc.edu.vn.nhom_10.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class NguyenLieu {
     String maNL;
     String tenNL;
@@ -66,5 +69,16 @@ public class NguyenLieu {
 
     public void setGia(int gia) {
         this.gia = gia;
+    }
+
+    public Map<String, Object> toMap(){
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("maNL",maNL);
+        result.put("tenNL",tenNL);
+        result.put("moTa",moTa);
+        result.put("donVi",donVi);
+        result.put("gia",gia);
+        result.put("soLuong",soLuong);
+        return result;
     }
 }
