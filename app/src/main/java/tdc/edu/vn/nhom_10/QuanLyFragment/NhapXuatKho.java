@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import tdc.edu.vn.nhom_10.DanhSachNguyenLieu;
+import tdc.edu.vn.nhom_10.DanhSachNhapKho;
+import tdc.edu.vn.nhom_10.DanhSachXuatKho;
 import tdc.edu.vn.nhom_10.KiemKeKho;
 import tdc.edu.vn.nhom_10.QuanLyBan;
 import tdc.edu.vn.nhom_10.R;
@@ -40,14 +42,14 @@ public class NhapXuatKho extends Fragment {
         btnXuatKho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), XuatKho.class);
+                Intent intent = new Intent(getActivity(), DanhSachXuatKho.class);
                 startActivity(intent);
             }
         });
         btnNhapKho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NhapKho.class);
+                Intent intent = new Intent(getActivity(), DanhSachNhapKho.class);
                 startActivity(intent);
             }
         });
