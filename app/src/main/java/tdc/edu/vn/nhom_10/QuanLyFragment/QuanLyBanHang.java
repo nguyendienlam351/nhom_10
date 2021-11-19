@@ -16,9 +16,11 @@ import tdc.edu.vn.nhom_10.QuanLyLoaiMon;
 import tdc.edu.vn.nhom_10.QuanLyMaGiamGia;
 import tdc.edu.vn.nhom_10.QuanLyNhanVien;
 import tdc.edu.vn.nhom_10.R;
+import tdc.edu.vn.nhom_10.XemHoaDon;
 
 public class QuanLyBanHang extends Fragment {
     Button btnMaGiamGia;
+    Button btnHoaDon;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,9 +37,17 @@ public class QuanLyBanHang extends Fragment {
                 startActivity(intent);
             }
         });
+        btnHoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), XemHoaDon.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setControl(View view){
         btnMaGiamGia = view.findViewById(R.id.btnMaGiamGia);
+        btnHoaDon = view.findViewById(R.id.btnHoaDon);
     }
 }
