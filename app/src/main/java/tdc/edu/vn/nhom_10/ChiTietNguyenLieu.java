@@ -1,8 +1,10 @@
 package tdc.edu.vn.nhom_10;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -55,37 +57,13 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myref.child(maNL).removeValue();
+                Xoa(maNL);
             }
         });
         btnThayDoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myref.orderByChild("tenNL").equalTo(edTenNL.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            edTenNL.setError("Tên nguyên liệu đã tồn tại");
-                        }else{
-                            if (kiemtratrong()){
-                                nguyenLieu.setMaNL(maNL);
-                                nguyenLieu.setGia(Integer.parseInt(edGia.getText().toString()));
-                                nguyenLieu.setMoTa(edMoTa.getText().toString());
-                                nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
-                                nguyenLieu.setTenNL(edTenNL.getText().toString());
-                                myref.child(maNL).setValue(nguyenLieu);
-                                Intent intent2 = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
-                                startActivity(intent2);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
+                ThayDoi(maNL);
             }
         });
     }
@@ -116,6 +94,66 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
 
             }
         });
+    }
+    private void Xoa(String maNL){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Thay đổi");
+        alertDialog.setMessage("Bạn có muốn xóa không ? ");
+        alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myref.child(maNL).removeValue();
+                finish();
+            }
+        });
+        alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog.show();
+    }
+    private void ThayDoi(String maNL){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Thay đổi");
+        alertDialog.setMessage("Bạn có muốn thay đổi không ? ");
+        alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myref.orderByChild("tenNL").equalTo(edTenNL.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            edTenNL.setError("Tên nguyên liệu đã tồn tại");
+                        }else{
+                            if (kiemtratrong()){
+                                nguyenLieu.setMaNL(maNL);
+                                nguyenLieu.setGia(Integer.parseInt(edGia.getText().toString()));
+                                nguyenLieu.setMoTa(edMoTa.getText().toString());
+                                nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
+                                nguyenLieu.setTenNL(edTenNL.getText().toString());
+                                myref.child(maNL).setValue(nguyenLieu);
+                                Intent intent2 = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
+                                startActivity(intent2);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+        alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog.show();
     }
 
     private void setControl() {
