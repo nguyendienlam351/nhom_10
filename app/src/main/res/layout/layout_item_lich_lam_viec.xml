@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing1">
+
+        <TextView
+            android:id="@+id/tvthuNgay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="T2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize" />
+
+        <ImageView
+            android:id="@+id/imvcaA"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center_horizontal"
+            android:background="@color/white"
+            android:src="@drawable/dautich" />
+
+        <ImageView
+            android:id="@+id/imvcaB"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@color/white"
+            android:src="@drawable/dautich"
+            android:gravity="center_horizontal" />
+
+        <ImageView
+            android:id="@+id/imvcaC"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="5"
+            android:background="@color/white"
+            android:src="@drawable/dautich"
+            android:gravity="center_horizontal" />
+    </TableRow>
+
+
+</LinearLayout>

@@ -118,6 +118,9 @@
             android:exported="false" />
         <activity
             android:name=".DangNhap"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLiLichLamViec"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
