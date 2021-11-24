@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.R;
 import tdc.edu.vn.nhom_10.model.CaLamViec;
+import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class QuanLiLichLamViecAdapter extends RecyclerView.Adapter<QuanLiLichLamViecAdapter.MyViewHolder>{
     private Activity context;
@@ -66,6 +67,15 @@ public class QuanLiLichLamViecAdapter extends RecyclerView.Adapter<QuanLiLichLam
                 delegation.getCaC(caLamViec);
             }
         });
+        if(caLamViec.getCaA().size() == 0){
+            holder.imvCaA.setImageDrawable(null);
+        }
+        if(caLamViec.getCaB().size() == 0){
+            holder.imvcaB.setImageDrawable(null);
+        }
+        if(caLamViec.getCaC().size() == 0){
+            holder.imvcaC.setImageDrawable(null);
+        }
     }
     @Override
     public int getItemViewType(int position) {
