@@ -24,7 +24,7 @@ import tdc.edu.vn.nhom_10.model.NguyenLieu;
 
 public class ChiTietNguyenLieu extends AppCompatActivity {
 
-    EditText edTenNL,edGia,edMoTa;
+    EditText edTenNL, edGia, edMoTa;
     Spinner spDonVi;
     Button btnXoa, btnThayDoi;
     NguyenLieu nguyenLieu = new NguyenLieu();
@@ -43,7 +43,7 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                Intent intent1 = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
+                Intent intent1 = new Intent(getApplicationContext(), DanhSachNguyenLieu.class);
                 startActivity(intent1);
             }
         });
@@ -74,17 +74,17 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 nguyenLieu = snapshot.getValue(NguyenLieu.class);
-                if(nguyenLieu != null){
+                if (nguyenLieu != null) {
                     edTenNL.setText(nguyenLieu.getTenNL());
                     edGia.setText(String.valueOf(nguyenLieu.getGia()));
                     edMoTa.setText(nguyenLieu.getMoTa());
-                    if(nguyenLieu.getDonVi().compareTo("Kg") == 0){
+                    if (nguyenLieu.getDonVi().compareTo("Kg") == 0) {
                         spDonVi.setSelection(0);
-                    }else{
+                    } else {
                         spDonVi.setSelection(1);
                     }
-                }else{
-                    Intent intent1 = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
+                } else {
+                    Intent intent1 = new Intent(getApplicationContext(), DanhSachNguyenLieu.class);
                     startActivity(intent1);
                 }
             }
@@ -95,7 +95,8 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
             }
         });
     }
-    private void Xoa(String maNL){
+
+    private void Xoa(String maNL) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Thay đổi");
         alertDialog.setMessage("Bạn có muốn xóa không ? ");
@@ -114,37 +115,25 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
         });
         alertDialog.show();
     }
-    private void ThayDoi(String maNL){
+
+    private void ThayDoi(String maNL) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Thay đổi");
         alertDialog.setMessage("Bạn có muốn thay đổi không ? ");
         alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                myref.orderByChild("tenNL").equalTo(edTenNL.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            edTenNL.setError("Tên nguyên liệu đã tồn tại");
-                        }else{
-                            if (kiemtratrong()){
-                                nguyenLieu.setMaNL(maNL);
-                                nguyenLieu.setGia(Integer.parseInt(edGia.getText().toString()));
-                                nguyenLieu.setMoTa(edMoTa.getText().toString());
-                                nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
-                                nguyenLieu.setTenNL(edTenNL.getText().toString());
-                                myref.child(maNL).setValue(nguyenLieu);
-                                Intent intent2 = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
-                                startActivity(intent2);
-                            }
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                if (kiemtratrong()) {
+                    nguyenLieu.setMaNL(maNL);
+                    nguyenLieu.setGia(Integer.parseInt(edGia.getText().toString()));
+                    nguyenLieu.setMoTa(edMoTa.getText().toString());
+                    nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
+                    nguyenLieu.setTenNL(edTenNL.getText().toString());
+                    myref.child(maNL).setValue(nguyenLieu);
+                    Intent intent2 = new Intent(getApplicationContext(), DanhSachNguyenLieu.class);
+                    startActivity(intent2);
+                }
             }
         });
         alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -165,17 +154,18 @@ public class ChiTietNguyenLieu extends AppCompatActivity {
         btnThayDoi = findViewById(R.id.btnThayDoi);
         actionBar = findViewById(R.id.actionBar);
     }
-    private boolean kiemtratrong (){
+
+    private boolean kiemtratrong() {
         boolean kiemtra = true;
-        if (edTenNL.getText().toString().trim().length() == 0){
+        if (edTenNL.getText().toString().trim().length() == 0) {
             edTenNL.setError("Nhập tên nguyên liệu !");
             kiemtra = false;
         }
-        if (edMoTa.getText().toString().trim().length() == 0){
+        if (edMoTa.getText().toString().trim().length() == 0) {
             edMoTa.setError("Nhập mô tả nguyên liệu !");
             kiemtra = false;
         }
-        if (edGia.getText().toString().trim().length() == 0){
+        if (edGia.getText().toString().trim().length() == 0) {
             edGia.setError("Nhập giá nguyên liệu !");
             kiemtra = false;
         }
