@@ -3,29 +3,24 @@ package tdc.edu.vn.nhom_10.model;
 import java.util.ArrayList;
 
 public class CaLamViec {
-    String maLichLamViec;
+    String maNgayLamViec;
     String thuNgay;
     ArrayList<NhanVien> caA = new ArrayList<>();
     ArrayList<NhanVien> caB = new ArrayList<>();
     ArrayList<NhanVien> caC = new ArrayList<>();
-    NhanVien nhanVien;
 
-    public CaLamViec(){};
-
-    public NhanVien getNhanVien() {
-        return nhanVien;
+    public CaLamViec(String thuNgay){
+        this.thuNgay=thuNgay;
     }
 
-    public void setNhanVien(NhanVien nhanVien) {
-        this.nhanVien = nhanVien;
+    public CaLamViec(){}
+
+    public String getMaNgayLamViec() {
+        return maNgayLamViec;
     }
 
-    public String getMaLichLamViec() {
-        return maLichLamViec;
-    }
-
-    public void setMaLichLamViec(String maLichLamViec) {
-        this.maLichLamViec = maLichLamViec;
+    public void setMaNgayLamViec(String maNgayLamViec) {
+        this.maNgayLamViec = maNgayLamViec;
     }
 
     public String getThuNgay() {

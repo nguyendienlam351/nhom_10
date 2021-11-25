@@ -1,5 +1,6 @@
 package tdc.edu.vn.nhom_10.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ public class QuanLiLichLamViecAdapter extends RecyclerView.Adapter<QuanLiLichLam
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView")int position) {
         CaLamViec caLamViec = lichLamViecArrayList.get(position);
         if(caLamViec==null){
             return;
@@ -52,29 +53,38 @@ public class QuanLiLichLamViecAdapter extends RecyclerView.Adapter<QuanLiLichLam
         holder.imvCaA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                delegation.getCaA(caLamViec);
+                delegation.getCaA(caLamViec,position);
             }
         });
         holder.imvcaB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                delegation.getCaB(caLamViec);
+                delegation.getCaB(caLamViec,position);
             }
         });
         holder.imvcaC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                delegation.getCaC(caLamViec);
+                delegation.getCaC(caLamViec,position);
             }
         });
         if(caLamViec.getCaA().size() == 0){
             holder.imvCaA.setImageDrawable(null);
         }
+        else {
+            holder.imvCaA.setImageResource(R.drawable.dautich);
+        }
         if(caLamViec.getCaB().size() == 0){
             holder.imvcaB.setImageDrawable(null);
         }
+        else {
+            holder.imvcaB.setImageResource(R.drawable.dautich);
+        }
         if(caLamViec.getCaC().size() == 0){
             holder.imvcaC.setImageDrawable(null);
+        }
+        else {
+            holder.imvcaC.setImageResource(R.drawable.dautich);
         }
     }
     @Override
@@ -99,8 +109,8 @@ public class QuanLiLichLamViecAdapter extends RecyclerView.Adapter<QuanLiLichLam
 
     }
     public interface MyItemClickListener{
-        void getCaA(CaLamViec caLamViec);
-        void getCaB(CaLamViec caLamViec);
-        void getCaC(CaLamViec caLamViec);
+        void getCaA(CaLamViec caLamViec,int position);
+        void getCaB(CaLamViec caLamViec,int position);
+        void getCaC(CaLamViec caLamViec,int position);
     }
 }
