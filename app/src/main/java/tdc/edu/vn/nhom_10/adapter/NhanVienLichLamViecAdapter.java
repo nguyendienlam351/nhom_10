@@ -24,9 +24,7 @@ public class NhanVienLichLamViecAdapter extends RecyclerView.Adapter<NhanVienLic
     Activity conText;
     int layoutID;
     ArrayList<NhanVien> datanhanVien;
-
     private MyItemClickListener delegation;
-
     public void setDelegation(MyItemClickListener delegation) {
         this.delegation = delegation;
     }
@@ -55,13 +53,6 @@ public class NhanVienLichLamViecAdapter extends RecyclerView.Adapter<NhanVienLic
             @Override
             public void onClick(View v) {
                 delegation.getThemNV(nhanVien);
-                //Chuyển màn hình
-//                Intent intent = new Intent(conText.getApplicationContext(), ChiTietLichLamViec.class);
-//                Bundle bundle = new Bundle();
-//
-//                bundle.putString("MaNV", nhanVien.getMaNV());
-//                intent.putExtras(bundle);
-//                conText.startActivity(intent);
             }
         });
     }

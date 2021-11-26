@@ -45,7 +45,7 @@ public class QuanLyNhanVienLichLamViec extends AppCompatActivity {
     CustomActionBar actionBar;
     TuanLamViec tuanLamViec;
     int viTri = 0;
-    String maTuan,ca;
+    String maTuan,ca,tuan;
     int maThu;
 
     @Override
@@ -65,6 +65,7 @@ public class QuanLyNhanVienLichLamViec extends AppCompatActivity {
 
         if (bundle != null) {
             maTuan = bundle.getString("maTuan", "");
+            tuan = bundle.getString("tuan","");
             maThu=bundle.getInt("maThu",0);
             ca = bundle.getString("ca", "");
             getData(maTuan,maThu,ca);
@@ -96,17 +97,31 @@ public class QuanLyNhanVienLichLamViec extends AppCompatActivity {
         adapter.setDelegation(new NhanVienLichLamViecAdapter.MyItemClickListener() {
              @Override
               public void getThemNV(NhanVien nhanVien) {
-                 if(kiemTra(nhanVien.getMaNV())){
-                     Toast.makeText(QuanLyNhanVienLichLamViec.this, "Nhân viên bị trùng", Toast.LENGTH_SHORT).show();
+                 if(maTuan.equals("")){
+                     maTuan=mData.push().getKey();
+                     tuanLamViec.setMaTuanLamViec(maTuan);
+                     tuanLamViec.setTuanLamViec(tuan);
+                     mData.child("LichLamViec").child(tuanLamViec.getMaTuanLamViec()).setValue(tuanLamViec);
+
+                     caLamViec.add(0,nhanVien);
+                     mData.child("LichLamViec").child(tuanLamViec.getMaTuanLamViec()).child("caLamViec")
+                             .child(String.valueOf(maThu)).child(ca).setValue(caLamViec);
                  }
                  else {
-                     caLamViec.add(0,nhanVien);
-                     mData.child("LichLamViec").child(maTuan).child("caLamViec")
-                             .child(String.valueOf(maThu)).child(ca).setValue(caLamViec);
+                     if (kiemTra(nhanVien.getMaNV())) {
+                         Toast.makeText(QuanLyNhanVienLichLamViec.this, "Nhân viên bị trùng", Toast.LENGTH_SHORT).show();
+                         return;
+                     }
+                     else {
+                         caLamViec.add(0,nhanVien);
+                         mData.child("LichLamViec").child(maTuan).child("caLamViec")
+                                 .child(String.valueOf(maThu)).child(ca).setValue(caLamViec);
+                     }
                  }
                  Intent intent = new Intent(getApplicationContext(), ChiTietLichLamViec.class);
                  Bundle bundle = new Bundle();
                  bundle.putString("maTuan",maTuan);
+                 bundle.putString("tuan",tuan);
                  bundle.putInt("maThu", maThu);
                  bundle.putString("ca",ca);
                  intent.putExtras(bundle);

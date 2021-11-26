@@ -106,7 +106,7 @@
         <entry key="..\:/nhom_10/app/src/main/res/layout/activity_chi_tiet_lich_lam_viec.xml" value="0.22" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/activity_chi_tiet_nhan_vien.xml" value="0.20416666666666666" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/activity_kiem_ke_kho.xml" value="0.22" />
-        <entry key="..\:/nhom_10/app/src/main/res/layout/activity_quan_li_lich_lam_viec.xml" value="0.10597826086956522" />
+        <entry key="..\:/nhom_10/app/src/main/res/layout/activity_quan_li_lich_lam_viec.xml" value="0.21" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/activity_quan_ly_ban.xml" value="0.20416666666666666" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/activity_quan_ly_loai_mon.xml" value="0.20416666666666666" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/activity_quan_ly_nhan_vien.xml" value="0.20416666666666666" />
@@ -115,6 +115,7 @@
         <entry key="..\:/nhom_10/app/src/main/res/layout/activity_xem_don_hang.xml" value="0.20416666666666666" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/activity_xem_hoa_don.xml" value="0.22" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/layout_dialog_chon_tg.xml" value="0.22" />
+        <entry key="..\:/nhom_10/app/src/main/res/layout/layout_item_ban_2.xml" value="0.20416666666666666" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/layout_item_chi_tiet_lich_lam_viec.xml" value="0.20416666666666666" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/layout_item_hoa_don.xml" value="0.20416666666666666" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/layout_item_kiem_ke_kho.xml" value="0.20416666666666666" />
