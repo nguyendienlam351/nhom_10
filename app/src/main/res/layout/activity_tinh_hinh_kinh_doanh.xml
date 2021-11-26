@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TinhHinhKinhDoanh">
+
+    <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout style="@style/layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/btnChonTG"
+                style="@style/button"
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#B8B8B8"
+                android:text="01/2021" />
+
+            <SearchView
+                android:id="@+id/svSearch"
+                style="@style/editText"
+                android:layout_weight="7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/spacing1"
+                android:layout_marginRight="@dimen/spacing1"
+                android:iconifiedByDefault="false"
+                android:queryBackground="@color/white"
+                android:queryHint="search"
+                android:submitBackground="@color/white" />
+
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black">
+
+            <TableRow android:weightSum="10">
+
+                <TextView
+                    style="@style/title"
+                    android:layout_width="0dp"
+                    android:layout_marginHorizontal="@dimen/spacing1"
+                    android:layout_marginTop="@dimen/spacing1"
+                    android:layout_marginBottom="@dimen/spacing1"
+                    android:layout_weight="6"
+                    android:background="#B8B8B8"
+                    android:gravity="center_horizontal"
+                    android:text="Tên món" />
+
+                <TextView
+                    style="@style/title"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/spacing1"
+                    android:layout_marginRight="@dimen/spacing1"
+                    android:layout_marginBottom="@dimen/spacing1"
+                    android:layout_weight="4"
+                    android:background="#B8B8B8"
+                    android:gravity="center_horizontal"
+                    android:text="Số lượng" />
+            </TableRow>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lvDanhSach"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableLayout>
+    </LinearLayout>
+
+</LinearLayout>
