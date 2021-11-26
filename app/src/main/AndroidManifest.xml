@@ -123,6 +123,9 @@
             android:name=".ChiTietLichLamViec"
             android:exported="false" />
         <activity
+            android:name=".QuanLyNhanVienLichLamViec"
+            android:exported="false" />
+        <activity
             android:name=".QuanLiLichLamViec"
             android:exported="true">
             <intent-filter>

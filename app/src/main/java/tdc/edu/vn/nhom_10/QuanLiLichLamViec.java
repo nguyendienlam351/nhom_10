@@ -140,7 +140,7 @@ public class QuanLiLichLamViec extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("maTuan", tuanLamViec.getMaTuanLamViec());
                 bundle.putInt("maThu", position);
-                bundle.putString("ca","ca A");
+                bundle.putString("ca","caA");
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -151,7 +151,7 @@ public class QuanLiLichLamViec extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("maTuan", tuanLamViec.getMaTuanLamViec());
                 bundle.putInt("maThu", position);
-                bundle.putString("ca","ca B");
+                bundle.putString("ca","caB");
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -162,7 +162,7 @@ public class QuanLiLichLamViec extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("maTuan", tuanLamViec.getMaTuanLamViec());
                 bundle.putInt("maThu", position);
-                bundle.putString("ca","ca C");
+                bundle.putString("ca","caC");
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
