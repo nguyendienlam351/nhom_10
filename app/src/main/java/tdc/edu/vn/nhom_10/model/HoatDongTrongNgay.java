@@ -8,7 +8,8 @@ public class HoatDongTrongNgay {
     public HoatDongTrongNgay() {
     }
 
-    public HoatDongTrongNgay(String ngay, String moTa) {
+    public HoatDongTrongNgay(String tenHD, String ngay, String moTa) {
+        this.tenHD = tenHD;
         this.ngay = ngay;
         this.moTa = moTa;
     }
