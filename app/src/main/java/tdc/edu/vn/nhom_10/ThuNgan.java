@@ -61,9 +61,12 @@ public class ThuNgan extends AppCompatActivity implements NavigationView.OnNavig
         if (bundle == null){
             replaceFragment(new ThanhToan());
         }else{
-            replaceFragment(new ThuChi());
-            CurrentFragment = Fragment_thuchi;
-            toolbar.setTitle(R.string.thuchi);
+            int ManHinh = bundle.getInt("manhinh", 0);
+            if (ManHinh == 1 || ManHinh == 2){
+                replaceFragment(new ThuChi());
+                CurrentFragment = Fragment_thuchi;
+                toolbar.setTitle(R.string.thuchi);
+            }
         }
         navigationView.getMenu().findItem(R.id.thanhtoan).setChecked(true);
     }

@@ -20,8 +20,10 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -43,6 +45,7 @@ import java.util.Date;
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.ThuNganFragment.ThanhToan;
 import tdc.edu.vn.nhom_10.adapter.ChiTietThanhToanAdapter;
+import tdc.edu.vn.nhom_10.model.ChiThu;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
 import tdc.edu.vn.nhom_10.model.HoaDon;
@@ -140,9 +143,24 @@ public class ChiTietThanhToan extends AppCompatActivity {
                             database.child("Ban").child(String.valueOf(donHang.getMaBan())).child("chiTietDonHang").removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    Intent intent = new Intent(ChiTietThanhToan.this, ThuNgan.class);
-                                    startActivity(intent);
-                                    Toast.makeText(ChiTietThanhToan.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
+                                    ChiThu chiThu = new ChiThu();
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ThuChi");
+                                    String maThuChi = reference.push().getKey();
+                                    chiThu.setMaThuChi(maThuChi);
+                                    chiThu.setNgayNhap(hoaDon.getNgayThang());
+                                    chiThu.setNguoiNhap(hoaDon.getHoTen());
+                                    chiThu.setLoaiThuChi("Thu");
+                                    chiThu.setLoai("Nhập tự động");
+                                    chiThu.setSoTien(hoaDon.getTong());
+                                    chiThu.setMoTa(donHang.getTenBan());
+                                    reference.child(maThuChi).setValue(chiThu).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Intent intent = new Intent(ChiTietThanhToan.this, ThuNgan.class);
+                                            startActivity(intent);
+                                            Toast.makeText(ChiTietThanhToan.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
                             });
                         }

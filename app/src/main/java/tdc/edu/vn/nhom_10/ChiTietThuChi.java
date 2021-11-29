@@ -96,7 +96,7 @@ public class ChiTietThuChi extends AppCompatActivity {
                 reference.child(maTC).setValue(chiThu);
                 Intent intent = new Intent(getApplicationContext(),ThuNgan.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("thuchi","thuchi");
+                bundle.putInt("manhinh",1);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -127,9 +127,20 @@ public class ChiTietThuChi extends AppCompatActivity {
                     }
                     edSoTien.setText(String.valueOf(chiThu.getSoTien()));
                     edMoTa.setText(chiThu.getMoTa());
+                    if(chiThu.getLoai().compareTo("Nhập thủ công") != 0){
+                        btnThayDoi.setEnabled(false);
+                        btnXoa.setEnabled(false);
+                        edMoTa.setEnabled(false);
+                        edSoTien.setEnabled(false);
+                        rdThu.setEnabled(false);
+                        rdChi.setEnabled(false);
+                    }
                 }
                 else {
                     Intent intent = new Intent(getApplicationContext(),ThuNgan.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("manhinh",2);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             }
@@ -139,6 +150,7 @@ public class ChiTietThuChi extends AppCompatActivity {
 
             }
         });
+
     }
     private void Xoa(String maTC){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -151,7 +163,7 @@ public class ChiTietThuChi extends AppCompatActivity {
                 reference.child(maTC).removeValue();
                 Intent intent = new Intent(getApplicationContext(),ThuNgan.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("xoa","xoa");
+                bundle.putInt("manhinh",2);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
