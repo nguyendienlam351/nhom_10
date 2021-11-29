@@ -49,7 +49,7 @@ public class ThemNguyenLieu extends AppCompatActivity {
                 finish();
             }
         });
-        actionBar.setActionBarName("Danh sách nguyên liệu");
+        actionBar.setActionBarName("Thêm nguyên liệu");
 
         myref = FirebaseDatabase.getInstance().getReference("NguyenLieu");
         edGiaNL.setFilters(new InputFilter[]{new MinMaxFilter(1, Integer.MAX_VALUE)});

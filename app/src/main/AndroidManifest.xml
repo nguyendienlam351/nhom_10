@@ -15,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
+            android:name=".ChiTietThuChi"
+            android:exported="false" />
+        <activity
+            android:name=".ThemMoiThuChi"
+            android:exported="false" />
+        <activity
             android:name=".ChiTietMaGiamGia"
             android:exported="false" />
         <activity

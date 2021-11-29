@@ -1,4 +1,4 @@
-package tdc.edu.vn.nhom_10.ThuNganFragment;
+package tdc.edu.vn.nhom_10;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

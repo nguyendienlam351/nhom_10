@@ -73,6 +73,11 @@
     <string name="ten_NL">Tên nguyên liệu</string>
     <string name="mota">Mô tả</string>
     <string name="kiemkekho">Kiểm kê kho</string>
+    <string name="ngaybatdau">Ngày bắt đầu : 01/01/2021</string>
+    <string name="thu">Thu</string>
+    <string name="chi">Chi</string>
+    <string name="sotien">Số tiền</string>
+    <string name="loai">Loại : </string>
     <array name="donvi">
         <item>Kg</item>
         <item>Lít</item>

@@ -27,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 import tdc.edu.vn.nhom_10.QuanLyFragment.BaoCao;
 import tdc.edu.vn.nhom_10.QuanLyFragment.NhapXuatKho;
 import tdc.edu.vn.nhom_10.QuanLyFragment.QuanLyBanHang;
-import tdc.edu.vn.nhom_10.QuanLyFragment.ThuChi;
 
 public class QuanLy extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
