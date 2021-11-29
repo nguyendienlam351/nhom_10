@@ -59,6 +59,14 @@ public class QuanLyNhanVienLichLamViec extends AppCompatActivity {
     }
 
     private void setEvent() {
+        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
+            @Override
+            public void backOnClick() {
+                Intent intent = new Intent(QuanLyNhanVienLichLamViec.this, ChiTietLichLamViec.class);
+                startActivity(intent);
+            }
+        });
+        actionBar.setActionBarName("Danh sách nhân viên");
         mData=FirebaseDatabase.getInstance().getReference();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();

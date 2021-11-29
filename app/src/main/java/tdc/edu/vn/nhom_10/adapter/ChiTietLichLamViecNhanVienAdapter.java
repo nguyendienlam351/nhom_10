@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,26 +25,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.R;
-import tdc.edu.vn.nhom_10.model.CaLamViec;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
-public class ChiTietLichLamViecAdapter extends RecyclerView.Adapter<ChiTietLichLamViecAdapter.MyViewHolder>{
+public class ChiTietLichLamViecNhanVienAdapter extends RecyclerView.Adapter<ChiTietLichLamViecNhanVienAdapter.MyViewHolder>{
     private Activity context;
     private int layoutID;
     private ArrayList<NhanVien> lichLamViecArrayList;
-    private MyItemClickListener delegation;
     private StorageReference storage;
-    boolean kiemTra = true;
 
-    public void setKiemTra(boolean kiemTra) {
-        this.kiemTra = kiemTra;
-    }
-
-    public void setDelegation(MyItemClickListener delegation) {
-        this.delegation = delegation;
-    }
-
-    public ChiTietLichLamViecAdapter(Activity context, int layoutID, ArrayList<NhanVien> lichLamViecArrayList){
+    public ChiTietLichLamViecNhanVienAdapter(Activity context, int layoutID, ArrayList<NhanVien> lichLamViecArrayList){
         this.context= context;
         this.layoutID=layoutID;
         this.lichLamViecArrayList=lichLamViecArrayList;
@@ -69,17 +57,6 @@ public class ChiTietLichLamViecAdapter extends RecyclerView.Adapter<ChiTietLichL
         holder.tvTenNV.setText(nhanVien.getHoTen());
         holder.tvSDT.setText(nhanVien.getSoDienThoai());
         holder.tvChucVu.setText(nhanVien.getChucVu());
-        if(kiemTra){
-            holder.imbXoa.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    delegation.getXoaNV(nhanVien);
-                }
-            });
-        }
-        else {
-            holder.imbXoa.setVisibility(View.INVISIBLE);
-        }
     }
     @Override
     public int getItemViewType(int position) {
@@ -117,18 +94,13 @@ public class ChiTietLichLamViecAdapter extends RecyclerView.Adapter<ChiTietLichL
     public static class  MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvTenNV,tvSDT,tvChucVu;
         ImageView imgAnhNV;
-        ImageButton imbXoa;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             tvTenNV = itemView.findViewById(R.id.tvTenNV);
             tvSDT = itemView.findViewById(R.id.tvSDT);
             tvChucVu = itemView.findViewById(R.id.tvChucVu);
             imgAnhNV = itemView.findViewById(R.id.imgAnhNV);
-            imbXoa = itemView.findViewById(R.id.imbXoa);
         }
 
-    }
-    public interface MyItemClickListener{
-        void getXoaNV(NhanVien nhanVien);
     }
 }

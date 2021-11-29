@@ -1,16 +1,10 @@
 package tdc.edu.vn.nhom_10;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-
 import android.os.Bundle;
-import android.view.View;
 
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,26 +17,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
-import tdc.edu.vn.nhom_10.adapter.ChiTietLichLamViecAdapter;
+import tdc.edu.vn.nhom_10.adapter.ChiTietLichLamViecNhanVienAdapter;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 import tdc.edu.vn.nhom_10.model.TuanLamViec;
 
-public class ChiTietLichLamViec extends AppCompatActivity {
+public class ChiTietLichLamViecNhanVien extends AppCompatActivity {
     RecyclerView lvCTLichLamViec;
     TextView tvTenNV,tvSDT,tvChucVu,tvCa,tvNgay;
-    ImageButton btnThem;
     ImageView imgAnhNV;
     TuanLamViec tuanLamViec;
     ArrayList<NhanVien>data = new ArrayList<>();
-    ChiTietLichLamViecAdapter myRecyclerViewAdapter;
+    ChiTietLichLamViecNhanVienAdapter myRecyclerViewAdapter;
     DatabaseReference database;
     Calendar calendar;
     String maTuan,ca,tuan;
@@ -52,7 +43,7 @@ public class ChiTietLichLamViec extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chi_tiet_lich_lam_viec);
+        setContentView(R.layout.activity_chi_tiet_lich_lam_viec_nhan_vien);
         setControl();
         setEvent();
     }
@@ -87,7 +78,7 @@ public class ChiTietLichLamViec extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                Intent intent = new Intent(ChiTietLichLamViec.this, QuanLiLichLamViec.class);
+                Intent intent = new Intent(ChiTietLichLamViecNhanVien.this, LichLamViec.class);
                 startActivity(intent);
             }
         });
@@ -95,13 +86,7 @@ public class ChiTietLichLamViec extends AppCompatActivity {
 
         SimpleDateFormat dinhDang = new SimpleDateFormat("dd/MM/yyyy");
         database = FirebaseDatabase.getInstance().getReference();
-        myRecyclerViewAdapter = new ChiTietLichLamViecAdapter(this,R.layout.layout_item_chi_tiet_lich_lam_viec,data);
-        myRecyclerViewAdapter.setDelegation(new ChiTietLichLamViecAdapter.MyItemClickListener() {
-            @Override
-            public void getXoaNV(NhanVien nhanVien) {
-                openDiaLogDeleteItem(nhanVien);
-            }
-        });
+        myRecyclerViewAdapter = new ChiTietLichLamViecNhanVienAdapter(this,R.layout.layout_item_chi_tiet_lich_lam_viec_nhan_vien,data);
 
         lvCTLichLamViec.setAdapter(myRecyclerViewAdapter);
 
@@ -131,62 +116,11 @@ public class ChiTietLichLamViec extends AppCompatActivity {
             }
             calendar.roll(calendar.DAY_OF_YEAR,maThu);
             tvNgay.setText(dinhDang.format(calendar.getTime()));
-
         }
-        Calendar tomorrowCalendar = Calendar.getInstance();
-        Date date2 = tomorrowCalendar.getTime();
-
-        if(calendar.getTime().compareTo(date2) < 0){
-            myRecyclerViewAdapter.setKiemTra(false);
-            btnThem.setVisibility(View.INVISIBLE);
-        }
-        else {
-            btnThem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ChiTietLichLamViec.this, QuanLyNhanVienLichLamViec.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("maTuan",maTuan);
-                    bundle.putString("tuan",tuan);
-                    bundle.putInt("maThu", maThu);
-                    bundle.putString("ca",ca);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
-        }
-
-    }
-    //Hàm xoá
-    private void openDiaLogDeleteItem(NhanVien nhanVien){
-        new AlertDialog.Builder(this)
-                .setTitle("Xoá")
-                .setMessage("Bạn có muốn xoá?")
-                .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int ViTri = -1;
-                        for(int i=0;i<data.size();i++){
-                            if(data.get(i).getMaNV().equals(nhanVien.getMaNV())){
-                                ViTri = i;
-                                break;
-                            }
-                        }
-                        if (ViTri != -1){
-                            data.remove(ViTri);
-                            database.child("LichLamViec").child(maTuan).child("caLamViec")
-                                    .child(String.valueOf(maThu)).child(ca).setValue(data);
-                        }
-                    }
-                })
-                .setNegativeButton("Từ chối",null)
-                .setCancelable(false)
-                .show();
     }
     private void setControl() {
         tvCa=findViewById(R.id.tvcaA);
         tvNgay=findViewById(R.id.tvNgay);
-        btnThem=findViewById(R.id.btnThem);
         tvTenNV=findViewById(R.id.tvTenNV);
         tvSDT=findViewById(R.id.tvSDT);
         tvChucVu=findViewById(R.id.tvChucVu);
