@@ -33,7 +33,7 @@
             android:name=".DanhSachNguyenLieu"
             android:exported="false" />
         <activity
-            android:name=".XemHoaDon"
+            android:name=".QuanLiLichLamViec"
             android:exported="false" />
         <activity
             android:name=".KiemKeKho"
@@ -129,7 +129,7 @@
             android:name=".ChiTietLichLamViecNhanVien"
             android:exported="false" />
         <activity
-            android:name=".QuanLiLichLamViec"
+            android:name=".XemHoaDon"
             android:exported="false" />
         <activity
             android:name=".LichLamViec"

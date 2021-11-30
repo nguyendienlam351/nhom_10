@@ -91,12 +91,6 @@ public class XemHoaDon extends AppCompatActivity {
 
         actionBar.setActionBarName("Hoá đơn");
         myRecyclerViewAdapter = new XemHoaDonAdapter(this,R.layout.layout_item_hoa_don,data);
-        myRecyclerViewAdapter.setDelegation(new XemHoaDonAdapter.MyItemClickListener() {
-            @Override
-            public void getDeleteHoaDon(HoaDon hoadon) {
-                openDiaLogDeleteItem(hoadon);
-            }
-        });
         lvHoaDon.setAdapter(myRecyclerViewAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -123,27 +117,8 @@ public class XemHoaDon extends AppCompatActivity {
                 filterList.add(hoaDon);
             }
         }
-
         myRecyclerViewAdapter.filterList(filterList);
     }
-    //Hàm xoá
-    private void openDiaLogDeleteItem(HoaDon hoaDon){
-        new AlertDialog.Builder(this)
-                .setTitle("Xoá")
-                .setMessage("Bạn có muốn xoá?")
-                .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        database= FirebaseDatabase.getInstance().getReference("HoaDon");
-                        database.child(String.valueOf(hoaDon.getMaHoaDon())).removeValue();
-                    }
-
-                })
-                .setNegativeButton("Từ chối",null)
-                .setCancelable(false)
-                .show();
-    }
-
     private void setControl() {
         svTimKiem=findViewById(R.id.svTimKiem);
         lvHoaDon=findViewById(R.id.lvHoaDon);

@@ -22,11 +22,6 @@ public class XemHoaDonAdapter extends RecyclerView.Adapter<XemHoaDonAdapter.MyVi
     private Activity context;
     private int layoutID;
     private ArrayList<HoaDon> hoaDonArrayList;
-    private XemHoaDonAdapter.MyItemClickListener delegation;
-
-    public void setDelegation(XemHoaDonAdapter.MyItemClickListener delegation) {
-        this.delegation = delegation;
-    }
 
     public XemHoaDonAdapter(Activity context, int layoutID, ArrayList<HoaDon> hoaDonArrayList){
         this.context= context;
@@ -58,12 +53,6 @@ public class XemHoaDonAdapter extends RecyclerView.Adapter<XemHoaDonAdapter.MyVi
         holder.tvHoTen.setText("Họ tên: "+hoaDon.getHoTen());
         holder.tvEmail.setText("Email: "+hoaDon.getEmail());
 
-        holder.imbDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                delegation.getDeleteHoaDon(hoaDon);
-            }
-        });
     }
     @Override
     public int getItemViewType(int position) {
@@ -76,20 +65,15 @@ public class XemHoaDonAdapter extends RecyclerView.Adapter<XemHoaDonAdapter.MyVi
 
     public static class  MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvBan,tvTong,tvNgay,tvHoTen,tvEmail;
-        ImageButton imbDelete;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             tvBan = itemView.findViewById(R.id.tvBan);
             tvTong = itemView.findViewById(R.id.tvTong);
             tvNgay = itemView.findViewById(R.id.tvNgayThang);
-            imbDelete=itemView.findViewById(R.id.imbXoa);
             tvHoTen=itemView.findViewById(R.id.tvHoTen);
             tvEmail=itemView.findViewById(R.id.tvEmail);
         }
 
-    }
-    public interface MyItemClickListener{
-        void getDeleteHoaDon(HoaDon hoaDon);
     }
 }
