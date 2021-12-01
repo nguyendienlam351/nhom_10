@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class HoatDongTrongNgayAdapter extends RecyclerView.Adapter<HoatDongTrong
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = conText.getLayoutInflater();
-        LinearLayout view = (LinearLayout) layoutInflater.inflate(viewType, parent, false);
+        CardView view = (CardView) layoutInflater.inflate(viewType, parent, false);
         return new MyViewHolder(view);
     }
 

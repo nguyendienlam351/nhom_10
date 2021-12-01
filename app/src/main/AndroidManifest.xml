@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
-            android:name=".DangNhap"
+            android:name=".ChiTietThanhToan"
             android:exported="false" />
         <activity
             android:name=".ChiTietMaGiamGia"
@@ -54,13 +54,13 @@
             android:name=".DanhSachNguyenLieuXuat"
             android:exported="false" />
         <activity
-            android:name=".DanhSachNguyenLieu"
+            android:name=".DSHoatDongTrongNgay"
             android:exported="false" />
         <activity
             android:name=".ChiTietNhapKho"
             android:exported="false" />
         <activity
-            android:name=".DSHoatDongTrongNgay"
+            android:name=".DangNhap"
             android:exported="false" />
         <activity
             android:name=".DanhSachNhapKho"
@@ -87,7 +87,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ChiTietThanhToan"
+            android:name=".DanhSachNguyenLieuNhap"
             android:exported="false" />
         <activity
             android:name=".DanhSachDonHang"
@@ -120,7 +120,7 @@
             android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
-            android:name=".DanhSachNguyenLieuNhap"
+            android:name=".DanhSachNguyenLieu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

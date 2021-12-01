@@ -50,6 +50,7 @@ public class NguyenLieuAdapter extends RecyclerView.Adapter<NguyenLieuAdapter.Ng
         holder.tvTenNL.setText(nguyenLieu.getTenNL());
         holder.tvGia.setText(String.valueOf(nguyenLieu.getGia()));
         holder.tvDonVi.setText(nguyenLieu.getDonVi());
+        holder.tvSoLuong.setText(String.valueOf(nguyenLieu.getSoLuong()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +80,14 @@ public class NguyenLieuAdapter extends RecyclerView.Adapter<NguyenLieuAdapter.Ng
         private TextView tvTenNL;
         private TextView tvDonVi;
         private TextView tvGia;
+        private TextView tvSoLuong;
 
         public NguyenLieuViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTenNL = itemView.findViewById(R.id.tvTenNL);
             tvDonVi = itemView.findViewById(R.id.tvDonVi);
             tvGia = itemView.findViewById(R.id.tvGia);
+            tvSoLuong = itemView.findViewById(R.id.tvSoLuong);
         }
     }
     public interface NguyenLieuItemClickListener{

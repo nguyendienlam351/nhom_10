@@ -73,6 +73,17 @@
                     android:background="#B8B8B8"
                     android:gravity="center_horizontal"
                     android:text="Đơn Vị" />
+
+                <TextView
+                    style="@style/title"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/spacing1"
+                    android:layout_marginRight="@dimen/spacing1"
+                    android:layout_marginBottom="@dimen/spacing1"
+                    android:layout_weight="4"
+                    android:background="#B8B8B8"
+                    android:gravity="center_horizontal"
+                    android:text="Số lượng" />
             </TableRow>
 
             <androidx.recyclerview.widget.RecyclerView
