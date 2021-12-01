@@ -33,7 +33,7 @@
             android:name=".DanhSachNguyenLieu"
             android:exported="false" />
         <activity
-            android:name=".QuanLiLichLamViec"
+            android:name=".XemHoaDon"
             android:exported="false" />
         <activity
             android:name=".KiemKeKho"
@@ -117,22 +117,22 @@
             android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
-            android:name=".DangNhap"
+            android:name=".QuanLyNhanVienLichLamViec"
             android:exported="false" />
         <activity
             android:name=".ChiTietLichLamViec"
             android:exported="false" />
         <activity
-            android:name=".QuanLyNhanVienLichLamViec"
+            android:name=".LichLamViecNhanVien"
             android:exported="false" />
         <activity
             android:name=".ChiTietLichLamViecNhanVien"
             android:exported="false" />
         <activity
-            android:name=".XemHoaDon"
+            android:name=".QuanLiLichLamViec"
             android:exported="false" />
         <activity
-            android:name=".LichLamViec"
+            android:name=".DangNhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

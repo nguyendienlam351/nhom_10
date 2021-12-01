@@ -78,8 +78,7 @@ public class ChiTietLichLamViecNhanVien extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                Intent intent = new Intent(ChiTietLichLamViecNhanVien.this, LichLamViec.class);
-                startActivity(intent);
+               finish();
             }
         });
         actionBar.setActionBarName("Chi tiết lịch làm việc");

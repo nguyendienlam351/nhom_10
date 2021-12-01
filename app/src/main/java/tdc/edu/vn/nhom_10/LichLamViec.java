@@ -2,13 +2,15 @@ package tdc.edu.vn.nhom_10;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +19,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,10 +27,9 @@ import java.util.Calendar;
 
 import tdc.edu.vn.nhom_10.adapter.QuanLiLichLamViecAdapter;
 import tdc.edu.vn.nhom_10.model.CaLamViec;
-import tdc.edu.vn.nhom_10.model.NhanVien;
 import tdc.edu.vn.nhom_10.model.TuanLamViec;
 
-public class LichLamViec extends AppCompatActivity {
+public class LichLamViec extends Fragment {
     RecyclerView lvLichLamViec;
     QuanLiLichLamViecAdapter myRecyclerViewAdapter;
     TuanLamViec tuanLamViec;
@@ -38,36 +38,14 @@ public class LichLamViec extends AppCompatActivity {
     ArrayList<CaLamViec> data= new ArrayList<>();
     DatabaseReference database;
     Calendar ngayBatDau, ngayKetThuc;
-
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quan_li_lich_lam_viec);
-        setControl();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_quan_li_lich_lam_viec_nhan_vien,container,false);
+        setControl(view);
         setEvent();
+        return view;
     }
-    //Lấy danh sách bàn trên RealTimeDatabase
-    private void getListBanFromRealTimeDatabase() {
-        database = FirebaseDatabase.getInstance().getReference("LichLamViec");
-        database.child("-MpMuYaqrHu3OK-yIamJ").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                TuanLamViec nTuanLamViec = snapshot.getValue(TuanLamViec.class);
-                if (nTuanLamViec != null) {
-                    tuanLamViec = nTuanLamViec;
-                    data.clear();
-                    data.addAll(tuanLamViec.getCaLamViec());
-                    myRecyclerViewAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
     private void setEvent() {
         database=FirebaseDatabase.getInstance().getReference();
         DateFormat dinhDang = new SimpleDateFormat("dd/MM/yyyy");
@@ -84,11 +62,11 @@ public class LichLamViec extends AppCompatActivity {
 
         tuanLamViec = new TuanLamViec();
         data.addAll(tuanLamViec.getCaLamViec());
-        myRecyclerViewAdapter = new QuanLiLichLamViecAdapter(this, R.layout.layout_item_lich_lam_viec, data);
+        myRecyclerViewAdapter = new QuanLiLichLamViecAdapter(getActivity(), R.layout.layout_item_lich_lam_viec, data);
         myRecyclerViewAdapter.setDelegation(new QuanLiLichLamViecAdapter.MyItemClickListener() {
             @Override
             public void getCaA(CaLamViec caLamViec, int position) {
-                Intent intent = new Intent(LichLamViec.this, ChiTietLichLamViecNhanVien.class);
+                Intent intent = new Intent(getActivity(), ChiTietLichLamViecNhanVien.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("maTuan", tuanLamViec.getMaTuanLamViec());
                 bundle.putString("tuan",tvNgayBatDau.getText().toString() + " - "+tvNgayKetThuc.getText().toString());
@@ -100,7 +78,7 @@ public class LichLamViec extends AppCompatActivity {
 
             @Override
             public void getCaB(CaLamViec caLamViec, int position) {
-                Intent intent = new Intent(LichLamViec.this, ChiTietLichLamViecNhanVien.class);
+                Intent intent = new Intent(getActivity(), ChiTietLichLamViecNhanVien.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("maTuan", tuanLamViec.getMaTuanLamViec());
                 bundle.putString("tuan",tvNgayBatDau.getText().toString() + " - "+tvNgayKetThuc.getText().toString());
@@ -112,7 +90,7 @@ public class LichLamViec extends AppCompatActivity {
 
             @Override
             public void getCaC(CaLamViec caLamViec, int position) {
-                Intent intent = new Intent(LichLamViec.this, ChiTietLichLamViecNhanVien.class);
+                Intent intent = new Intent(getActivity(), ChiTietLichLamViecNhanVien.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("maTuan", tuanLamViec.getMaTuanLamViec());
                 bundle.putString("tuan",tvNgayBatDau.getText().toString() + " - "+tvNgayKetThuc.getText().toString());
@@ -125,11 +103,11 @@ public class LichLamViec extends AppCompatActivity {
 
         lvLichLamViec.setAdapter(myRecyclerViewAdapter);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         lvLichLamViec.setLayoutManager(layoutManager);
         getLichLamViec(tvNgayBatDau.getText().toString() + " - "+tvNgayKetThuc.getText().toString());
-       // getListBanFromRealTimeDatabase();
+        // getListBanFromRealTimeDatabase();
 
         //Hàm nút Tăng
         btnTang.setOnClickListener(new View.OnClickListener() {
@@ -140,9 +118,9 @@ public class LichLamViec extends AppCompatActivity {
                 int year=ngayBatDau.get(Calendar.YEAR);
                 ngayBatDau.set(year,month,day +7);
 
-                 day=ngayKetThuc.get(Calendar.DAY_OF_MONTH);
-                 month=ngayKetThuc.get(Calendar.MONTH);
-                 year=ngayKetThuc.get(Calendar.YEAR);
+                day=ngayKetThuc.get(Calendar.DAY_OF_MONTH);
+                month=ngayKetThuc.get(Calendar.MONTH);
+                year=ngayKetThuc.get(Calendar.YEAR);
                 ngayKetThuc.set(year,month,day +7);
                 tvNgayBatDau.setText(dinhDang.format(ngayBatDau.getTime()));
                 tvNgayKetThuc.setText(dinhDang.format(ngayKetThuc.getTime()));
@@ -177,10 +155,10 @@ public class LichLamViec extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 tuanLamViecs[0] = snapshot.getValue(TuanLamViec.class);
-                    tuanLamViec = tuanLamViecs[0];
-                    data.clear();
-                    data.addAll(tuanLamViec.getCaLamViec());
-                    myRecyclerViewAdapter.notifyDataSetChanged();
+                tuanLamViec = tuanLamViecs[0];
+                data.clear();
+                data.addAll(tuanLamViec.getCaLamViec());
+                myRecyclerViewAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -209,11 +187,11 @@ public class LichLamViec extends AppCompatActivity {
             myRecyclerViewAdapter.notifyDataSetChanged();
         }
     }
-    private void setControl() {
-        lvLichLamViec = findViewById(R.id.lvLichLamViec);
-        tvNgayBatDau = findViewById(R.id.tvNgayBatDau);
-        tvNgayKetThuc = findViewById(R.id.tvNgayKetThuc);
-        btnGiam = findViewById(R.id.btnGiam);
-        btnTang = findViewById(R.id.btnTang);
+    private void setControl(View view) {
+        lvLichLamViec = view.findViewById(R.id.lvLichLamViec);
+        tvNgayBatDau = view.findViewById(R.id.tvNgayBatDau);
+        tvNgayKetThuc = view.findViewById(R.id.tvNgayKetThuc);
+        btnGiam = view.findViewById(R.id.btnGiam);
+        btnTang = view.findViewById(R.id.btnTang);
     }
 }
