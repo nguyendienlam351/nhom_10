@@ -143,6 +143,10 @@ public class ThuChi extends Fragment {
         int ngay = today.monthDay;
         int thang = today.month+1;
         int nam = today.year;
-        tvNgay.setText("Ngày bắt đầu : "+ngay+"/"+thang+"/"+nam);
+        if (ngay<10){
+            tvNgay.setText("Ngày bắt đầu : 0"+ngay+"/"+thang+"/"+nam);
+        }else{
+            tvNgay.setText("Ngày bắt đầu : "+ngay+"/"+thang+"/"+nam);
+        }
     }
 }

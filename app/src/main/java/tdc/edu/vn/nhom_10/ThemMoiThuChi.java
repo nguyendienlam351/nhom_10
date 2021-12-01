@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.model.ChiThu;
 import tdc.edu.vn.nhom_10.model.NhanVien;
@@ -122,7 +124,11 @@ public class ThemMoiThuChi extends AppCompatActivity {
         int ngay = today.monthDay;
         int thang = today.month+1;
         int nam = today.year;
-        tvDate.setText("Ngày nhập : "+ngay+"/"+thang+"/"+nam);
+        if (ngay<10){
+            tvDate.setText("Ngày nhập : 0"+ngay+"/"+thang+"/"+nam);
+        }else{
+            tvDate.setText("Ngày nhập : "+ngay+"/"+thang+"/"+nam);
+        }
     }
 
     private void setControl() {

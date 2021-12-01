@@ -24,7 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import tdc.edu.vn.nhom_10.QuanLyFragment.NhapXuatKho;
 import tdc.edu.vn.nhom_10.ThuNganFragment.ThanhToan;
 
 public class ThuNgan extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

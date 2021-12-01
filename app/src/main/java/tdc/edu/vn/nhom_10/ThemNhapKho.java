@@ -27,8 +27,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +49,7 @@ import java.util.List;
 
 import gun0912.tedbottompicker.TedBottomPicker;
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.model.ChiThu;
 import tdc.edu.vn.nhom_10.model.NguyenLieu;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 import tdc.edu.vn.nhom_10.model.NhapKho;
@@ -96,7 +99,12 @@ public class ThemNhapKho extends AppCompatActivity {
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
-        Ngay = day + "/" + (month + 1) + "/" + year;
+        if(day<10){
+            Ngay = "0"+day + "/" + (month + 1) + "/" + year;
+        }else{
+            Ngay = day + "/" + (month + 1) + "/" + year;
+        }
+
         tvNgay.setText("Ngày: " + Ngay);
         //Gọi hàm NV
         getNhanVien();
@@ -119,9 +127,26 @@ public class ThemNhapKho extends AppCompatActivity {
                                 .child("soLuong").setValue(SoLuong + nguyenLieu.getSoLuong()).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                //Chuyển màn hình
-                                Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
-                                startActivity(intent);
+                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ThuChi");
+                                ChiThu chiThu = new ChiThu();
+                                String maThuChi = reference.push().getKey();
+                                chiThu.setMaThuChi(maThuChi);
+                                chiThu.setLoaiThuChi("Chi");
+                                chiThu.setLoai("Nhập tự động");
+                                chiThu.setNgayNhap(Ngay);
+                                chiThu.setNguoiNhap(hoTen);
+                                chiThu.setMoTa("Nhập "+nguyenLieu.getTenNL());
+                                int tien = nguyenLieu.getGia() * nhapKho.getSoLuong();
+                                chiThu.setSoTien(tien);
+                                reference.child(maThuChi).setValue(chiThu).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        //Chuyển màn hình
+                                        Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
+                                        startActivity(intent);
+                                    }
+                                });
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
