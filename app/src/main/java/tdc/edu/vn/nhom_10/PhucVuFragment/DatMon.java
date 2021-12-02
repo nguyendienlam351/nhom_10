@@ -43,10 +43,11 @@ public class DatMon extends Fragment {
     }
 
     private void setEvent() {
-        donHangArrayList = new ArrayList<DonHang>();
         database = FirebaseDatabase.getInstance().getReference("Ban");
-        donHangAdater = new DonHangAdater(getActivity(), R.layout.layout_item_ban_2, donHangArrayList);
 
+        //Lấy dữ liệu danh sách bàn
+        donHangArrayList = new ArrayList<DonHang>();
+        donHangAdater = new DonHangAdater(getActivity(), R.layout.layout_item_ban_2, donHangArrayList);
         donHangAdater.setDelegation(new DonHangAdater.MyItemClickListener() {
             @Override
             public void getBan(DonHang donHang) {
@@ -57,17 +58,14 @@ public class DatMon extends Fragment {
                 startActivity(intent);
             }
         });
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-
         lvDanhSachBan.setLayoutManager(layoutManager);
-
         lvDanhSachBan.setAdapter(donHangAdater);
 
         getDataDonHang();
 
+        //Tìm kiếm bàn theo tên
         edtTimKiem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -82,6 +80,7 @@ public class DatMon extends Fragment {
         });
     }
 
+    //Lọc dự liệu bàn theo tên
     private void filter(String tenBan) {
         ArrayList<DonHang> filterList = new ArrayList<DonHang>();
         for (DonHang donHang : donHangArrayList) {
@@ -93,6 +92,7 @@ public class DatMon extends Fragment {
         donHangAdater.filterList(filterList);
     }
 
+    //Lấy dữ liệu bàn
     private void getDataDonHang() {
 
         database.addChildEventListener(new ChildEventListener() {

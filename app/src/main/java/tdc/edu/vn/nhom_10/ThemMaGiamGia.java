@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.CustomView.MinMaxFilter;
 import tdc.edu.vn.nhom_10.model.MaGiamGia;
 
@@ -59,6 +60,7 @@ public class ThemMaGiamGia extends AppCompatActivity {
     }
 
     private void setEvent() {
+        //Actionbar
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
@@ -66,16 +68,17 @@ public class ThemMaGiamGia extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         actionBar.setActionBarName("Thêm mã giảm giá");
 
         database = FirebaseDatabase.getInstance().getReference("MaGiamGia");
+
+        //Tạo giá trị này hiện tại
         ngayBatDau = Calendar.getInstance();
         ngayKetThuc = Calendar.getInstance();
-
         tvNgayBatDau.setText("Ngày bắt đầu: " + dateFormat.format(ngayBatDau.getTime()));
         tvNgayKetThuc.setText("Ngày kết thúc: " + dateFormat.format(ngayKetThuc.getTime()));
 
+        //Hiển thị dialog chọn ngày bắt đầu
         btnDate1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +100,7 @@ public class ThemMaGiamGia extends AppCompatActivity {
             }
         });
 
+        //Hiển thị dialog chọn ngày kết thúc
         btnDate2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,11 +117,14 @@ public class ThemMaGiamGia extends AppCompatActivity {
             }
         });
 
+        //Ràng buộc dữ liệu nhập vào
         edtTenMa.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         edtGiaTriApDung.setFilters(new InputFilter[]{new MinMaxFilter(1, Integer.MAX_VALUE)});
         edtPhanTramGiamGia.setFilters(new InputFilter[]{new MinMaxFilter(1, 100)});
         edtSoLuong.setFilters(new InputFilter[]{new MinMaxFilter(1, Integer.MAX_VALUE)});
 
+
+        //Thêm mã giảm giá
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,10 +132,12 @@ public class ThemMaGiamGia extends AppCompatActivity {
                     database.orderByChild("tenMaGiamGia").equalTo(edtTenMa.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            //Kiểm tra mã giảm giá tồn tại
                             if(snapshot.exists()){
                                 edtTenMa.setError("Mã giảm giá đã tồn tại");
                             }
                             else {
+                                //Tạo mã giảm giá
                                 MaGiamGia maGiamGia =  new MaGiamGia();
                                 maGiamGia.setMaGiamGia(database.push().getKey());
                                 maGiamGia.setTenMaGiamGia(edtTenMa.getText().toString());
@@ -147,7 +156,10 @@ public class ThemMaGiamGia extends AppCompatActivity {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(ThemMaGiamGia.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                        new CustomAlertDialog(ThemMaGiamGia.this,
+                                                "Lỗi",
+                                                e.toString(),
+                                                CustomAlertDialog.ERROR).show();
                                     }
                                 });
                             }
@@ -163,6 +175,7 @@ public class ThemMaGiamGia extends AppCompatActivity {
         });
     }
 
+    //Kiểm tra giá trị nhập vào
     private boolean validated() {
         boolean checkValdated = true;
         if (edtTenMa.getText().toString().length() == 0) {

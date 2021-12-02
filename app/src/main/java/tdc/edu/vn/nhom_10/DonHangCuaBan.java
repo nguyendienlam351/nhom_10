@@ -25,6 +25,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.adapter.ChiTietDonHangAdater;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
@@ -50,6 +51,7 @@ public class DonHangCuaBan extends AppCompatActivity {
     }
 
     private void setEvent() {
+        //actionbar
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
@@ -57,22 +59,19 @@ public class DonHangCuaBan extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         actionBar.setActionBarName("Đơn hàng của bàn");
 
         database = FirebaseDatabase.getInstance().getReference();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-
         if (bundle != null) {
+            //Lấy dữ liệu bàn theo tên
             String maBan = bundle.getString("maBan", "");
-
             getDataDonHang(maBan);
         }
 
         chiTietDonHangArrayList = new ArrayList<ChiTietDonHang>();
         chiTietDonHangAdater = new ChiTietDonHangAdater(DonHangCuaBan.this, R.layout.layout_item_mon_4, chiTietDonHangArrayList);
-
         chiTietDonHangAdater.setDelegation(new ChiTietDonHangAdater.ChiTietDonHangClickListener() {
 
             @Override
@@ -101,15 +100,12 @@ public class DonHangCuaBan extends AppCompatActivity {
                 }
             }
         });
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(DonHangCuaBan.this);
-
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-
         lvDanhSachMon.setLayoutManager(layoutManager);
-
         lvDanhSachMon.setAdapter(chiTietDonHangAdater);
 
+        //Sự kiện nút thêm món
         btnThemMon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,10 +117,12 @@ public class DonHangCuaBan extends AppCompatActivity {
             }
         });
 
+        //Sự kiện nút đặt món
         btnDat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean kiemTra = false;
+                //Kiểm tra trạng thái tất cả các món khác rỗng
                 for (ChiTietDonHang item : donHang.getChiTietDonHang()) {
                     if (item.getTrangThai().equals("")) {
                         kiemTra = true;
@@ -132,6 +130,7 @@ public class DonHangCuaBan extends AppCompatActivity {
                     }
                 }
                 if(kiemTra) {
+                    //Set trạng thái món sang chờ
                     for (ChiTietDonHang item : donHang.getChiTietDonHang()) {
                         if (item.getTrangThai().equals("")) {
                             item.setTrangThai("chờ");
@@ -140,17 +139,21 @@ public class DonHangCuaBan extends AppCompatActivity {
                     database.child("Ban").child(donHang.getMaBan()).setValue(donHang).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Toast.makeText(DonHangCuaBan.this, "Đặt món thành công", Toast.LENGTH_SHORT).show();
+                            new CustomAlertDialog(DonHangCuaBan.this, "Thành công", "Đặt món thành công.",CustomAlertDialog.SUCCESS).show();
                         }
                     });
                 }
                 else {
-                    Toast.makeText(DonHangCuaBan.this, "Hãy chọn thêm món", Toast.LENGTH_SHORT).show();
+                    new CustomAlertDialog(DonHangCuaBan.this,
+                            "Hãy chọn thêm món",
+                            "Danh sách trống hoặc các món đã được đặt.\nHãy chọn thêm món.",
+                            CustomAlertDialog.ERROR).show();
                 }
             }
         });
     }
 
+    //Lấy dữ liệu đơn hàng theo mã bàn
     private void getDataDonHang(String maBan) {
         database.child("Ban").child(maBan).addValueEventListener(new ValueEventListener() {
             @Override

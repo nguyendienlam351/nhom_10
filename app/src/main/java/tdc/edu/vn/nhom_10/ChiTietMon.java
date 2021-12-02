@@ -31,6 +31,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
@@ -61,6 +62,7 @@ public class ChiTietMon extends AppCompatActivity {
     }
 
     private void setEvent() {
+        //Actionbar
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
@@ -71,7 +73,6 @@ public class ChiTietMon extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         actionBar.setActionBarName("Chi tiết món");
 
         database = FirebaseDatabase.getInstance().getReference();
@@ -80,12 +81,15 @@ public class ChiTietMon extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
+            //Lấy dữ liệu chi tiết món
             String maMon = bundle.getString("maMon", "");
             getDataMon(maMon);
 
+            //Lấy dữ liệu đơn hàng
             String maBan = bundle.getString("maBan", "");
             getDataDonHang(maBan);
         }
+
         btnThemMon.setOnClickListener(v -> {
             if (!kiemtraThem(chiTietDonHang.getMaMon())) {
                 donHang.getChiTietDonHang().add(0,chiTietDonHang);
@@ -100,7 +104,9 @@ public class ChiTietMon extends AppCompatActivity {
                     }
                 });
             } else {
-                Toast.makeText(ChiTietMon.this, "Món đã có trong đơn hàng", Toast.LENGTH_SHORT).show();
+                new CustomAlertDialog(ChiTietMon.this,
+                        "Hãy chọn món khác",
+                        "Món đã có trong đơn hàng", CustomAlertDialog.ERROR);
             }
         });
 
@@ -122,16 +128,17 @@ public class ChiTietMon extends AppCompatActivity {
         });
     }
 
+    //Kiểm tra thêm món trùng
     private boolean kiemtraThem(String maMon){
         for(ChiTietDonHang chiTietDonHang: donHang.getChiTietDonHang()){
             if(chiTietDonHang.getMaMon().equals(maMon) && chiTietDonHang.getTrangThai().equals("")){
                 return true;
             }
         }
-
         return false;
     }
 
+    //Lấy dữ liệu đơn hàng
     private void getDataDonHang(String maBan) {
         database.child("Ban").child(maBan).addValueEventListener(new ValueEventListener() {
             @Override
@@ -151,6 +158,7 @@ public class ChiTietMon extends AppCompatActivity {
 
     }
 
+    //Lấy dữ liệu chi tiết món
     private void getDataMon(String maMon) {
         database.child("Mon").child(maMon).addValueEventListener(new ValueEventListener() {
             @Override
@@ -172,6 +180,7 @@ public class ChiTietMon extends AppCompatActivity {
         });
     }
 
+    //Lấy dữ liệu loại món theo mã loại
     private void getDataLoaiMon(String maLoaiMon) {
         database.child("LoaiMon").child(maLoaiMon).addValueEventListener(new ValueEventListener() {
             @Override
@@ -192,7 +201,7 @@ public class ChiTietMon extends AppCompatActivity {
         });
     }
 
-
+    //Lấy ảnh món
     private void getAnhMon(String anh) {
         int dot = anh.lastIndexOf('.');
         String base = (dot == -1) ? anh : anh.substring(0, dot);

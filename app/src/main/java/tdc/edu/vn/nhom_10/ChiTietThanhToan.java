@@ -41,6 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.ThuNganFragment.ThanhToan;
 import tdc.edu.vn.nhom_10.adapter.ChiTietThanhToanAdapter;
 import tdc.edu.vn.nhom_10.model.DonHang;
@@ -77,43 +78,43 @@ public class ChiTietThanhToan extends AppCompatActivity {
     }
 
     private void setEvent() {
-
+        //Actionbar
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
                 finish();
             }
         });
-
         actionBar.setActionBarName("Đơn hàng của bàn");
+
 
         chiTietDonHangArrayList = new ArrayList<ChiTietDonHang>();
         database = FirebaseDatabase.getInstance().getReference();
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-
         if (bundle != null) {
+            //Lấy danh sách đơn hàng theo mã bàn
             String maBan = bundle.getString("maBan", "");
-
             getDataDonHang(maBan);
         }
 
         chiTietThanhToanAdapter = new ChiTietThanhToanAdapter(ChiTietThanhToan.this, R.layout.layout_item_mon_3, chiTietDonHangArrayList);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(ChiTietThanhToan.this);
-
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-
         lvDanhSachMon.setLayoutManager(layoutManager);
-
         lvDanhSachMon.setAdapter(chiTietThanhToanAdapter);
 
+        //Lấy thông tin nhân viên
         getNhanVien();
 
+        //Thanh toán đơn hàng
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (chiTietDonHangArrayList.size() != 0) {
+                    //Tạo ngày cho đơn hàng
                     Calendar calendar = Calendar.getInstance();
                     final int year = calendar.get(Calendar.YEAR);
                     final int month = calendar.get(Calendar.MONTH);
@@ -121,6 +122,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
 
                     DatabaseReference myRef = database.child("HoaDon");
 
+                    //Tạo đơn hàng
                     String maHoaDon = myRef.push().getKey();
                     HoaDon hoaDon = new HoaDon();
                     hoaDon.setMaHoaDon(maHoaDon);
@@ -142,18 +144,25 @@ public class ChiTietThanhToan extends AppCompatActivity {
                                 public void onSuccess(Void unused) {
                                     Intent intent = new Intent(ChiTietThanhToan.this, ThuNgan.class);
                                     startActivity(intent);
-                                    Toast.makeText(ChiTietThanhToan.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
+                                    new CustomAlertDialog(ChiTietThanhToan.this,
+                                            "Hãy chọn món khác",
+                                            "Món đã có trong đơn hàng", CustomAlertDialog.ERROR);
                                 }
                             });
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ChiTietThanhToan.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            new CustomAlertDialog(ChiTietThanhToan.this,
+                                    "Lỗi",
+                                    e.getMessage(), CustomAlertDialog.ERROR);
                         }
                     });
                 } else {
-                    Toast.makeText(ChiTietThanhToan.this, "Hãy chọn thêm món", Toast.LENGTH_SHORT).show();
+                    new CustomAlertDialog(ChiTietThanhToan.this,
+                            "Hãy chọn thêm món",
+                            "Danh sách trống hoặc các món đã được đặt.\nHãy chọn thêm món.",
+                            CustomAlertDialog.ERROR).show();
                 }
             }
         });
@@ -178,6 +187,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
             }
         });
     }
+
 
     private void getMaGiamGia(String ma) {
         final MaGiamGia[] maGiamGias = new MaGiamGia[1];
@@ -261,10 +271,13 @@ public class ChiTietThanhToan extends AppCompatActivity {
         return true;
     }
 
+
+    //Lấy thông tin nhân viên
     private void getNhanVien() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String maNhanVien = user.getUid();
 
+        //Lấy họ tên nhân viên
         database.child("NhanVien/" + maNhanVien).child("hoTen").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -279,6 +292,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
             }
         });
 
+        //Lấy email nhân viên
         database.child("NhanVien/" + maNhanVien).child("email").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -295,6 +309,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
 
     }
 
+    //Lấy dữ liệu đơn hàng theo mã bàn
     private void getDataDonHang(String maBan) {
         database.child("Ban").child(maBan).addValueEventListener(new ValueEventListener() {
             @Override
@@ -317,6 +332,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
         });
     }
 
+    //Tính tổng đơn hàng
     public void tongDonHang() {
         int tong = 0;
         for (ChiTietDonHang item : chiTietDonHangArrayList) {
@@ -325,6 +341,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
         this.tong = tong;
     }
 
+    //Lọc dữ liệu đơn hàng
     private ArrayList<ChiTietDonHang> filter(ArrayList<ChiTietDonHang> arrayList) {
         ArrayList<ChiTietDonHang> filterList = new ArrayList<ChiTietDonHang>();
         for (ChiTietDonHang chiTietDonHang : arrayList) {
@@ -332,7 +349,6 @@ public class ChiTietThanhToan extends AppCompatActivity {
                 filterList.add(chiTietDonHang);
             }
         }
-
         return filterList;
     }
 

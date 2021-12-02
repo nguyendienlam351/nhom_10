@@ -34,6 +34,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.CustomView.MinMaxFilter;
 import tdc.edu.vn.nhom_10.model.MaGiamGia;
 
@@ -65,6 +66,7 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
     }
 
     private void setEvent() {
+        //Actionbar
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
@@ -72,7 +74,6 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         actionBar.setActionBarName("Chi tiết mã giảm giá");
 
         database = FirebaseDatabase.getInstance().getReference("MaGiamGia");
@@ -82,12 +83,13 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-
         if (bundle != null) {
+            //Lấy dữ liệu mã giảm giá theo mã
             String ma = bundle.getString("maGiamGia", "");
             getDataMaGiamGia(ma);
         }
 
+        //Hiển thị dialog chọn ngày bắt đầu
         btnDate1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +111,7 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
             }
         });
 
+        //Hiển thị dialog chọn ngày kết thúc
         btnDate2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,11 +128,13 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
             }
         });
 
+        //Ràng buộc dữ liệu nhập vào
         edtTenMa.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         edtGiaTriApDung.setFilters(new InputFilter[]{new MinMaxFilter(1, Integer.MAX_VALUE)});
         edtPhanTramGiamGia.setFilters(new InputFilter[]{new MinMaxFilter(1, 100)});
         edtSoLuong.setFilters(new InputFilter[]{new MinMaxFilter(1, Integer.MAX_VALUE)});
 
+        //Thay đổi mã giảm giá
         btnThayDoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,7 +163,10 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(ChiTietMaGiamGia.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                    new CustomAlertDialog(ChiTietMaGiamGia.this,
+                                            "Lỗi",
+                                            e.toString(),
+                                            CustomAlertDialog.ERROR).show();
                                 }
                             });
                         }
@@ -170,6 +178,7 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
             }
         });
 
+        //Xóa mã giảm giá
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +191,10 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
                         database.child(maGiamGia.getMaGiamGia()).removeValue().addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ChiTietMaGiamGia.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                new CustomAlertDialog(ChiTietMaGiamGia.this,
+                                        "Lỗi",
+                                        e.toString(),
+                                        CustomAlertDialog.ERROR).show();
                             }
                         });
                     }
@@ -195,6 +207,7 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
         });
     }
 
+    //Lấy dữ liệu mã giảm giá theo mã
     private void getDataMaGiamGia(String ma) {
         database.child(ma).addValueEventListener(new ValueEventListener() {
             @Override
@@ -232,6 +245,7 @@ public class ChiTietMaGiamGia extends AppCompatActivity {
         });
     }
 
+    //Kiểm tra dữ liệu mã giảm giá
     private boolean validated() {
         boolean checkValdated = true;
         if (edtTenMa.getText().toString().length() == 0) {

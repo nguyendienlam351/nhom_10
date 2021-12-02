@@ -44,16 +44,18 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
     }
 
     private void setEvent() {
+        //Actionbar
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
                 finish();
             }
         });
-
         actionBar.setActionBarName("Mã giảm giá");
 
         database = FirebaseDatabase.getInstance().getReference("MaGiamGia");
+
+        //Danh sách mã giảm giá
         maGiamGiaArrayList = new ArrayList<MaGiamGia>();
         maGiamGiaAdapter = new MaGiamGiaAdapter(QuanLyMaGiamGia.this, R.layout.layout_item_ma_giam_gia, maGiamGiaArrayList);
 
@@ -69,15 +71,14 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(QuanLyMaGiamGia.this);
-
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-
         lvDanhSachGiamGia.setLayoutManager(layoutManager);
-
         lvDanhSachGiamGia.setAdapter(maGiamGiaAdapter);
 
+        //Lấy dữ liệu mã giảm giá
         getDataMaGiamGia();
 
+        //Tìm kiếm mã giảm giá theo tên
         edtTimKiem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -91,6 +92,7 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
             }
         });
 
+        //Chuyển màn hình mã giảm giá
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +102,7 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
         });
     }
 
+    //Lọc mã giảm giá
     private void filter(String tenMa) {
         ArrayList<MaGiamGia> filterList = new ArrayList<MaGiamGia>();
         for (MaGiamGia maGiamGia : maGiamGiaArrayList) {
@@ -111,6 +114,7 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
         maGiamGiaAdapter.filterList(filterList);
     }
 
+    //Lấy dữ liệu mã giảm giá
     private void getDataMaGiamGia() {
 
         database.addChildEventListener(new ChildEventListener() {

@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.adapter.MonAdapter;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
@@ -55,6 +56,7 @@ public class DanhSachMon extends AppCompatActivity {
     }
 
     private void setEvent() {
+        //Actionbar
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
@@ -65,17 +67,14 @@ public class DanhSachMon extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         actionBar.setActionBarName("Danh sách món");
-
-        chiTietDonHangArrayList = new ArrayList<>();
-
-        loaiMonArrayList = new ArrayList<>();
 
         database = FirebaseDatabase.getInstance().getReference();
 
+        //Lấy dữ liệu danh sách món
+        chiTietDonHangArrayList = new ArrayList<>();
         monAdapter = new MonAdapter(this, R.layout.layout_item_mon_1, chiTietDonHangArrayList);
-
+        //Set sự kiện item
         monAdapter.setDelegation(new MonAdapter.MonItemClickListener() {
 
             @Override
@@ -105,38 +104,39 @@ public class DanhSachMon extends AppCompatActivity {
                     });
                 }
                 else {
-                    Toast.makeText(DanhSachMon.this, "Món đã có trong đơn hàng", Toast.LENGTH_SHORT).show();
+                    new CustomAlertDialog(DanhSachMon.this,
+                            "Hãy chọn món khác",
+                            "Món đã có trong đơn hàng", CustomAlertDialog.ERROR);
                 }
             }
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-
         lvDanhSachMon.setLayoutManager(layoutManager);
-
         lvDanhSachMon.setAdapter(monAdapter);
 
-
+        //Lấy dữ liệu danh sách loại món
+        loaiMonArrayList = new ArrayList<>();
         loaiMonAdapter = new ArrayAdapter<LoaiMon>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, loaiMonArrayList);
         loaiMonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
         spnLoaiMon.setAdapter(loaiMonAdapter);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
+            //Lấy dữ liệu đơn hàng
             String maBan = bundle.getString("maBan", "");
-
             getDataDonHang(maBan);
         }
 
+        //lấy dữ liệu loại món
         getDataLoaiMon();
+        //Lấy dữ liệu món
         getDataMon();
 
+        //Tìm kiếm món theo tên
         edtTimKiem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -150,6 +150,7 @@ public class DanhSachMon extends AppCompatActivity {
             }
         });
 
+        //Lọc dữ liệu món theo loại món
         spnLoaiMon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -164,6 +165,7 @@ public class DanhSachMon extends AppCompatActivity {
         });
     }
 
+    //Lọc dữ liệu món
     private void filter(String tenMon){
         String maLoaiMon = loaiMonArrayList.get(viTriLoai).getMaLoaiMon();
         ArrayList<ChiTietDonHang> filterList = new ArrayList<ChiTietDonHang>();
@@ -176,6 +178,7 @@ public class DanhSachMon extends AppCompatActivity {
         monAdapter.filterList(filterList);
     }
 
+    //Lấy dữ liệu đơn hàng theo mã bàn
     private void getDataDonHang(String maBan) {
         database.child("Ban").child(maBan).addValueEventListener(new ValueEventListener() {
             @Override
@@ -194,6 +197,7 @@ public class DanhSachMon extends AppCompatActivity {
 
     }
 
+    //Lấy dữ liệu loại món
     private void getDataLoaiMon() {
         LoaiMon tatCa = new LoaiMon("Tất cả");
         tatCa.setMaLoaiMon("");
@@ -217,6 +221,7 @@ public class DanhSachMon extends AppCompatActivity {
         });
     }
 
+    //Lấy dự liệu món
     private void getDataMon() {
         database.child("Mon").addChildEventListener(new ChildEventListener() {
             @Override
@@ -270,6 +275,7 @@ public class DanhSachMon extends AppCompatActivity {
         });
     }
 
+    //Kiểm tra món trùng
     private boolean kiemtraThem(String maMon){
         for(ChiTietDonHang chiTietDonHang: donHang.getChiTietDonHang()){
             if(chiTietDonHang.getMaMon().equals(maMon) && chiTietDonHang.getTrangThai().equals("")){

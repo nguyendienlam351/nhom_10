@@ -2,10 +2,12 @@ package tdc.edu.vn.nhom_10;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.CustomView.ThangNamDiaLog;
 import tdc.edu.vn.nhom_10.adapter.TinhHinhKinhDoanhAdapter;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
@@ -46,40 +49,41 @@ public class TinhHinhKinhDoanh extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tinh_hinh_kinh_doanh);
-
         setControl();
         setEvent();
     }
 
     private void setEvent() {
+        //Actionbar
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
                 finish();
             }
         });
-
         actionBar.setActionBarName("Tình hình kinh doanh");
 
         database = FirebaseDatabase.getInstance().getReference();
         chiTietDonHangArrayList = new ArrayList<ChiTietDonHang>();
+
+        //Danh sách tình hình kinh doanh
         kinhDoanhArrayList = new ArrayList<KinhDoanh>();
         kinhDoanhAdapter = new TinhHinhKinhDoanhAdapter(this, R.layout.layout_item_tinh_hinh_kinh_doanh, kinhDoanhArrayList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         lvDanhSach.setLayoutManager(layoutManager);
         lvDanhSach.setAdapter(kinhDoanhAdapter);
 
+        //Tạo dữ liệu tháng năm hiện tại
         Calendar calendar = Calendar.getInstance();
-
         month = calendar.get(Calendar.MONTH) + 1;
         year = calendar.get(Calendar.YEAR);
-
         btnChonTG.setText(month + "/" + year);
 
+        //Lấy dữ liệu đơn hàng theo tháng năm
         getDataDonHang(month + "/" + year);
 
+        //Dialog chọn tháng năm
         btnChonTG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +103,7 @@ public class TinhHinhKinhDoanh extends AppCompatActivity {
             }
         });
 
+        //Tìm kiếm món theo tên
         svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -113,6 +118,7 @@ public class TinhHinhKinhDoanh extends AppCompatActivity {
         });
     }
 
+    //Lọc dữ liệu tình hình kinh doanh
     private void filter(String tenMon) {
         ArrayList<KinhDoanh> filterList = new ArrayList<KinhDoanh>();
         for (KinhDoanh kinhDoanh : kinhDoanhArrayList) {
@@ -124,6 +130,7 @@ public class TinhHinhKinhDoanh extends AppCompatActivity {
         kinhDoanhAdapter.filterList(filterList);
     }
 
+    //Lấy dữ liệu tình hình kinh doanh
     private void getDataKinhDoanh() {
         for (ChiTietDonHang item : chiTietDonHangArrayList) {
             if (item.getTrangThai().equals("xong")) {
@@ -141,6 +148,7 @@ public class TinhHinhKinhDoanh extends AppCompatActivity {
         }
     }
 
+    //Tìm món theo mã món
     private int timMaMon(String maMon) {
         for (int i = 0; i < kinhDoanhArrayList.size(); i++) {
             if (kinhDoanhArrayList.get(i).getMaMon().equals(maMon)) {
@@ -150,6 +158,7 @@ public class TinhHinhKinhDoanh extends AppCompatActivity {
         return -1;
     }
 
+    //Lấy dữ liệu đơn hàng
     private void getDataDonHang(String ngay) {
         database.child("HoaDon").addValueEventListener(new ValueEventListener() {
             @Override

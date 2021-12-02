@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
-            android:name=".DangNhap"
+            android:name=".TinhHinhKinhDoanh"
             android:exported="false" />
         <activity
             android:name=".ChiTietMaGiamGia"
@@ -120,7 +120,7 @@
             android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
-            android:name=".TinhHinhKinhDoanh"
+            android:name=".DangNhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

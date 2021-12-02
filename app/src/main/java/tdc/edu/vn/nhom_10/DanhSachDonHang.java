@@ -45,13 +45,13 @@ public class DanhSachDonHang extends AppCompatActivity {
     }
 
     private void setEvent() {
+        //Actionbar
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
                 finish();
             }
         });
-
         actionBar.setActionBarName("Đơn hàng của bàn");
 
         chiTietDonHangArrayList = new ArrayList<ChiTietDonHang>();
@@ -60,8 +60,8 @@ public class DanhSachDonHang extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
+            //Lấy dữ liệu đơn hàng theo mã bàn
             String maBan = bundle.getString("maBan", "");
-
             getDataDonHang(maBan);
         }
 
@@ -78,11 +78,8 @@ public class DanhSachDonHang extends AppCompatActivity {
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(DanhSachDonHang.this);
-
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-
         lvDanhSachMon.setLayoutManager(layoutManager);
-
         lvDanhSachMon.setAdapter(danhSachDonHangAdapter);
 
         btnXong.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +97,7 @@ public class DanhSachDonHang extends AppCompatActivity {
 
     }
 
+    //Lấy dữ liệu đơn hàng theo mã bàn
     private void getDataDonHang(String maBan) {
         database.child("Ban").child(maBan).addValueEventListener(new ValueEventListener() {
             @Override
@@ -107,6 +105,7 @@ public class DanhSachDonHang extends AppCompatActivity {
                 DonHang nDonHang = snapshot.getValue(DonHang.class);
                 if (nDonHang != null) {
                     donHang = nDonHang;
+                    tvTenBan.setText(donHang.getTenBan());
                     chiTietDonHangArrayList.clear();
                     chiTietDonHangArrayList.addAll(donHang.getChiTietDonHang());
                     danhSachDonHangAdapter.notifyDataSetChanged();
