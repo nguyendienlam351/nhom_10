@@ -71,7 +71,13 @@
             android:gravity="right"
             android:orientation="vertical">
             <ImageButton
-                android:id="@+id/btnXoaMon"
+                android:id="@+id/btnXong"
+                android:layout_width="@dimen/smallIconSize"
+                android:layout_height="@dimen/smallIconSize"
+                android:background="@drawable/check"
+                android:layout_marginTop="@dimen/spacing3" />
+            <ImageButton
+                android:id="@+id/btnHuy"
                 android:layout_width="@dimen/smallIconSize"
                 android:layout_height="@dimen/smallIconSize"
                 android:background="@drawable/delete"

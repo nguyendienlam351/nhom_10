@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import tdc.edu.vn.nhom_10.R;
 
-public class ThangNamDiaLog extends Dialog {
+public class ThangNamDiaLog extends AlertDialog {
     Context context;
     TextView tvThang;
     TextView tvNam;
@@ -35,7 +37,6 @@ public class ThangNamDiaLog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.layout_dialog_chon_tg);
 
         this.tvThang = (TextView) findViewById(R.id.tvThang);

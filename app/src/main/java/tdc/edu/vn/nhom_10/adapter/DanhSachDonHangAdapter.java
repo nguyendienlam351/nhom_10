@@ -63,7 +63,12 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
         ChiTietDonHang chiTietDonHang = chiTietDonHangArrayList.get(position);
 
         if(!chiTietDonHang.getTrangThai().equals("chờ")){
-            holder.btnXoaMon.setVisibility(View.INVISIBLE);
+            holder.btnHuy.setVisibility(View.INVISIBLE);
+            holder.btnXong.setVisibility(View.INVISIBLE);
+        }
+        else {
+            holder.btnHuy.setVisibility(View.VISIBLE);
+            holder.btnXong.setVisibility(View.VISIBLE);
         }
 
         getAnhMon(chiTietDonHang.getAnh(),holder.imgMon);
@@ -77,11 +82,23 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
 
         holder.tvTrangThai.setText(chiTietDonHang.getTrangThai()+"");
 
-        holder.btnXoaMon.setOnClickListener(new View.OnClickListener() {
+        holder.btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(delegation != null){
-                    delegation.iconClick(chiTietDonHang,position);
+                    delegation.huyClick(chiTietDonHang,position);
+                }
+                else {
+                    Toast.makeText(context, "you must set delegation before", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        holder.btnXong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(delegation != null){
+                    delegation.xongClick(chiTietDonHang,position);
                 }
                 else {
                     Toast.makeText(context, "you must set delegation before", Toast.LENGTH_SHORT).show();
@@ -130,7 +147,8 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
         public TextView tvTenMon;
         public TextView tvGia;
         public TextView tvSoLuong;
-        public ImageButton btnXoaMon;
+        public ImageButton btnHuy;
+        public ImageButton btnXong;
         public TextView tvTrangThai;
 
         public DanhSachDonHangViewHolder(@NonNull View itemView) {
@@ -139,11 +157,13 @@ public class DanhSachDonHangAdapter extends RecyclerView.Adapter<DanhSachDonHang
             tvTenMon = itemView.findViewById(R.id.tvTenMon);
             tvGia = itemView.findViewById(R.id.tvGia);
             tvSoLuong = itemView.findViewById(R.id.tvSoLuong);
-            btnXoaMon = itemView.findViewById(R.id.btnXoaMon);
+            btnHuy = itemView.findViewById(R.id.btnHuy);
+            btnXong = itemView.findViewById(R.id.btnXong);
             tvTrangThai = itemView.findViewById(R.id.tvTrangThai);
         }
     }
     public interface DanhSachDonHangClickListener{
-        public void iconClick(ChiTietDonHang chiTietDonHang, int position);
+        public void huyClick(ChiTietDonHang chiTietDonHang, int position);
+        public void xongClick(ChiTietDonHang chiTietDonHang, int position);
     }
 }

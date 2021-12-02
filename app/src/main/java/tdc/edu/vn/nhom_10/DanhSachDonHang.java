@@ -28,7 +28,6 @@ import tdc.edu.vn.nhom_10.model.DonHang;
 public class DanhSachDonHang extends AppCompatActivity {
     RecyclerView lvDanhSachMon;
     TextView tvTenBan;
-    Button btnXong;
     DanhSachDonHangAdapter danhSachDonHangAdapter;
     DatabaseReference database;
     DonHang donHang = new DonHang();
@@ -69,10 +68,18 @@ public class DanhSachDonHang extends AppCompatActivity {
 
         danhSachDonHangAdapter.setDelegation(new DanhSachDonHangAdapter.DanhSachDonHangClickListener() {
             @Override
-            public void iconClick(ChiTietDonHang chiTietDonHang, int position) {
+            public void huyClick(ChiTietDonHang chiTietDonHang, int position) {
                 database.child("Ban").child(donHang.getMaBan())
                         .child("chiTietDonHang").child(String.valueOf(position))
                         .child("trangThai").setValue("hủy");
+
+            }
+
+            @Override
+            public void xongClick(ChiTietDonHang chiTietDonHang, int position) {
+                database.child("Ban").child(donHang.getMaBan())
+                        .child("chiTietDonHang").child(String.valueOf(position))
+                        .child("trangThai").setValue("xong");
 
             }
         });
@@ -81,19 +88,6 @@ public class DanhSachDonHang extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         lvDanhSachMon.setLayoutManager(layoutManager);
         lvDanhSachMon.setAdapter(danhSachDonHangAdapter);
-
-        btnXong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (ChiTietDonHang item : chiTietDonHangArrayList){
-                    if(item.getTrangThai().equals("chờ")){
-                        item.setTrangThai("xong");
-                    }
-                }
-                database.child("Ban").child(donHang.getMaBan())
-                        .child("chiTietDonHang").setValue(chiTietDonHangArrayList);
-            }
-        });
 
     }
 
@@ -122,7 +116,6 @@ public class DanhSachDonHang extends AppCompatActivity {
     private void setControl() {
         lvDanhSachMon = findViewById(R.id.lvDanhSachMon);
         tvTenBan = findViewById(R.id.tvTenBan);
-        btnXong = findViewById(R.id.btnXong);
         actionBar = findViewById(R.id.actionBar);
     }
 }

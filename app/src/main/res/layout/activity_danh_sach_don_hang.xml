@@ -38,14 +38,7 @@
             android:id="@+id/lvDanhSachMon"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="12" />
+            android:layout_weight="13" />
 
-        <Button
-            android:id="@+id/btnXong"
-            style="@style/addButton"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="@string/xong" />
     </LinearLayout>
 </LinearLayout>
