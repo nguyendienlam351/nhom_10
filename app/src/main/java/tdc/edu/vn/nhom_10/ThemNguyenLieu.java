@@ -2,8 +2,10 @@ package tdc.edu.vn.nhom_10;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -23,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.CustomView.MinMaxFilter;
 import tdc.edu.vn.nhom_10.model.NguyenLieu;
 
@@ -63,19 +66,7 @@ public class ThemNguyenLieu extends AppCompatActivity {
                             edTenNL.setError("Tên nguyên liệu đã tồn tại !");
                         }else{
                             if(kiemtratrong() == true){
-                                NguyenLieu nguyenLieu = new NguyenLieu();
-                                String maNguyenlieu = myref.push().getKey();
-                                nguyenLieu.setGia(Integer.parseInt(edGiaNL.getText().toString()));
-                                nguyenLieu.setSoLuong(0);
-                                nguyenLieu.setTenNL(edTenNL.getText().toString());
-                                nguyenLieu.setMoTa(edMoTa.getText().toString());
-                                nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
-                                nguyenLieu.setMaNL(maNguyenlieu);
-
-                                myref.child(maNguyenlieu).setValue(nguyenLieu);
-
-                                Intent intent = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
-                                startActivity(intent);
+                                ThemMoi();
                             }
                         }
                     }
@@ -87,6 +78,35 @@ public class ThemNguyenLieu extends AppCompatActivity {
                 });
             }
         });
+    }
+    private void ThemMoi(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Xóa");
+        alertDialog.setMessage("Bạn có muốn thêm không ? ");
+        alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                NguyenLieu nguyenLieu = new NguyenLieu();
+                String maNguyenlieu = myref.push().getKey();
+                nguyenLieu.setGia(Integer.parseInt(edGiaNL.getText().toString()));
+                nguyenLieu.setSoLuong(0);
+                nguyenLieu.setTenNL(edTenNL.getText().toString());
+                nguyenLieu.setMoTa(edMoTa.getText().toString());
+                nguyenLieu.setDonVi(spDonVi.getSelectedItem().toString());
+                nguyenLieu.setMaNL(maNguyenlieu);
+
+                myref.child(maNguyenlieu).setValue(nguyenLieu);
+                Intent intent = new Intent(getApplicationContext(),DanhSachNguyenLieu.class);
+                startActivity(intent);
+            }
+        });
+        alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog.show();
     }
 
     private void setControl() {

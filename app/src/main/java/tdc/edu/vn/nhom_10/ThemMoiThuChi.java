@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.model.ChiThu;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
@@ -98,7 +99,6 @@ public class ThemMoiThuChi extends AppCompatActivity {
             }
         });
         alertDialog.show();
-
     }
 
     private void getTenNguoiNhap() {

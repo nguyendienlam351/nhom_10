@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.CustomView.QuenMatKhauDialog;
 
 public class DangNhap extends AppCompatActivity {
@@ -65,18 +66,17 @@ public class DangNhap extends AppCompatActivity {
                 email = edTaikhoan.getText().toString().trim();
                 pass = edMatkhau.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Nhập email của bạn !", Toast.LENGTH_LONG).show();
+                    edTaikhoan.setError("Vui lòng nhập email !");
                     return;
                 }
                 if (TextUtils.isEmpty(pass)) {
-                    Toast.makeText(getApplicationContext(), "Nhập mật khẩu của bạn !", Toast.LENGTH_LONG).show();
+                    edMatkhau.setError("Vui lòng nhập mật khẩu !");
                     return;
                 }
                 mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(DangNhap.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Đăng nhập thành công !", Toast.LENGTH_LONG).show();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference myRef = database.getReference("NhanVien/"+mAuth.getUid());
                             myRef.child("chucVu").addValueEventListener(new ValueEventListener() {
@@ -104,7 +104,9 @@ public class DangNhap extends AppCompatActivity {
                                 }
                             });
                         }else{
-                            Toast.makeText(getApplicationContext(), "Đăng nhập thất bại \n"+task.getException(), Toast.LENGTH_LONG).show();
+                            new CustomAlertDialog(DangNhap.this,"Thất bại","Đăng nhập thất bại.\nSai tài khoản hoặc mật khẩu.",CustomAlertDialog.ERROR).show();
+                            edMatkhau.setText("");
+                            edTaikhoan.setText("");
                         }
                     }
                 });
@@ -128,9 +130,9 @@ public class DangNhap extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(DangNhap.this, "Ứng dụng đã gửi link đổi mật khẩu về Email", Toast.LENGTH_LONG).show();
+                            new CustomAlertDialog(DangNhap.this,"Thành công","Ứng dụng đã gửi link đổi mật khẩu về Email",CustomAlertDialog.SUCCESS).show();
                         } else {
-                            Toast.makeText(DangNhap.this, "Gửi link thất bại, vui lòng nhập đúng Email", Toast.LENGTH_LONG).show();
+                            new CustomAlertDialog(DangNhap.this,"Thất bại","Gửi link thất bại.\nEmail không đúng.",CustomAlertDialog.ERROR).show();
                         }
                     }
                 });
