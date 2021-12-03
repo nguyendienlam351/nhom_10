@@ -72,7 +72,7 @@
             android:name=".QuanLyMon"
             android:exported="false" />
         <activity
-            android:name=".QuanLyLoaiMon"
+            android:name=".QuanLyBan"
             android:exported="false" />
         <activity
             android:name=".ThuNgan"
@@ -96,7 +96,7 @@
             android:name=".PhucVu"
             android:exported="false" />
         <activity
-            android:name=".QuanLyBan"
+            android:name=".QuanLyLoaiMon"
             android:exported="false" />
         <activity
             android:name=".ChiTietMon"
@@ -126,13 +126,13 @@
             android:name=".LichLamViecNhanVien"
             android:exported="false" />
         <activity
+            android:name=".DangNhap"
+            android:exported="false" />
+        <activity
             android:name=".ChiTietLichLamViecNhanVien"
             android:exported="false" />
         <activity
             android:name=".QuanLiLichLamViec"
-            android:exported="false" />
-        <activity
-            android:name=".DangNhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

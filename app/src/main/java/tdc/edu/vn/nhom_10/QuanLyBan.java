@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.adapter.MyRecyclerViewAdapterBan;
 import tdc.edu.vn.nhom_10.model.Ban;
 
@@ -176,7 +177,7 @@ public class QuanLyBan extends AppCompatActivity {
                             mDatabase.child("Ban").child(maBan).setValue(ban).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    Toast.makeText(QuanLyBan.this, "Thành công", Toast.LENGTH_SHORT).show();
+                                    new CustomAlertDialog(QuanLyBan.this,"Thông báo","Thêm bàn mới thành công.",CustomAlertDialog.SUCCESS).show();
                                     edtNhapTenBan.setText("");
                                 }
                             }).addOnFailureListener(new OnFailureListener() {

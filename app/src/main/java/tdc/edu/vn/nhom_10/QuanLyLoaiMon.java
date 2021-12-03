@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.adapter.MyRecyclerViewAdapterLoaiMon;
 import tdc.edu.vn.nhom_10.model.Ban;
 import tdc.edu.vn.nhom_10.model.LoaiMon;
@@ -125,11 +126,9 @@ public class QuanLyLoaiMon extends AppCompatActivity {
             }
             @Override
             public void getUpDateLoaiMon(LoaiMon loaiMon) {
-                int dot = loaiMon.getTenLoaiMon().lastIndexOf(' ');
-                String catChuoi = (dot == -1) ? "" : loaiMon.getTenLoaiMon().substring(dot + 1);
                 selected.setMaLoaiMon(loaiMon.getMaLoaiMon());
-                selected.setTenLoaiMon(catChuoi);
-                edtNhapTenLoaiMon.setText(catChuoi);
+                selected.setTenLoaiMon(loaiMon.getTenLoaiMon());
+                edtNhapTenLoaiMon.setText(loaiMon.getTenLoaiMon());
                 if(layout.getVisibility() == View.GONE){
                     btnAdd.setVisibility(View.GONE);
                     layout.setVisibility(View.VISIBLE);
@@ -164,7 +163,7 @@ public class QuanLyLoaiMon extends AppCompatActivity {
                 String name =edtNhapTenLoaiMon.getText().toString().trim();
                 String maLoaiMon=database.push().getKey();
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                LoaiMon loaiMon = new LoaiMon("Loại "+name);
+                LoaiMon loaiMon = new LoaiMon(name);
                 loaiMon.setMaLoaiMon(maLoaiMon);
 
                 database.orderByChild("tenLoaiMon").equalTo(loaiMon.getTenLoaiMon()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -222,7 +221,7 @@ public class QuanLyLoaiMon extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         database=FirebaseDatabase.getInstance().getReference("LoaiMon");
                         String newTenLoaiMon = edtNhapTenLoaiMon.getText().toString().trim();
-                        selected.setTenLoaiMon("Loại "+newTenLoaiMon);
+                        selected.setTenLoaiMon(newTenLoaiMon);
                         database.orderByChild("tenLoaiMon").equalTo(selected.getTenLoaiMon()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {

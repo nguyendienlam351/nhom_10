@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.adapter.MyRecyclerViewAdapterBan;
 import tdc.edu.vn.nhom_10.adapter.MyRecylerViewNhanVien;
 import tdc.edu.vn.nhom_10.adapter.NhanVienLichLamViecAdapter;
@@ -117,7 +118,7 @@ public class QuanLyNhanVienLichLamViec extends AppCompatActivity {
                  }
                  else {
                      if (kiemTra(nhanVien.getMaNV())) {
-                         Toast.makeText(QuanLyNhanVienLichLamViec.this, "Nhân viên bị trùng", Toast.LENGTH_SHORT).show();
+                         new CustomAlertDialog(QuanLyNhanVienLichLamViec.this,"Thông báo","Nhân viên bị trùng! Vui lòng chọn nhân viên khác!",CustomAlertDialog.ERROR).show();
                          return;
                      }
                      else {
