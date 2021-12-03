@@ -111,16 +111,16 @@
             android:name=".DonHangCuaBan"
             android:exported="false" />
         <activity
-            android:name=".ChiTietNhanVien"
+            android:name=".DanhSachNguyenLieu"
             android:exported="false" />
         <activity
-            android:name=".QuanLyNhanVien"
+            android:name=".ChiTietNhanVien"
             android:exported="false" />
         <activity
             android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
-            android:name=".DanhSachNguyenLieu"
+            android:name=".QuanLyNhanVien"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
