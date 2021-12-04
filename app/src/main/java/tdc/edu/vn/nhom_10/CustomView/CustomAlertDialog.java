@@ -1,7 +1,5 @@
 package tdc.edu.vn.nhom_10.CustomView;
 
-import static tdc.edu.vn.nhom_10.R.*;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -35,18 +33,18 @@ public class CustomAlertDialog extends AlertDialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(layout.layout_alert_dialog);
-        TextView tvTitle = (TextView) findViewById(id.tvTitle);
-        TextView tvContent = (TextView) findViewById(id.tvContent);
-        Button btnDong = (Button) findViewById(id.btnDong);
+        setContentView(R.layout.layout_alert_dialog);
+        TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
+        TextView tvContent = (TextView) findViewById(R.id.tvContent);
+        Button btnDong = (Button) findViewById(R.id.btnDong);
 
         if (type == SUCCESS){
             tvTitle.setBackgroundColor(ContextCompat.getColor(context, R.color.green));
             btnDong.setBackgroundColor(ContextCompat.getColor(context, R.color.green));
         }
         else {
-            tvTitle.setBackgroundColor(ContextCompat.getColor(context, color.red));
-            btnDong.setBackgroundColor(ContextCompat.getColor(context, color.red));
+            tvTitle.setBackgroundColor(ContextCompat.getColor(context, R.color.red));
+            btnDong.setBackgroundColor(ContextCompat.getColor(context, R.color.red));
         }
 
         tvTitle.setText(title);

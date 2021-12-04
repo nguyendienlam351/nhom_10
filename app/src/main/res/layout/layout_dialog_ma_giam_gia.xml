@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout"
+    >
+    <TextView
+        style="@style/title"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:padding="@dimen/spacing3"
+        android:layout_margin="0dp"
+        android:background="@color/blue"
+        android:textColor="@color/white"
+        android:text="Chọn mã giảm giá" />
+    <SearchView
+        android:id="@+id/edtTimKiem"
+        style="@style/editText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/iconSize"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@color/white"
+        android:queryHint="@string/search"
+        android:submitBackground="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lvDanhSachGiamGia"
+        android:layout_weight="7"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+        <Button
+            android:id="@+id/btnDong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/addButton"
+            android:textColor="@color/white"
+            android:text="Đóng"/>
+
+</LinearLayout>

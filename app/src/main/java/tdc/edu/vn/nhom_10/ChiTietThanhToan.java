@@ -42,6 +42,7 @@ import java.util.Date;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
+import tdc.edu.vn.nhom_10.CustomView.MaGiamGiaDialog;
 import tdc.edu.vn.nhom_10.ThuNganFragment.ThanhToan;
 import tdc.edu.vn.nhom_10.adapter.ChiTietThanhToanAdapter;
 import tdc.edu.vn.nhom_10.model.DonHang;
@@ -56,6 +57,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
     TextView tvHoTen;
     TextView tvEmail;
     Button btnThanhToan;
+    ImageButton btnClear;
     ChiTietThanhToanAdapter chiTietThanhToanAdapter;
     DatabaseReference database;
     DonHang donHang;
@@ -135,7 +137,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
                     myRef.child(maHoaDon).setValue(hoaDon).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            if(maGiamGia != null){
+                            if (edtGiamGia.getError() == null) {
                                 database.child("MaGiamGia").child(maGiamGia.getMaGiamGia())
                                         .child("soLuong").setValue(maGiamGia.getSoLuong() - 1);
                             }
@@ -167,73 +169,40 @@ public class ChiTietThanhToan extends AppCompatActivity {
             }
         });
 
-        edtGiamGia.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-        edtGiamGia.addTextChangedListener(new TextWatcher() {
+        edtGiamGia.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(edtGiamGia.getText().toString().trim().length() != 0) {
-                    getMaGiamGia(edtGiamGia.getText().toString());
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-    }
-
-
-    private void getMaGiamGia(String ma) {
-        final MaGiamGia[] maGiamGias = new MaGiamGia[1];
-        database.child("MaGiamGia").orderByChild("tenMaGiamGia").equalTo(ma).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                maGiamGias[0] = snapshot.getValue(MaGiamGia.class);
-                if (maGiamGias[0] == null) {
-                    edtGiamGia.setError("Mã giam giá không tồn tại");
-                } else {
-                    if (kiemTraMaGiamGia(maGiamGias[0])) {
-                        int iGiamGia = maGiamGias[0].getPhanTramGiamGia() * tong / 100;
-                        tong = tong - iGiamGia;
-                        tvTong.setText("Tổng: " + formatter.format(tong) + " đ ( -" + formatter.format(iGiamGia) + " đ)");
-                        maGiamGia = maGiamGias[0];
-                        edtGiamGia.setError(null);
+            public void onClick(View v) {
+                new MaGiamGiaDialog(ChiTietThanhToan.this, new MaGiamGiaDialog.MaGiamGiaDiaLogListener() {
+                    @Override
+                    public void itemClick(MaGiamGia giamGia) {
+                        if(kiemTraMaGiamGia(giamGia)){
+                            maGiamGia = giamGia;
+                            int iGiamGia = giamGia.getPhanTramGiamGia() * tong / 100;
+                            tong = tong - iGiamGia;
+                            tvTong.setText("Tổng: " + formatter.format(tong) + " đ ( -" + formatter.format(iGiamGia) + " đ)");
+                            edtGiamGia.setError(null);
+                        }
+                        else {
+                            maGiamGia = null;
+                            tongDonHang();
+                            tvTong.setText("Tổng: " + formatter.format(tong) + " đ");
+                        }
+                        edtGiamGia.setText(giamGia.getTenMaGiamGia());
+                        btnClear.setVisibility(View.VISIBLE);
                     }
-                }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+                }).show();
             }
         });
-        if (maGiamGias[0] == null) {
-            maGiamGia = null;
-            tongDonHang();
-            tvTong.setText("Tổng: " + formatter.format(tong) + " đ");
-            edtGiamGia.setError("Mã giam giá không tồn tại");
-        }
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtGiamGia.setText(null);
+                edtGiamGia.setError(null);
+                maGiamGia = null;
+                btnClear.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     private boolean kiemTraMaGiamGia(MaGiamGia maGiamGia) {
@@ -253,7 +222,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
             edtGiamGia.setError(e.getMessage());
             return false;
         }
-        if(todayDate.compareTo(ngayBatDau) < 0){
+        if (todayDate.compareTo(ngayBatDau) < 0) {
             edtGiamGia.setError("Mã giảm giá chưa được áp dụng");
             return false;
         }
@@ -264,7 +233,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
             edtGiamGia.setError(e.getMessage());
             return false;
         }
-        if(todayDate.compareTo(ngayKetThuc)>0){
+        if (todayDate.compareTo(ngayKetThuc) > 0) {
             edtGiamGia.setError("Mã giảm giá đã hết được áp dụng");
             return false;
         }
@@ -360,5 +329,6 @@ public class ChiTietThanhToan extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvEmail);
         btnThanhToan = findViewById(R.id.btnThanhToan);
         actionBar = findViewById(R.id.actionBar);
+        btnClear = findViewById(R.id.btnClear);
     }
 }

@@ -1,17 +1,21 @@
-package tdc.edu.vn.nhom_10;
+package tdc.edu.vn.nhom_10.CustomView;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Rect;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.SearchView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -21,62 +25,56 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
-import tdc.edu.vn.nhom_10.CustomView.MaGiamGiaDialog;
+import tdc.edu.vn.nhom_10.R;
 import tdc.edu.vn.nhom_10.adapter.MaGiamGiaAdapter;
-import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.MaGiamGia;
 
-public class QuanLyMaGiamGia extends AppCompatActivity {
-    RecyclerView lvDanhSachGiamGia;
-    DatabaseReference database;
-    CustomActionBar actionBar;
+public class MaGiamGiaDialog extends AlertDialog {
+    Context context;
     ArrayList<MaGiamGia> maGiamGiaArrayList;
     MaGiamGiaAdapter maGiamGiaAdapter;
+    DatabaseReference database;
+    Button btnDong;
+    RecyclerView lvDanhSachGiamGia;
     SearchView edtTimKiem;
-    ImageButton btnThem;
+    MaGiamGiaDialog.MaGiamGiaDiaLogListener listener;
+
+    public MaGiamGiaDialog(@NonNull Context context,MaGiamGiaDialog.MaGiamGiaDiaLogListener listener) {
+        super(context);
+        this.context = context;
+        this.listener = listener;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quan_ly_ma_giam_gia);
-        setControl();
-        setEvent();
-    }
+        setContentView(R.layout.layout_dialog_ma_giam_gia);
 
-    private void setEvent() {
-        //Actionbar
-        actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
-            @Override
-            public void backOnClick() {
-                finish();
-            }
-        });
-        actionBar.setActionBarName("Mã giảm giá");
+        Rect displayRectangle = new Rect();
+        Window window = this.getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+        this.getWindow().setLayout(window.getAttributes().width, (int)(displayRectangle.height() * 0.8f));
+
+        btnDong = findViewById(R.id.btnDong);
+        lvDanhSachGiamGia = findViewById(R.id.lvDanhSachGiamGia);
+        edtTimKiem = findViewById(R.id.edtTimKiem);
 
         database = FirebaseDatabase.getInstance().getReference("MaGiamGia");
 
-        //Danh sách mã giảm giá
         maGiamGiaArrayList = new ArrayList<MaGiamGia>();
-        maGiamGiaAdapter = new MaGiamGiaAdapter(QuanLyMaGiamGia.this, R.layout.layout_item_ma_giam_gia_2, maGiamGiaArrayList);
-
+        maGiamGiaAdapter = new MaGiamGiaAdapter((Activity) context, R.layout.layout_item_ma_giam_gia_2, maGiamGiaArrayList);
         maGiamGiaAdapter.setDelegation(new MaGiamGiaAdapter.MyItemClickListener() {
             @Override
             public void getMaGiamGia(MaGiamGia maGiamGia) {
-                Intent intent = new Intent(QuanLyMaGiamGia.this, ChiTietMaGiamGia.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("maGiamGia", maGiamGia.getMaGiamGia());
-                intent.putExtras(bundle);
-                startActivity(intent);
+                listener.itemClick(maGiamGia);
+                dismiss();
             }
         });
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(QuanLyMaGiamGia.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         lvDanhSachGiamGia.setLayoutManager(layoutManager);
         lvDanhSachGiamGia.setAdapter(maGiamGiaAdapter);
 
-        //Lấy dữ liệu mã giảm giá
         getDataMaGiamGia();
 
         //Tìm kiếm mã giảm giá theo tên
@@ -93,12 +91,10 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
             }
         });
 
-        //Chuyển màn hình mã giảm giá
-        btnThem.setOnClickListener(new View.OnClickListener() {
+        btnDong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QuanLyMaGiamGia.this, ThemMaGiamGia.class);
-                startActivity(intent);
+                dismiss();
             }
         });
     }
@@ -115,7 +111,6 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
         maGiamGiaAdapter.filterList(filterList);
     }
 
-    //Lấy dữ liệu mã giảm giá
     private void getDataMaGiamGia() {
 
         database.addChildEventListener(new ChildEventListener() {
@@ -148,10 +143,8 @@ public class QuanLyMaGiamGia extends AppCompatActivity {
         });
     }
 
-    private void setControl() {
-        actionBar = findViewById(R.id.actionBar);
-        lvDanhSachGiamGia = findViewById(R.id.lvDanhSachGiamGia);
-        edtTimKiem = findViewById(R.id.edtTimKiem);
-        btnThem = findViewById(R.id.btnThem);
+
+    public interface MaGiamGiaDiaLogListener {
+        public void itemClick(MaGiamGia maGiamGia);
     }
 }

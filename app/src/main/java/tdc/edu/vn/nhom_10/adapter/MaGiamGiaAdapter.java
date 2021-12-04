@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.R;
@@ -46,6 +48,11 @@ public class MaGiamGiaAdapter extends RecyclerView.Adapter<MaGiamGiaAdapter.MaGi
     public void onBindViewHolder(@NonNull MaGiamGiaViewHolder holder, int position) {
         MaGiamGia maGiamGia = maGiamGiaArrayList.get(position);
         holder.tvMaGiamGia.setText(maGiamGia.getTenMaGiamGia());
+        holder.tvSoLuong.setText(String.valueOf(maGiamGia.getSoLuong()));
+        NumberFormat formatter = new DecimalFormat("#,###,###");
+        holder.tvGiaTriApDung.setText(formatter.format(maGiamGia.getGiaTriApDung()) + " đ");
+        holder.tvPhanTram.setText(maGiamGia.getPhanTramGiamGia() + "%");
+        holder.tvThoiGian.setText(maGiamGia.getNgayBatDau() + " - " + maGiamGia.getNgayKetThuc());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +84,18 @@ public class MaGiamGiaAdapter extends RecyclerView.Adapter<MaGiamGiaAdapter.MaGi
 
     public static class MaGiamGiaViewHolder extends RecyclerView.ViewHolder {
         public TextView tvMaGiamGia;
+        public TextView tvSoLuong;
+        public TextView tvGiaTriApDung;
+        public TextView tvPhanTram;
+        public TextView tvThoiGian;
 
         public MaGiamGiaViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMaGiamGia = itemView.findViewById(R.id.tvMaGiamGia);
+            tvGiaTriApDung = itemView.findViewById(R.id.tvGiaTriApDung);
+            tvSoLuong = itemView.findViewById(R.id.tvSoLuong);
+            tvPhanTram = itemView.findViewById(R.id.tvPhanTram);
+            tvThoiGian = itemView.findViewById(R.id.tvThoiGian);
         }
 
     }
