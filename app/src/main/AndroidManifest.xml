@@ -18,6 +18,12 @@
             android:name=".TinhHinhKinhDoanh"
             android:exported="false" />
         <activity
+            android:name=".ChiTietThuChi"
+            android:exported="false" />
+        <activity
+            android:name=".ThemMoiThuChi"
+            android:exported="false" />
+        <activity
             android:name=".ChiTietMaGiamGia"
             android:exported="false" />
         <activity

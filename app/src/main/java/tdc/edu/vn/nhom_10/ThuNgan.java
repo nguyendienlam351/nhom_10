@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -13,9 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
@@ -27,15 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-
-import tdc.edu.vn.nhom_10.PhaCheFragment.XemHoaDon;
-import tdc.edu.vn.nhom_10.PhaCheFragment.XuatKho;
-import tdc.edu.vn.nhom_10.PhucVuFragment.DatMon;
-import tdc.edu.vn.nhom_10.PhucVuFragment.LichLamViec;
 import tdc.edu.vn.nhom_10.ThuNganFragment.ThanhToan;
-import tdc.edu.vn.nhom_10.ThuNganFragment.ThuChi;
 
 public class ThuNgan extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -66,10 +55,19 @@ public class ThuNgan extends AppCompatActivity implements NavigationView.OnNavig
 
 
         navigationView.setNavigationItemSelectedListener(this);
-
-        replaceFragment(new ThanhToan());
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle == null){
+            replaceFragment(new ThanhToan());
+        }else{
+            int ManHinh = bundle.getInt("manhinh", 0);
+            if (ManHinh == 1 || ManHinh == 2){
+                replaceFragment(new ThuChi());
+                CurrentFragment = Fragment_thuchi;
+                toolbar.setTitle(R.string.thuchi);
+            }
+        }
         navigationView.getMenu().findItem(R.id.thanhtoan).setChecked(true);
-
     }
     private void getInfoUser(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

@@ -27,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 import tdc.edu.vn.nhom_10.QuanLyFragment.BaoCao;
 import tdc.edu.vn.nhom_10.QuanLyFragment.NhapXuatKho;
 import tdc.edu.vn.nhom_10.QuanLyFragment.QuanLyBanHang;
-import tdc.edu.vn.nhom_10.QuanLyFragment.ThuChi;
 
 public class QuanLy extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,7 +49,7 @@ public class QuanLy extends AppCompatActivity implements NavigationView.OnNaviga
         setContentView(R.layout.activity_quan_ly);
         navigationView = findViewById(R.id.navigation_view);
         ten = navigationView.getHeaderView(0).findViewById(R.id.tennhanvien);
-        //getInfoUser();
+        getInfoUser();
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

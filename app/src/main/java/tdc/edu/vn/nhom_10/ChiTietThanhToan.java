@@ -20,8 +20,10 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -45,6 +47,7 @@ import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.CustomView.MaGiamGiaDialog;
 import tdc.edu.vn.nhom_10.ThuNganFragment.ThanhToan;
 import tdc.edu.vn.nhom_10.adapter.ChiTietThanhToanAdapter;
+import tdc.edu.vn.nhom_10.model.ChiThu;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
 import tdc.edu.vn.nhom_10.model.HoaDon;
@@ -149,6 +152,26 @@ public class ChiTietThanhToan extends AppCompatActivity {
                                     new CustomAlertDialog(ChiTietThanhToan.this,
                                             "Hãy chọn món khác",
                                             "Món đã có trong đơn hàng", CustomAlertDialog.ERROR);
+                                    ChiThu chiThu = new ChiThu();
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ThuChi");
+                                    String maThuChi = reference.push().getKey();
+                                    chiThu.setMaThuChi(maThuChi);
+                                    chiThu.setNgayNhap(hoaDon.getNgayThang());
+                                    chiThu.setNguoiNhap(hoaDon.getHoTen());
+                                    chiThu.setLoaiThuChi("Thu");
+                                    chiThu.setLoai("Nhập tự động");
+                                    chiThu.setSoTien(hoaDon.getTong());
+                                    chiThu.setMoTa(donHang.getTenBan());
+                                    reference.child(maThuChi).setValue(chiThu).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Intent intent = new Intent(ChiTietThanhToan.this, ThuNgan.class);
+                                            startActivity(intent);
+                                            new CustomAlertDialog(ChiTietThanhToan.this,
+                                                    "Thành công",
+                                                    "Đơn hàng đã được thanh toán thành công.", CustomAlertDialog.SUCCESS);
+                                        }
+                                    });
                                 }
                             });
                         }
