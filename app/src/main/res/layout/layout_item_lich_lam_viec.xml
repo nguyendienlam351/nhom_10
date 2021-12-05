@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="17"
+        android:layout_marginBottom="@dimen/spacing1">
+
+        <TextView
+            android:id="@+id/tvthuNgay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:layout_marginHorizontal="@dimen/spacing1"
+            android:gravity="center"
+            android:text="T2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSize" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/spacing3"
+            android:layout_marginHorizontal="@dimen/spacing1"
+            android:gravity="center"
+            android:background="@color/white"
+            android:layout_weight="5">
+        <ImageView
+            android:id="@+id/imvcaA"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/dautich" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing1"
+            android:paddingVertical="@dimen/spacing3"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_weight="5">
+        <ImageView
+            android:id="@+id/imvcaB"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/dautich" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing1"
+            android:paddingVertical="@dimen/spacing3"
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_weight="5">
+        <ImageView
+            android:id="@+id/imvcaC"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/dautich"/>
+        </LinearLayout>
+    </TableRow>
+
+
+</LinearLayout>

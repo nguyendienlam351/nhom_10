@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import tdc.edu.vn.nhom_10.QuanLiLichLamViec;
 import tdc.edu.vn.nhom_10.QuanLyBan;
 import tdc.edu.vn.nhom_10.QuanLyLoaiMon;
 import tdc.edu.vn.nhom_10.QuanLyMon;
@@ -22,6 +23,7 @@ public class QuanLy extends Fragment {
     Button btnQuanLyLoaiMon;
     Button btnQuanLyNhanVien;
     Button btnQuanLyMon;
+    Button btnQuanLyLichLamViec;
 
     @Nullable
     @Override
@@ -62,6 +64,13 @@ public class QuanLy extends Fragment {
                 startActivity(intent);
             }
         });
+        btnQuanLyLichLamViec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), QuanLiLichLamViec.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setControl(View view){
@@ -69,5 +78,6 @@ public class QuanLy extends Fragment {
         btnQuanLyLoaiMon = view.findViewById(R.id.btnQuanLyLoaiMon);
         btnQuanLyNhanVien = view.findViewById(R.id.btnQuanLyNhanVien);
         btnQuanLyMon = view.findViewById(R.id.btnQuanLyMon);
+        btnQuanLyLichLamViec = view.findViewById(R.id.btnQuanLyLichLamViec);
     }
 }

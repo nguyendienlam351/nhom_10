@@ -46,19 +46,6 @@
                 style="@style/text"
                 android:text="Tổng: 120.000đ (-0 đ)"/>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:gravity="right"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/imbXoa"
-                    android:background="@drawable/delete"
-                    android:layout_width="@dimen/smallIconSize"
-                    android:layout_height="@dimen/smallIconSize" />
-            </LinearLayout>
         </LinearLayout>
 
             <TextView
