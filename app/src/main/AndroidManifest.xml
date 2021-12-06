@@ -15,136 +15,142 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
-            android:name=".TinhHinhKinhDoanh"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietThuChi"
-            android:exported="false" />
-        <activity
-            android:name=".ThemMoiThuChi"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietThanhToan"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietMaGiamGia"
-            android:exported="false" />
-        <activity
-            android:name=".ThemMaGiamGia"
-            android:exported="false" />
-        <activity
-            android:name=".QuanLyMaGiamGia"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietNguyenLieu"
-            android:exported="false" />
-        <activity
-            android:name=".ThemNguyenLieu"
-            android:exported="false" />
-        <activity
-            android:name=".ThemNhapKho"
-            android:exported="false" />
-        <activity
-            android:name=".XemHoaDon"
-            android:exported="false" />
-        <activity
-            android:name=".KiemKeKho"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietXuatKho"
-            android:exported="false" />
-        <activity
-            android:name=".ThemXuatKho"
-            android:exported="false" />
-        <activity
-            android:name=".DanhSachXuatKho"
-            android:exported="false" />
-        <activity
-            android:name=".DanhSachNguyenLieuXuat"
-            android:exported="false" />
-        <activity
-            android:name=".DSHoatDongTrongNgay"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietNhapKho"
-            android:exported="false" />
-        <activity
-            android:name=".DangNhap"
-            android:exported="false" />
-        <activity
-            android:name=".QuanLyNhanVien"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietQLMon"
-            android:exported="false" />
-        <activity
-            android:name=".QuanLyThemMon"
-            android:exported="false" />
-        <activity
-            android:name=".QuanLyMon"
-            android:exported="false" />
-        <activity
-            android:name=".QuanLyBan"
-            android:exported="false" />
-        <activity
-            android:name=".ThuNgan"
-            android:exported="false" />
-        <activity
-            android:name=".PhaChe"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DanhSachNguyenLieuNhap"
-            android:exported="false" />
-        <activity
-            android:name=".DanhSachDonHang"
-            android:exported="false" />
-        <activity
-            android:name=".QuanLy"
-            android:exported="true" />
-        <activity
-            android:name=".PhucVu"
-            android:exported="false" />
-        <activity
-            android:name=".QuanLyLoaiMon"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietMon"
-            android:exported="false" />
-        <activity
-            android:name=".DanhSachMon"
-            android:exported="false" />
-        <activity
-            android:name=".DonHangCuaBan"
-            android:exported="false" />
-        <activity
-            android:name=".DanhSachNguyenLieu"
-            android:exported="false" />
-        <activity
-            android:name=".ChiTietNhanVien"
-            android:exported="false" />
-        <activity
-            android:name=".ThemNhanVien"
-            android:exported="false" />
-        <activity
-            android:name=".QuanLyNhanVienLichLamViec"
-            android:exported="false" />
-        <activity
             android:name=".ChiTietLichLamViec"
-            android:exported="false" />
-        <activity
-            android:name=".LichLamViecNhanVien"
-            android:exported="false" />
-        <activity
-            android:name=".QuanLiLichLamViec"
             android:exported="false" />
         <activity
             android:name=".ChiTietLichLamViecNhanVien"
             android:exported="false" />
         <activity
+            android:name=".ChiTietMaGiamGia"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietMon"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietNguyenLieu"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietNhanVien"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietNhapKho"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietQLMon"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietThanhToan"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietThuChi"
+            android:exported="false" />
+        <activity
+            android:name=".ChiTietXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachDonHang"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachMon"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachNguyenLieu"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachNguyenLieuNhap"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachNguyenLieuXuat"
+            android:exported="false" />
+        <activity
             android:name=".DanhSachNhapKho"
+            android:exported="false" />
+        <activity
+            android:name=".DanhSachXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".DoanhThu"
+            android:exported="false" />
+        <activity
+            android:name=".DoiMatKhau"
+            android:exported="false" />
+        <activity
+            android:name=".DonHangCuaBan"
+            android:exported="false" />
+        <activity
+            android:name=".DSHoatDongTrongNgay"
+            android:exported="false" />
+        <activity
+            android:name=".KiemKeKho"
+            android:exported="false" />
+        <activity
+            android:name=".LichLamViecNhanVien"
+            android:exported="false" />
+        <activity
+            android:name=".PhaChe"
+            android:exported="false" />
+        <activity
+            android:name=".PhucVu"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLiLichLamViec"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLy"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyBan"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyLoaiMon"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyMaGiamGia"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyMon"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyNhanVien"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyNhanVienLichLamViec"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyThemMon"
+            android:exported="false" />
+        <activity
+            android:name=".ThemMaGiamGia"
+            android:exported="false" />
+        <activity
+            android:name=".ThemMoiThuChi"
+            android:exported="false" />
+        <activity
+            android:name=".ThemNguyenLieu"
+            android:exported="false" />
+        <activity
+            android:name=".ThemNhanVien"
+            android:exported="false" />
+        <activity
+            android:name=".ThemNhapKho"
+            android:exported="false" />
+        <activity
+            android:name=".ThemXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".ThongTinNhanVien"
+            android:exported="false" />
+        <activity
+            android:name=".ThuNgan"
+            android:exported="false" />
+        <activity
+            android:name=".TinhHinhKinhDoanh"
+            android:exported="false" />
+        <activity
+            android:name=".XemHoaDon"
+            android:exported="false" />
+        <activity
+            android:name=".DangNhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

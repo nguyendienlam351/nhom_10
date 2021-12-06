@@ -40,7 +40,7 @@ import tdc.edu.vn.nhom_10.model.NguyenLieu;
 import tdc.edu.vn.nhom_10.model.NhapKho;
 import tdc.edu.vn.nhom_10.model.XuatKho;
 
-public class KiemKeKho extends AppCompatActivity {
+public class DoanhThu extends AppCompatActivity {
     SearchView svSearch;
     Button btnChonTG;
     RecyclerView lvKiemKeKho;

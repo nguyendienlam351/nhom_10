@@ -1,2 +1,6 @@
-package tdc.edu.vn.nhom_10;public class ThongTinNhanVien {
+package tdc.edu.vn.nhom_10;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ThongTinNhanVien extends AppCompatActivity {
 }
