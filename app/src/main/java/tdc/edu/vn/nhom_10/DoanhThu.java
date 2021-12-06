@@ -20,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
-import tdc.edu.vn.nhom_10.QuanLyFragment.ThuChi;
 import tdc.edu.vn.nhom_10.adapter.DoanhThuAdapter;
 
 import tdc.edu.vn.nhom_10.model.ChiThu;

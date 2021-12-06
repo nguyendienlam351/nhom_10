@@ -30,15 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 import tdc.edu.vn.nhom_10.PhaCheFragment.XemHoaDon;
 import tdc.edu.vn.nhom_10.PhaCheFragment.XuatKho;
 import tdc.edu.vn.nhom_10.PhucVuFragment.DatMon;
-import tdc.edu.vn.nhom_10.PhucVuFragment.LichLamViec;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class PhaChe extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
     private static int Fragment_seenorder = 0;
     private static int Fragment_xuatkho = 1;
     private static int Fragment_calendar = 2;
-
 
     private int CurrentFragment = Fragment_seenorder;
     private DrawerLayout drawerLayout;
