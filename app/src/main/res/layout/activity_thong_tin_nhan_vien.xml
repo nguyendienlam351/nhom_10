@@ -1,6 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChiTietNhanVien">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout style="@style/layout">
+        <ImageView
+            android:id="@+id/imgHinh"
+            android:layout_width="@dimen/largeImage"
+            android:layout_height="@dimen/largeImage"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/image" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="@string/hoTen"/>
+
+            <TextView
+                android:layout_weight="7"
+                android:id="@+id/tvHoTen"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="Nguyen Van A"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="Ngày Sinh : "/>
+
+            <TextView
+                android:layout_weight="7"
+                android:id="@+id/tvNgaySinh"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="12/12/2002"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="Số CCCD :"/>
+
+            <TextView
+                android:layout_weight="7"
+                android:id="@+id/tvCCCD"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="151511515"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="Email :"/>
+
+            <TextView
+                android:layout_weight="7"
+                android:id="@+id/tvEmail"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="phache@gmail.com"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="Số ĐT :"/>
+
+            <TextView
+                android:layout_weight="7"
+                android:id="@+id/tvSDT"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="0386646543"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="Số CCCD :"/>
+
+            <TextView
+                android:layout_weight="7"
+                android:id="@+id/tvDiaChi"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="Phuong Linh Tay"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="Chức Vụ :"/>
+
+            <TextView
+                android:layout_weight="7"
+                android:id="@+id/tvChucVu"
+                android:layout_width="0dp"
+                style="@style/text"
+                android:text="Pha Chế"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnDoiMatKhau"
+                    style="@style/editButton"
+                    android:layout_width="wrap_content"
+                    android:text="Đổi Mật Khẩu" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

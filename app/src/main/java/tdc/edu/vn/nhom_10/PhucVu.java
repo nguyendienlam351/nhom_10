@@ -12,6 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -35,7 +38,7 @@ public class PhucVu extends AppCompatActivity implements NavigationView.OnNaviga
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     Toolbar toolbar;
-
+    ImageView imageView;
     private TextView ten;
 
     @Override
@@ -57,6 +60,17 @@ public class PhucVu extends AppCompatActivity implements NavigationView.OnNaviga
 
         replaceFragment(new DatMon());
         navigationView.getMenu().findItem(R.id.order).setChecked(true);
+        imageView = navigationView.getHeaderView(0).findViewById(R.id.imgAnh);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PhucVu.this, ThongTinNhanVien.class);
+
+                startActivity(intent);
+
+            }
+        });
 
     }
     private void getInfoUser(){

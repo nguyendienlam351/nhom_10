@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DoiMatKhau">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="30dp"
+        android:orientation="vertical"
+
+        >
+
+        <EditText
+
+            android:id="@+id/edMatKhauCu"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
+            android:hint="Mật Khẩu"
+            android:gravity="center"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:background="@drawable/boder"/>
+
+
+        <EditText
+            android:id="@+id/edMatKhauMoi"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
+            android:hint="Nhập Mật Khẩu Mới"
+            android:inputType="textPassword"
+            android:background="@drawable/boder"/>
+
+        <EditText
+            android:id="@+id/edXacNhanMKMoi"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
+            android:hint="Xác Nhận Mật Khẩu"
+            android:inputType="textPassword"
+            android:gravity="center"
+            android:background="@drawable/boder"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="left"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cdHienmk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hienmatkhau"
+                android:textStyle="bold"/>
+
+                style="?android:attr/borderlessButtonStyle"/>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnThayDoi"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:text="thaydoi"/>
+    </LinearLayout>
+
+</LinearLayout>

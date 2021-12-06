@@ -1,6 +1,7 @@
 package tdc.edu.vn.nhom_10;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -136,12 +137,10 @@ public class QuanLyThemMon extends AppCompatActivity {
                         // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                         // ...
                         Toast.makeText(QuanLyThemMon.this, "Thành Công", Toast.LENGTH_SHORT).show();
-                        edtTenMon.getText().clear();
-                        edtGia.getText().clear();
-                        edtMoTa.getText().clear();
 
-                        imgHinh.invalidate();
-                        imgHinh.setImageBitmap(null);
+                        // quay man hinh ve qlm
+                        Intent intent = new Intent(QuanLyThemMon.this, QuanLyMon.class);
+                        startActivity(intent);
 
                     }
                 });
