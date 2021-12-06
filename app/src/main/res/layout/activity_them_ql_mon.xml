@@ -80,7 +80,7 @@
 
                 <Button
                     android:id="@+id/btnThem"
-                    style="@style/editButton"
+                    style="@style/addButton"
                     android:layout_width="wrap_content"
                     android:text="Thêm" />
 

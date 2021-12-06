@@ -78,6 +78,9 @@
     <string name="chi">Chi</string>
     <string name="sotien">Số tiền</string>
     <string name="loai">Loại : </string>
+    <string name="hoatdongtrongngay">Hoạt động trong ngày</string>
+    <string name="tinhhinhkinhdoanh">Tình hình kinh doanh</string>
+    <string name="doanhthu">Doanh thu</string>
     <array name="donvi">
         <item>Kg</item>
         <item>Lít</item>

@@ -140,7 +140,7 @@ public class ChiTietThanhToan extends AppCompatActivity {
                     myRef.child(maHoaDon).setValue(hoaDon).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            if (edtGiamGia.getError() == null) {
+                            if (maGiamGia != null) {
                                 database.child("MaGiamGia").child(maGiamGia.getMaGiamGia())
                                         .child("soLuong").setValue(maGiamGia.getSoLuong() - 1);
                             }
@@ -156,7 +156,13 @@ public class ChiTietThanhToan extends AppCompatActivity {
                                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ThuChi");
                                     String maThuChi = reference.push().getKey();
                                     chiThu.setMaThuChi(maThuChi);
-                                    chiThu.setNgayNhap(hoaDon.getNgayThang());
+                                    String Ngay;
+                                    if(day<10){
+                                        Ngay = "0"+day + "/" + (month + 1) + "/" + year;
+                                    }else{
+                                        Ngay = day + "/" + (month + 1) + "/" + year;
+                                    }
+                                    chiThu.setNgayNhap(Ngay);
                                     chiThu.setNguoiNhap(hoaDon.getHoTen());
                                     chiThu.setLoaiThuChi("Thu");
                                     chiThu.setLoai("Nhập tự động");

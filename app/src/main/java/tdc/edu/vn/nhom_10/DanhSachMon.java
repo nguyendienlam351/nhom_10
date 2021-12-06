@@ -106,7 +106,7 @@ public class DanhSachMon extends AppCompatActivity {
                 else {
                     new CustomAlertDialog(DanhSachMon.this,
                             "Hãy chọn món khác",
-                            "Món đã có trong đơn hàng", CustomAlertDialog.ERROR);
+                            "Món đã có trong đơn hàng.", CustomAlertDialog.ERROR).show();
                 }
             }
         });

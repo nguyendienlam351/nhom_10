@@ -135,13 +135,13 @@
             android:name=".LichLamViecNhanVien"
             android:exported="false" />
         <activity
-            android:name=".DangNhap"
+            android:name=".QuanLiLichLamViec"
             android:exported="false" />
         <activity
             android:name=".ChiTietLichLamViecNhanVien"
             android:exported="false" />
         <activity
-            android:name=".QuanLiLichLamViec"
+            android:name=".DangNhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
