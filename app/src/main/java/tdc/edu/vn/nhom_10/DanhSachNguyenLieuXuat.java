@@ -62,7 +62,7 @@ public class DanhSachNguyenLieuXuat extends AppCompatActivity {
         getFirebase();
 
         //
-        adapter = new NguyenLieuXuatAdapter(this, R.layout.layout_item_nguyen_lieu_nhap, list);
+        adapter = new NguyenLieuXuatAdapter(this, R.layout.layout_item_nguyen_lieu_xuat, list);
         lvNhapKho.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

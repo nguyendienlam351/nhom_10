@@ -63,7 +63,7 @@
             android:name=".DangNhap"
             android:exported="false" />
         <activity
-            android:name=".DanhSachNhapKho"
+            android:name=".QuanLyNhanVien"
             android:exported="false" />
         <activity
             android:name=".ChiTietQLMon"
@@ -120,7 +120,7 @@
             android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
-            android:name=".QuanLyNhanVien"
+            android:name=".DanhSachNhapKho"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

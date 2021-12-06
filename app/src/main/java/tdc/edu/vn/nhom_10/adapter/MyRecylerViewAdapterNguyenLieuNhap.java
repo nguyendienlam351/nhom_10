@@ -54,6 +54,7 @@ public class MyRecylerViewAdapterNguyenLieuNhap extends RecyclerView.Adapter<MyR
         NumberFormat formatter = new DecimalFormat("#,###,###");
         holder.tvGia.setText(formatter.format(nguyenLieu.getGia()) + " đ");
         holder.tvDonVi.setText(nguyenLieu.getDonVi());
+        holder.tvSoLuong.setText(String.valueOf(nguyenLieu.getSoLuong()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,13 +87,14 @@ public class MyRecylerViewAdapterNguyenLieuNhap extends RecyclerView.Adapter<MyR
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTen, tvGia, tvDonVi;
+        TextView tvTen, tvGia, tvDonVi, tvSoLuong;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTen = itemView.findViewById(R.id.tvTen);
             tvGia = itemView.findViewById(R.id.tvGia);
             tvDonVi = itemView.findViewById(R.id.tvDonVi);
+            tvSoLuong = itemView.findViewById(R.id.tvSoLuong);
         }
     }
 

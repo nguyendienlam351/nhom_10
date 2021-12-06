@@ -163,6 +163,7 @@
         <entry key="app/src/main/res/layout/layout_item_mon_4.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/layout_item_nguyen_lieu.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/layout_item_nguyen_lieu_nhap.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/layout_item_nguyen_lieu_xuat.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/layout_item_nhan_vien.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/layout_item_nhap_kho.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/layout_item_xuat_kho.xml" value="0.3098958333333333" />
