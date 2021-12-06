@@ -47,6 +47,7 @@ import java.util.List;
 
 import gun0912.tedbottompicker.TedBottomPicker;
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.model.HoatDongTrongNgay;
 import tdc.edu.vn.nhom_10.model.NguyenLieu;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 import tdc.edu.vn.nhom_10.model.NhapKho;
@@ -105,13 +106,14 @@ public class ThemXuatKho extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mData = FirebaseDatabase.getInstance().getReference();
-                String HoTen = tvHoTen.getText().toString().trim();
-                String Email = tvEmail.getText().toString().trim();
+                String HoTen = hoTen;
+                String Email = email;
                 String Ten = tvTen.getText().toString().trim();
                 int SoLuong = Integer.parseInt(edtSoLuong.getText().toString().trim());
                 String maXuatKho = mData.push().getKey();
                 XuatKho xuatKho = new XuatKho(nguyenLieu, HoTen, Email, maXuatKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
                 xuatKho.setMaXuatKho(maXuatKho);
+                HoatDongTrongNgay hoatDongTrongNgay = new HoatDongTrongNgay("Xuất kho",Ngay , "Đã xuất " + SoLuong + nguyenLieu.getDonVi() + " " + nguyenLieu.getTenNL());
                 mData.child("XuatKho").child(maXuatKho).setValue(xuatKho).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -130,6 +132,7 @@ public class ThemXuatKho extends AppCompatActivity {
                                 Toast.makeText(ThemXuatKho.this, e.toString(), Toast.LENGTH_SHORT).show();
                             }
                         });
+                        mData.child("HoatDongTrongNgay").push().setValue(hoatDongTrongNgay);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

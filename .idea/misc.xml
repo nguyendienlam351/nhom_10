@@ -128,22 +128,27 @@
         <entry key="..\:/nhom_10/app/src/main/res/layout/layout_item_nhan_vien.xml" value="0.20416666666666666" />
         <entry key="..\:/nhom_10/app/src/main/res/layout/xemhoadon.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/boder.xml" value="0.3101851851851852" />
-        <entry key="app/src/main/res/drawable/vien.xml" value="0.3101851851851852" />
+        <entry key="app/src/main/res/drawable/vien.xml" value="0.15" />
         <entry key="app/src/main/res/drawable/vien_bottom.xml" value="0.3101851851851852" />
         <entry key="app/src/main/res/drawable/vien_left_right.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/vien_menu.xml" value="0.3101851851851852" />
+        <entry key="app/src/main/res/drawable/vien_right_top.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/layout/activity_chi_tiet_mon.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/activity_chi_tiet_nhan_vien.xml" value="0.11423505572441743" />
+        <entry key="app/src/main/res/layout/activity_chi_tiet_nhan_vien.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_chi_tiet_nhap_kho.xml" value="0.20380434782608695" />
         <entry key="app/src/main/res/layout/activity_chi_tiet_xuat_kho.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_chitietnv.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_dang_nhap.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_danh_sach_don_hang.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_danh_sach_mon.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_danh_sach_nguyen_lieu.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/activity_danh_sach_nguyen_lieu_nhap.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/activity_danh_sach_nguyen_lieu_xuat.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_danh_sach_nhap_kho.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/layout/activity_danh_sach_xuat_kho.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_hoat_dong_trong_ngay.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_item_hoat_dong_trong_ngay.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_kiem_ke_kho.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_list1_nhan_vien.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_list2_nhan_vien.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_list3_nhan_vien.xml" value="0.2441123188405797" />
@@ -157,12 +162,20 @@
         <entry key="app/src/main/res/layout/activity_them_xuat_kho.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_themnv.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_item_Danh_Muc_Kho.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/layout_item_ban_1.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/layout_item_ban_2.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/layout_item_danh_muc_kho.xml" value="0.17708333333333334" />
+        <entry key="app/src/main/res/layout/layout_item_hoa_don.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/layout_item_hoat_dong_trong_ngay.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_item_kiem_ke_kho.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/layout_item_loai_mon.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/layout_item_mon_1.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/layout_item_mon_2.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/layout_item_mon_3.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/layout_item_mon_4.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/layout_item_nguyen_lieu.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/layout_item_nguyen_lieu_nhap.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/layout_item_nguyen_lieu_xuat.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/layout_item_nhan_vien.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/layout_item_nhap_kho.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/layout_item_xuat_kho.xml" value="0.3098958333333333" />

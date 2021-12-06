@@ -50,6 +50,7 @@ import java.util.List;
 import gun0912.tedbottompicker.TedBottomPicker;
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
 import tdc.edu.vn.nhom_10.model.ChiThu;
+import tdc.edu.vn.nhom_10.model.HoatDongTrongNgay;
 import tdc.edu.vn.nhom_10.model.NguyenLieu;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 import tdc.edu.vn.nhom_10.model.NhapKho;
@@ -120,6 +121,7 @@ public class ThemNhapKho extends AppCompatActivity {
                 String maNhapKho = mData.push().getKey();
                 NhapKho nhapKho = new NhapKho(nguyenLieu, HoTen, Email, maNhapKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
                 nhapKho.setMaNhapKho(maNhapKho);
+                HoatDongTrongNgay hoatDongTrongNgay = new HoatDongTrongNgay("Nhập kho",Ngay , "Đã nhập " + SoLuong + nguyenLieu.getDonVi() + " " + nguyenLieu.getTenNL());
                 mData.child("NhapKho").child(maNhapKho).setValue(nhapKho).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -147,6 +149,14 @@ public class ThemNhapKho extends AppCompatActivity {
                                     }
                                 });
 
+                                //Chuyển màn hình
+                                mData.child("HoatDongTrongNgay").push().setValue(hoatDongTrongNgay).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

@@ -48,9 +48,11 @@ import tdc.edu.vn.nhom_10.CustomView.MaGiamGiaDialog;
 import tdc.edu.vn.nhom_10.ThuNganFragment.ThanhToan;
 import tdc.edu.vn.nhom_10.adapter.ChiTietThanhToanAdapter;
 import tdc.edu.vn.nhom_10.model.ChiThu;
+import tdc.edu.vn.nhom_10.model.Ban;
 import tdc.edu.vn.nhom_10.model.DonHang;
 import tdc.edu.vn.nhom_10.model.ChiTietDonHang;
 import tdc.edu.vn.nhom_10.model.HoaDon;
+import tdc.edu.vn.nhom_10.model.HoatDongTrongNgay;
 import tdc.edu.vn.nhom_10.model.MaGiamGia;
 
 public class ChiTietThanhToan extends AppCompatActivity {
@@ -147,6 +149,8 @@ public class ChiTietThanhToan extends AppCompatActivity {
                             database.child("Ban").child(String.valueOf(donHang.getMaBan())).child("chiTietDonHang").removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
+                                    HoatDongTrongNgay hoatDongTrongNgay = new HoatDongTrongNgay("Hoá đơn",hoaDon.getNgayThang() ,  donHang.getTenBan() + " đã được thanh toán");
+                                    database.child("HoatDongTrongNgay").push().setValue(hoatDongTrongNgay);
                                     Intent intent = new Intent(ChiTietThanhToan.this, ThuNgan.class);
                                     startActivity(intent);
                                     new CustomAlertDialog(ChiTietThanhToan.this,

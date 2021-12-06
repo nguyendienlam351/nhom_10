@@ -32,9 +32,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -49,6 +52,7 @@ import java.util.List;
 
 import gun0912.tedbottompicker.TedBottomPicker;
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
+import tdc.edu.vn.nhom_10.model.MaGiamGia;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class ThemNhanVien extends AppCompatActivity {
@@ -128,49 +132,63 @@ public class ThemNhanVien extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseReference = FirebaseDatabase.getInstance().getReference();
-                String SDT = edtSDT.getText().toString().trim();
-                String Email = edtEmail.getText().toString().trim();
-                mAuth.createUserWithEmailAndPassword(Email, SDT).addOnCompleteListener(ThemNhanVien.this, new OnCompleteListener<AuthResult>() {
+                databaseReference.child("NhanVien").orderByChild("email").equalTo(edtEmail.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        String HoTen = edtHoTen.getText().toString().trim();
-                        String CCCD = edtCCCD.getText().toString().trim();
-                        String DiaChi = edtDiaChi.getText().toString().trim();
-                        String ChucVu = spnChucVu.getSelectedItem().toString();
-                        String maNV = mAuth.getUid();
-                        String anh = mAuth.getUid() + ".png";
-                        NhanVien nhanVien = new NhanVien(HoTen, SDT, NgaySinh, CCCD, Email, DiaChi, ChucVu, maNV, anh);
-                        nhanVien.setMaNV(maNV);
-                        databaseReference.child("NhanVien").child(maNV).setValue(nhanVien);
-                        Toast.makeText(ThemNhanVien.this, mAuth.getUid(), Toast.LENGTH_SHORT).show();
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            edtEmail.setError("Email đã tồn tại");
+                        }
+                        else {
+                            String SDT = edtSDT.getText().toString().trim();
+                            String Email = edtEmail.getText().toString().trim();
+                            mAuth.createUserWithEmailAndPassword(Email, SDT).addOnCompleteListener(ThemNhanVien.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    String HoTen = edtHoTen.getText().toString().trim();
+                                    String CCCD = edtCCCD.getText().toString().trim();
+                                    String DiaChi = edtDiaChi.getText().toString().trim();
+                                    String ChucVu = spnChucVu.getSelectedItem().toString();
+                                    String maNV = mAuth.getUid();
+                                    String anh = mAuth.getUid() + ".png";
+                                    NhanVien nhanVien = new NhanVien(HoTen, SDT, NgaySinh, CCCD, Email, DiaChi, ChucVu, maNV, anh);
+                                    nhanVien.setMaNV(maNV);
+                                    databaseReference.child("NhanVien").child(maNV).setValue(nhanVien);
+                                    Toast.makeText(ThemNhanVien.this, mAuth.getUid(), Toast.LENGTH_SHORT).show();
 
-                        //Thêm hình ảnh lên firebase
-                        StorageReference mountainsRef = storageRef.child(maNV + ".png");
-                        imgHinh.setDrawingCacheEnabled(true);
-                        imgHinh.buildDrawingCache();
-                        Bitmap bitmap = ((BitmapDrawable) imgHinh.getDrawable()).getBitmap();
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                        byte[] data = baos.toByteArray();
+                                    //Thêm hình ảnh lên firebase
+                                    StorageReference mountainsRef = storageRef.child(maNV + ".png");
+                                    imgHinh.setDrawingCacheEnabled(true);
+                                    imgHinh.buildDrawingCache();
+                                    Bitmap bitmap = ((BitmapDrawable) imgHinh.getDrawable()).getBitmap();
+                                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                                    byte[] data = baos.toByteArray();
 
-                        UploadTask uploadTask = mountainsRef.putBytes(data);
-                        uploadTask.addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle unsuccessful uploads
-                                Toast.makeText(ThemNhanVien.this, "Lỗi", Toast.LENGTH_SHORT).show();
+                                    UploadTask uploadTask = mountainsRef.putBytes(data);
+                                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception exception) {
+                                            // Handle unsuccessful uploads
+                                            Toast.makeText(ThemNhanVien.this, "Lỗi", Toast.LENGTH_SHORT).show();
 
-                            }
-                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                                // ...
-                            }
-                        });
-                        //Chuyển màn hình
-                        Intent intent = new Intent(getApplicationContext(), QuanLyNhanVien.class);
-                        startActivity(intent);
+                                        }
+                                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                                            // ...
+                                        }
+                                    });
+                                    //Chuyển màn hình
+                                    Intent intent = new Intent(getApplicationContext(), QuanLyNhanVien.class);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
 

@@ -24,6 +24,9 @@
             android:name=".ThemMoiThuChi"
             android:exported="false" />
         <activity
+            android:name=".ChiTietThanhToan"
+            android:exported="false" />
+        <activity
             android:name=".ChiTietMaGiamGia"
             android:exported="false" />
         <activity
@@ -39,7 +42,7 @@
             android:name=".ThemNguyenLieu"
             android:exported="false" />
         <activity
-            android:name=".DanhSachNguyenLieu"
+            android:name=".ThemNhapKho"
             android:exported="false" />
         <activity
             android:name=".XemHoaDon"
@@ -60,16 +63,16 @@
             android:name=".DanhSachNguyenLieuXuat"
             android:exported="false" />
         <activity
-            android:name=".DanhSachNguyenLieuNhap"
+            android:name=".DSHoatDongTrongNgay"
             android:exported="false" />
         <activity
             android:name=".ChiTietNhapKho"
             android:exported="false" />
         <activity
-            android:name=".ThemNhapKho"
+            android:name=".DangNhap"
             android:exported="false" />
         <activity
-            android:name=".DanhSachNhapKho"
+            android:name=".QuanLyNhanVien"
             android:exported="false" />
         <activity
             android:name=".ChiTietQLMon"
@@ -93,7 +96,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ChiTietThanhToan"
+            android:name=".DanhSachNguyenLieuNhap"
             android:exported="false" />
         <activity
             android:name=".DanhSachDonHang"
@@ -117,10 +120,10 @@
             android:name=".DonHangCuaBan"
             android:exported="false" />
         <activity
-            android:name=".ChiTietNhanVien"
+            android:name=".DanhSachNguyenLieu"
             android:exported="false" />
         <activity
-            android:name=".QuanLyNhanVien"
+            android:name=".ChiTietNhanVien"
             android:exported="false" />
         <activity
             android:name=".ThemNhanVien"
@@ -141,7 +144,7 @@
             android:name=".ChiTietLichLamViecNhanVien"
             android:exported="false" />
         <activity
-            android:name=".DangNhap"
+            android:name=".DanhSachNhapKho"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

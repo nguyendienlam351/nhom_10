@@ -19,6 +19,7 @@
             android:layout_height="@dimen/largeImage"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
             android:background="@drawable/image" />
 
         <EditText

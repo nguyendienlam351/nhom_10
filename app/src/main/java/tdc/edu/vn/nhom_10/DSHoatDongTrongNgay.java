@@ -21,25 +21,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
-import tdc.edu.vn.nhom_10.adapter.MyRecylerViewAdapterNguyenLieuNhap;
-import tdc.edu.vn.nhom_10.adapter.NguyenLieuXuatAdapter;
-import tdc.edu.vn.nhom_10.model.NguyenLieu;
-import tdc.edu.vn.nhom_10.model.NhanVien;
+import tdc.edu.vn.nhom_10.adapter.HoatDongTrongNgayAdapter;
+import tdc.edu.vn.nhom_10.model.HoatDongTrongNgay;
+import tdc.edu.vn.nhom_10.model.NhapKho;
 
-public class DanhSachNguyenLieuXuat extends AppCompatActivity {
+public class DSHoatDongTrongNgay extends AppCompatActivity {
     ImageButton btnThem;
-    RecyclerView lvNhapKho;
-    ArrayList<NguyenLieu> list = new ArrayList<NguyenLieu>();
-    NguyenLieuXuatAdapter adapter;
+    RecyclerView lvHDTN;
+    ArrayList<HoatDongTrongNgay> list = new ArrayList<HoatDongTrongNgay>();
+    HoatDongTrongNgayAdapter adapter;
     DatabaseReference mData;
     SearchView svSearch;
     CustomActionBar actionBar;
-    int viTri = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danh_sach_nguyen_lieu_xuat);
+        setContentView(R.layout.activity_hoat_dong_trong_ngay);
 
         setControl();
         setEvent();
@@ -51,71 +49,47 @@ public class DanhSachNguyenLieuXuat extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                Intent intent = new Intent(getApplicationContext(), DanhSachXuatKho.class);
+                Intent intent = new Intent(getApplicationContext(), QuanLy.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("ManHinh", 2);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
 
-        actionBar.setActionBarName("Danh sách nguyên liệu xuất");
+        actionBar.setActionBarName("Hoạt động trong ngày");
 
         //Gọi firebase
         getFirebase();
 
         //
-        adapter = new NguyenLieuXuatAdapter(this, R.layout.layout_item_nguyen_lieu_xuat, list);
-        lvNhapKho.setAdapter(adapter);
+        adapter = new HoatDongTrongNgayAdapter(this, R.layout.layout_item_hoat_dong_trong_ngay, list);
+        lvHDTN.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        lvNhapKho.setLayoutManager(layoutManager);
+        lvHDTN.setLayoutManager(layoutManager);
 
-
-        //Search
-        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filter(newText);
-                return true;
-            }
-        });
-    }
-
-    //Hàm lọc theo tên
-    private void filter(String search) {
-        ArrayList<NguyenLieu> filterList = new ArrayList<>();
-        for (NguyenLieu nguyenLieu : list) {
-            if (nguyenLieu.getTenNL().toLowerCase().contains(search.toLowerCase())) {
-                filterList.add(nguyenLieu);
-            }
-            adapter.filterList(filterList);
-        }
     }
 
     //Hàm đọc firebase
     private void getFirebase() {
         // Write a message to the database
-        mData = FirebaseDatabase.getInstance().getReference("NguyenLieu");
+        mData = FirebaseDatabase.getInstance().getReference("HoatDongTrongNgay");
+
 //        for(int i= 1; i < 6;i++){
-//            DanhMucKho danhMucKho = new DanhMucKho();
-//            danhMucKho.setMaDanhMucKho(mData.push().getKey().toString());
-//            danhMucKho.setTen("quy");
-//            danhMucKho.setGia(10);
-//            danhMucKho.setDonVi("kg");
-//            danhMucKho.setSoLuong("10");
-//            danhMucKho.setMoTa("Nam đâu rồiiiiii");
-//            mData.child(danhMucKho.getMaDanhMucKho()).setValue(danhMucKho);
+//            HoatDongTrongNgay hoatDongTrongNgay = new HoatDongTrongNgay();
+//            hoatDongTrongNgay.setTenHD("quy");
+//            hoatDongTrongNgay.setNgay("10/12/2001");
+//            hoatDongTrongNgay.setMoTa("Nhập 10 đơn vị");
+//            mData.push().setValue(hoatDongTrongNgay);
 //        }
         mData.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                NguyenLieu nguyenLieu = snapshot.getValue(NguyenLieu.class);
-                if (nguyenLieu != null) {
-                    list.add(0,nguyenLieu);
+                HoatDongTrongNgay hoatDongTrongNgay = snapshot.getValue(HoatDongTrongNgay.class);
+                if (hoatDongTrongNgay != null) {
+                    list.add(0,hoatDongTrongNgay);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -127,7 +101,6 @@ public class DanhSachNguyenLieuXuat extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                NhanVien nhanVien = snapshot.getValue(NhanVien.class);
             }
 
             @Override
@@ -145,7 +118,7 @@ public class DanhSachNguyenLieuXuat extends AppCompatActivity {
 
     private void setControl() {
         btnThem = findViewById(R.id.btnThem);
-        lvNhapKho = findViewById(R.id.lvNhapKho);
+        lvHDTN = findViewById(R.id.lvHDTN);
         svSearch = findViewById(R.id.svSearch);
         actionBar = findViewById(R.id.actionBar);
     }
