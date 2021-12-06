@@ -99,8 +99,6 @@ public class QuanLyMon extends AppCompatActivity {
         spMon.setAdapter(arrayAdapter);
         getDataLoaiMon();
 
-
-
         //Chuyển màn hình thêm
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,9 +138,7 @@ public class QuanLyMon extends AppCompatActivity {
     }
 
 
-
-
-
+    // filter loc du lieu
     private void filter(String tenMon){
         String maLoaiMon = loaiMonArrayList.get(viTri).getMaLoaiMon();
         ArrayList<MonAn> filterList = new ArrayList<MonAn>();

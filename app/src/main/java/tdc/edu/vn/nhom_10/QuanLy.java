@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -41,7 +43,7 @@ public class QuanLy extends AppCompatActivity implements NavigationView.OnNaviga
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     Toolbar toolbar;
-
+    ImageView imageView;
     private TextView ten;
 
     @Override
@@ -63,6 +65,18 @@ public class QuanLy extends AppCompatActivity implements NavigationView.OnNaviga
 
         replaceFragment(new tdc.edu.vn.nhom_10.QuanLyFragment.QuanLy());
         navigationView.getMenu().findItem(R.id.quanly).setChecked(true);
+
+        imageView = navigationView.getHeaderView(0).findViewById(R.id.imgAnh);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuanLy.this, ThongTinNhanVien.class);
+
+                startActivity(intent);
+
+            }
+        });
 
     }
     private void getInfoUser(){

@@ -7,40 +7,9 @@
     android:orientation="vertical"
     tools:context=".KiemKeKho">
 
-    <tdc.edu.vn.nhom_10.CustomView.CustomActionBar
-        android:id="@+id/actionBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <LinearLayout style="@style/layout">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <Button
-                android:id="@+id/btnChonTG"
-                style="@style/button"
-                android:backgroundTint="#B8B8B8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tháng/Năm" />
-
-            <SearchView
-                android:id="@+id/svSearch"
-                style="@style/editText"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/iconSize"
-                android:layout_marginLeft="@dimen/spacing1"
-                android:layout_marginRight="@dimen/spacing1"
-                android:layout_weight="1"
-                android:iconifiedByDefault="false"
-                android:queryBackground="@color/white"
-                android:queryHint="search"
-                android:submitBackground="@color/white" />
-
-        </LinearLayout>
 
         <TableLayout
             android:layout_width="match_parent"
@@ -55,10 +24,10 @@
                     android:layout_marginHorizontal="@dimen/spacing1"
                     android:layout_marginTop="@dimen/spacing1"
                     android:layout_marginBottom="@dimen/spacing1"
-                    android:layout_weight="10"
+                    android:layout_weight="5"
                     android:background="#B8B8B8"
                     android:gravity="center_horizontal"
-                    android:text="Tên" />
+                    android:text="Ngày" />
 
                 <TextView
                     style="@style/title"
@@ -66,10 +35,10 @@
                     android:layout_marginTop="@dimen/spacing1"
                     android:layout_marginRight="@dimen/spacing1"
                     android:layout_marginBottom="@dimen/spacing1"
-                    android:layout_weight="3"
+                    android:layout_weight="5"
                     android:background="#B8B8B8"
                     android:gravity="center_horizontal"
-                    android:text="Nhập" />
+                    android:text="Thu" />
 
                 <TextView
                     style="@style/title"
@@ -77,10 +46,10 @@
                     android:layout_marginTop="@dimen/spacing1"
                     android:layout_marginRight="@dimen/spacing1"
                     android:layout_marginBottom="@dimen/spacing1"
-                    android:layout_weight="3"
+                    android:layout_weight="5"
                     android:background="#B8B8B8"
                     android:gravity="center_horizontal"
-                    android:text="Xuất" />
+                    android:text="Chi" />
 
                 <TextView
                     style="@style/title"
@@ -88,14 +57,14 @@
                     android:layout_marginTop="@dimen/spacing1"
                     android:layout_marginRight="@dimen/spacing1"
                     android:layout_marginBottom="@dimen/spacing1"
-                    android:layout_weight="3"
+                    android:layout_weight="5"
                     android:background="#B8B8B8"
                     android:gravity="center_horizontal"
-                    android:text="Tồn" />
+                    android:text="Lợi Nhuận" />
             </TableRow>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/lvKiemKeKho"
+                android:id="@+id/lvDoanhThu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </TableLayout>

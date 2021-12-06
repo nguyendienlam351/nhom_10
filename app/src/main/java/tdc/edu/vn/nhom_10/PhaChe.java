@@ -13,7 +13,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ import tdc.edu.vn.nhom_10.PhaCheFragment.XemHoaDon;
 import tdc.edu.vn.nhom_10.PhaCheFragment.XuatKho;
 import tdc.edu.vn.nhom_10.PhucVuFragment.DatMon;
 import tdc.edu.vn.nhom_10.PhucVuFragment.LichLamViec;
+import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class PhaChe extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -41,10 +44,12 @@ public class PhaChe extends AppCompatActivity implements NavigationView.OnNaviga
     private static int Fragment_xuatkho = 1;
     private static int Fragment_calendar = 2;
 
+
     private int CurrentFragment = Fragment_seenorder;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     Toolbar toolbar;
+    ImageView imageView;
     FirebaseAuth mAuth;
 
     private TextView ten;
@@ -54,6 +59,7 @@ public class PhaChe extends AppCompatActivity implements NavigationView.OnNaviga
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pha_che);
         navigationView = findViewById(R.id.navigation_view);
+
         ten = navigationView.getHeaderView(0).findViewById(R.id.tennhanvien);
         getInfoUser();
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -68,6 +74,18 @@ public class PhaChe extends AppCompatActivity implements NavigationView.OnNaviga
 
         replaceFragment(new XemHoaDon());
         navigationView.getMenu().findItem(R.id.xemhoadon).setChecked(true);
+
+        imageView = navigationView.getHeaderView(0).findViewById(R.id.imgAnh);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PhaChe.this, ThongTinNhanVien.class);
+
+                startActivity(intent);
+
+            }
+        });
 
     }
     private void getInfoUser(){
@@ -88,6 +106,8 @@ public class PhaChe extends AppCompatActivity implements NavigationView.OnNaviga
             }
         });
     }
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();

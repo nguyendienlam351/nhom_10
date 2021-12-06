@@ -10,44 +10,47 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import tdc.edu.vn.nhom_10.R;
-import tdc.edu.vn.nhom_10.model.KiemKe;
+import tdc.edu.vn.nhom_10.model.DoanhThuMD;
 
-public class KiemKeKhoAdapter extends RecyclerView.Adapter<KiemKeKhoAdapter.MyViewHolder>{
+public class DoanhThuAdapter extends RecyclerView.Adapter<DoanhThuAdapter.MyViewHolder>{
     private Activity context;
     private int layoutID;
-    private ArrayList<KiemKe> kiemKeKhoArrayList;
+    private ArrayList<DoanhThuMD> doanhThuArrayList;
 
-    public KiemKeKhoAdapter(Activity context, int layoutID, ArrayList<KiemKe> kiemKeKhoArrayList){
+    public DoanhThuAdapter(Activity context, int layoutID, ArrayList<DoanhThuMD> doanhThuArrayList){
         this.context= context;
         this.layoutID=layoutID;
-        this.kiemKeKhoArrayList=kiemKeKhoArrayList;
+        this.doanhThuArrayList=doanhThuArrayList;
     }
     @NonNull
     @Override
-    public KiemKeKhoAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = context.getLayoutInflater();
         LinearLayout view = (LinearLayout) layoutInflater.inflate(viewType, parent, false);
-        return new KiemKeKhoAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
-    public void filterList(ArrayList<KiemKe> kiemKeKhoArrayList){
-        this.kiemKeKhoArrayList = kiemKeKhoArrayList;
+    public void filterList(ArrayList<DoanhThuMD> doanhThuArrayList){
+        this.doanhThuArrayList = doanhThuArrayList;
         notifyDataSetChanged();
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        KiemKe kiemKeKho = kiemKeKhoArrayList.get(position);
-        if(kiemKeKho==null){
+        DoanhThuMD doanhThu = doanhThuArrayList.get(position);
+        if(doanhThu==null){
             return;
         }
+        NumberFormat formatter = new DecimalFormat("#,###,###");
+        holder.tvNgay.setText(doanhThu.getNgay());
+        holder.tvThu.setText(formatter.format(doanhThu.getThu()) + " đ");
+        holder.tvChi.setText(formatter.format(doanhThu.getChi()) + " đ");
+        holder.tvLoiNhuan.setText(formatter.format(doanhThu.getThu()-doanhThu.getChi()) + " đ");
 
-        holder.tvTen.setText(kiemKeKho.getTen());
-        holder.tvNhap.setText(String.valueOf(kiemKeKho.getNhap()));
-        holder.tvXuat.setText(String.valueOf(kiemKeKho.getXuat()));
-        holder.tvTon.setText(String.valueOf(kiemKeKho.getTon()));
     }
     @Override
     public int getItemViewType(int position) {
@@ -55,18 +58,18 @@ public class KiemKeKhoAdapter extends RecyclerView.Adapter<KiemKeKhoAdapter.MyVi
     }
     @Override
     public int getItemCount() {
-        return kiemKeKhoArrayList.size();
+        return doanhThuArrayList.size();
     }
 
     public static class  MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTen,tvNhap,tvXuat,tvTon;
+        TextView tvNgay,tvThu,tvChi,tvLoiNhuan;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-            tvTen = itemView.findViewById(R.id.tvTen);
-            tvNhap = itemView.findViewById(R.id.tvNhap);
-            tvXuat = itemView.findViewById(R.id.tvXuat);
-            tvTon=itemView.findViewById(R.id.tvTon);
+            tvNgay = itemView.findViewById(R.id.tvNgay);
+            tvThu = itemView.findViewById(R.id.tvThu);
+            tvChi = itemView.findViewById(R.id.tvChi);
+            tvLoiNhuan=itemView.findViewById(R.id.tvLoiNhuan);
         }
     }
 }

@@ -15,13 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_10">
         <activity
+            android:name=".DoanhThu"
+            android:exported="false" />
+        <activity
+            android:name=".DoiMatKhau"
+            android:exported="false" />
+        <activity
+            android:name=".QuanLyMon"
+            android:exported="false" />
+        <activity
             android:name=".ChiTietQLMon"
             android:exported="false" />
         <activity
             android:name=".QuanLyThemMon"
             android:exported="false" />
         <activity
-            android:name=".DangNhap"
+            android:name=".ThongTinNhanVien"
             android:exported="false" />
         <activity
             android:name=".QuanLyLoaiMon"
@@ -69,7 +78,7 @@
             android:name=".ThemNhanVien"
             android:exported="false" />
         <activity
-            android:name=".QuanLyMon"
+            android:name=".DangNhap"
             android:exported="true">
             <intent-filter>
 

@@ -1,14 +1,14 @@
 package tdc.edu.vn.nhom_10.model;
 
-public class DoanhThu {
+public class DoanhThuMD {
     String ma;
     String ngay;
     int thu;
     int chi;
-    int loiNhuan;
 
 
-    public DoanhThu(){};
+
+    public DoanhThuMD(){};
 
     public String getMa() {
         return ma;
@@ -22,8 +22,8 @@ public class DoanhThu {
         return ngay;
     }
 
-    public void setNgay(String ten) {
-        this.ngay = ten;
+    public void setNgay(String ngay) {
+        this.ngay = ngay;
     }
 
     public int getThu() {
@@ -42,11 +42,5 @@ public class DoanhThu {
         this.chi = chi;
     }
 
-    public int getLoiNhuan() {
-        return loiNhuan;
-    }
 
-    public void setLoiNhuan(int loiNhuan) {
-        this.loiNhuan = loiNhuan;
-    }
 }
