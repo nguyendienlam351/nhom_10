@@ -8,9 +8,10 @@
     android:gravity="bottom">
 
     <ImageView
+        android:id="@+id/imgAnh"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/image"/>
     <TextView
         android:id="@+id/tennhanvien"
         android:layout_width="wrap_content"
