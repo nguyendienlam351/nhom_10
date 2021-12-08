@@ -27,10 +27,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,17 +47,18 @@ import java.util.List;
 
 import gun0912.tedbottompicker.TedBottomPicker;
 import tdc.edu.vn.nhom_10.CustomView.CustomActionBar;
-import tdc.edu.vn.nhom_10.model.ChiThu;
+import tdc.edu.vn.nhom_10.CustomView.CustomAlertDialog;
 import tdc.edu.vn.nhom_10.model.HoatDongTrongNgay;
 import tdc.edu.vn.nhom_10.model.NguyenLieu;
 import tdc.edu.vn.nhom_10.model.NhanVien;
 import tdc.edu.vn.nhom_10.model.NhapKho;
+import tdc.edu.vn.nhom_10.model.XuatKho;
 
-public class ThemNhapKho extends AppCompatActivity {
+public class ThemXuatKhoPhaChe extends AppCompatActivity {
     EditText edtSoLuong;
     TextView tvHoTen, tvEmail, tvTen, tvDonVi, tvGia, tvSoLuong, tvMoTa, tvNgay;
     CustomActionBar actionBar;
-    Button btnThem;
+    Button btnXuat;
     String Ngay;
     NguyenLieu nguyenLieu;
     DatabaseReference mData;
@@ -69,7 +68,7 @@ public class ThemNhapKho extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_them_nhap_kho);
+        setContentView(R.layout.activity_them_xuat_kho);
         setControl();
         setEvent();
 
@@ -80,12 +79,12 @@ public class ThemNhapKho extends AppCompatActivity {
         actionBar.setDelegation(new CustomActionBar.ActionBarDelegation() {
             @Override
             public void backOnClick() {
-                Intent intent = new Intent(getApplicationContext(), DanhSachNguyenLieuNhap.class);
+                Intent intent = new Intent(getApplicationContext(), DanhSachNguyenLieuXuat.class);
                 startActivity(intent);
             }
         });
 
-        actionBar.setActionBarName("Thêm nhập kho");
+        actionBar.setActionBarName("Thêm xuất kho");
 
         //
         Intent intent = getIntent();
@@ -94,23 +93,17 @@ public class ThemNhapKho extends AppCompatActivity {
             String MaNguyenLieu = bundle.getString("MaNL", "");
             getDataNguyenLieu(MaNguyenLieu);
         }
+        //Gọi hàm NV
+        getNhanVien();
         //Tạo ngày, tháng, năm sinh
         final Context context = this;
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
-        if (day < 10) {
-            Ngay = "0" + day + "/" + (month + 1) + "/" + year;
-        } else {
-            Ngay = day + "/" + (month + 1) + "/" + year;
-        }
-
+        Ngay = day + "/" + (month + 1) + "/" + year;
         tvNgay.setText("Ngày: " + Ngay);
-        //Gọi hàm NV
-        getNhanVien();
-        //
-        btnThem.setOnClickListener(new View.OnClickListener() {
+        btnXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mData = FirebaseDatabase.getInstance().getReference();
@@ -118,58 +111,34 @@ public class ThemNhapKho extends AppCompatActivity {
                 String Email = email;
                 String Ten = tvTen.getText().toString().trim();
                 int SoLuong = Integer.parseInt(edtSoLuong.getText().toString().trim());
-                String maNhapKho = mData.push().getKey();
-                NhapKho nhapKho = new NhapKho(nguyenLieu, HoTen, Email, maNhapKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
-                nhapKho.setMaNhapKho(maNhapKho);
-                HoatDongTrongNgay hoatDongTrongNgay = new HoatDongTrongNgay("Nhập kho", Ngay, "Đã nhập " + SoLuong + nguyenLieu.getDonVi() + " " + nguyenLieu.getTenNL());
-                mData.child("NhapKho").child(maNhapKho).setValue(nhapKho).addOnSuccessListener(new OnSuccessListener<Void>() {
+                String maXuatKho = mData.push().getKey();
+                XuatKho xuatKho = new XuatKho(nguyenLieu, HoTen, Email, maXuatKho, Ten, Ngay, SoLuong, nguyenLieu.getDonVi());
+                xuatKho.setMaXuatKho(maXuatKho);
+                HoatDongTrongNgay hoatDongTrongNgay = new HoatDongTrongNgay("Xuất kho",Ngay , "Đã xuất " + SoLuong + nguyenLieu.getDonVi() + " " + nguyenLieu.getTenNL());
+                mData.child("XuatKho").child(maXuatKho).setValue(xuatKho).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         mData.child("NguyenLieu").child(nguyenLieu.getMaNL())
-                                .child("soLuong").setValue(SoLuong + nguyenLieu.getSoLuong()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                .child("soLuong").setValue(nguyenLieu.getSoLuong() - SoLuong).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ThuChi");
-                                ChiThu chiThu = new ChiThu();
-                                String maThuChi = reference.push().getKey();
-                                chiThu.setMaThuChi(maThuChi);
-                                chiThu.setLoaiThuChi("Chi");
-                                chiThu.setLoai("Nhập tự động");
-                                chiThu.setNgayNhap(Ngay);
-                                chiThu.setNguoiNhap(hoTen);
-                                chiThu.setMoTa("Nhập " + edtSoLuong.getText() + " " + nguyenLieu.getDonVi() + " " + nguyenLieu.getTenNL());
-                                int tien = nguyenLieu.getGia() * nhapKho.getSoLuong();
-                                chiThu.setSoTien(tien);
-                                reference.child(maThuChi).setValue(chiThu).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        //Chuyển màn hình
-                                        Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
-                                        startActivity(intent);
-                                    }
-                                });
-
                                 //Chuyển màn hình
-                                mData.child("HoatDongTrongNgay").push().setValue(hoatDongTrongNgay).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Intent intent = new Intent(getApplicationContext(), DanhSachNhapKho.class);
-                                        startActivity(intent);
-                                    }
-                                });
+                                Intent intent = new Intent(getApplicationContext(), DanhSachXuatKho.class);
+                                startActivity(intent);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                mData.child("NhapKho").child(maNhapKho).removeValue();
-                                Toast.makeText(ThemNhapKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                mData.child("XuatKho").child(maXuatKho).removeValue();
+                                new CustomAlertDialog(ThemXuatKhoPhaChe.this,"Lỗi", e.toString(), CustomAlertDialog.ERROR).show();
                             }
                         });
+                        mData.child("HoatDongTrongNgay").push().setValue(hoatDongTrongNgay);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ThemNhapKho.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        new CustomAlertDialog(ThemXuatKhoPhaChe.this,"Lỗi", e.toString(), CustomAlertDialog.ERROR).show();
                     }
                 });
             }
@@ -245,7 +214,7 @@ public class ThemNhapKho extends AppCompatActivity {
         tvSoLuong = findViewById(R.id.tvSoLuong);
         tvMoTa = findViewById(R.id.tvMoTa);
         edtSoLuong = findViewById(R.id.edtSoLuong);
-        btnThem = findViewById(R.id.btnThem);
+        btnXuat = findViewById(R.id.btnXuat);
         actionBar = findViewById(R.id.actionBar);
     }
 }

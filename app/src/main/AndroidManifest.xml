@@ -63,6 +63,9 @@
             android:name=".DanhSachNguyenLieuXuat"
             android:exported="false" />
         <activity
+            android:name=".DanhSachNguyenLieuXuatPhaChe"
+            android:exported="false" />
+        <activity
             android:name=".DanhSachNhapKho"
             android:exported="false" />
         <activity
@@ -136,6 +139,9 @@
             android:exported="false" />
         <activity
             android:name=".ThemXuatKho"
+            android:exported="false" />
+        <activity
+            android:name=".ThemXuatKhoPhaChe"
             android:exported="false" />
         <activity
             android:name=".ThongTinNhanVien"

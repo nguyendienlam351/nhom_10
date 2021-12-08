@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,8 +30,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 import tdc.edu.vn.nhom_10.PhucVuFragment.DatMon;
+import tdc.edu.vn.nhom_10.model.NhanVien;
 
 public class PhucVu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,6 +57,7 @@ public class PhucVu extends AppCompatActivity implements NavigationView.OnNaviga
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phuc_vu);
         navigationView = findViewById(R.id.navigation_view);
+        imageView = navigationView.getHeaderView(0).findViewById(R.id.imgAnh);
         ten = navigationView.getHeaderView(0).findViewById(R.id.tennhanvien);
         getInfoUser();
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -78,11 +90,12 @@ public class PhucVu extends AppCompatActivity implements NavigationView.OnNaviga
         String maNV = user.getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("NhanVien/"+maNV);
-        myRef.child("hoTen").addValueEventListener(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value = snapshot.getValue(String.class);
-                ten.setText(String.valueOf(value));
+                NhanVien nhanVien = snapshot.getValue(NhanVien.class);
+                ten.setText(nhanVien.getHoTen());
+                getAnhNhanVien(nhanVien.getAnh());
             }
 
             @Override
@@ -90,6 +103,32 @@ public class PhucVu extends AppCompatActivity implements NavigationView.OnNaviga
 
             }
         });
+    }
+
+    // lay anh
+    private void getAnhNhanVien(String anh) {
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference("NhanVien");
+        int dot = anh.lastIndexOf('.');
+        String base = (dot == -1) ? anh : anh.substring(0, dot);
+        String extension = (dot == -1) ? "" : anh.substring(dot + 1);
+        try {
+            final File file = File.createTempFile(base, extension);
+            storageRef.child(anh).getFile(file)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                            imageView.setImageBitmap(bitmap);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

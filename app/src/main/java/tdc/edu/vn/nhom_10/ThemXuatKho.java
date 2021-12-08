@@ -83,7 +83,7 @@ public class ThemXuatKho extends AppCompatActivity {
             }
         });
 
-        actionBar.setActionBarName("Thêm Xuất kho");
+        actionBar.setActionBarName("Thêm xuất kho");
 
         //
         Intent intent = getIntent();

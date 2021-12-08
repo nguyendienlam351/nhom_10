@@ -89,7 +89,7 @@ public class ThongTinNhanVien extends AppCompatActivity {
             }
         });
 
-        actionBar.setActionBarName("Thong Tin Nhan Vien");
+        actionBar.setActionBarName("Thông tin nhân viên");
         //
 
 

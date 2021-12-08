@@ -18,7 +18,8 @@
             android:layout_height="@dimen/largeImage"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="@drawable/image" />
+            android:scaleType="fitXY"
+            android:src="@drawable/image" />
 
 
         <LinearLayout
@@ -178,7 +179,7 @@
 
                 <Button
                     android:id="@+id/btnDoiMatKhau"
-                    style="@style/editButton"
+                    style="@style/addButton"
                     android:layout_width="wrap_content"
                     android:text="Đổi Mật Khẩu" />
             </LinearLayout>

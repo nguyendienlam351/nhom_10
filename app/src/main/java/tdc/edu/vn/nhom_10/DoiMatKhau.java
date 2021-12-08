@@ -44,7 +44,7 @@ public class DoiMatKhau extends AppCompatActivity {
             }
         });
 
-        actionBar.setActionBarName("Doi Mat Khau");
+        actionBar.setActionBarName("Đổi mật khẩu");
 
         btnThayDoi.setOnClickListener(new View.OnClickListener() {
             @Override
